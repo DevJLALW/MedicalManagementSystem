@@ -2,6 +2,7 @@ package com.srh.medicalmanagementsystem.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -22,7 +23,7 @@ public class Patient {
     private String lastName;
 
     @Column(name = "DOB", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     private Date dob;
 
     @Column(name = "Gender", nullable = false)
