@@ -32,9 +32,11 @@
         </div>
         <div class="row mb-3">
             <label class="col-sm-4 col-form-label">Gender</label>
-            <div class="col-sm-8">
-                <input type="text" th:field="*{gender}" class="form-control" />
-            </div>
+                <select name="gender" id="gender" class = "col-sm-5 mx-auto rounded border"> 
+                    <option value="Male">Male</option> 
+                    <option value="Femake">Female</option> 
+                    <option value="Others">Others</option> 
+                </select>
         </div>
         <div class="row mb-3">
             <label class="col-sm-4 col-form-label">Contact Number</label>
@@ -57,7 +59,8 @@
 
         <div>
             <button type="submit" class="btn btn-primary">Create Patient</button>
-        </div>
+            <a type="submit" href="ShowPatients.html" class="btn btn-primary">Back</a>
+        </div>    
     </form>
 </div>
     </div>
