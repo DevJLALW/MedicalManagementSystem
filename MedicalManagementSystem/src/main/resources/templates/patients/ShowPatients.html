@@ -10,10 +10,11 @@
 <div class="container">
     <h1 class="text-center my-4">Patients Information</h1>
 
-    <a class="btn btn-primary" href="/patients/create">New Patient Entry</a>
+    <a class="btn btn-primary" href="CreatePatient.html">New Patient Entry</a>
     <table class="table">
         <thead>
         <tr>
+	    <th>Select</th>
             <th>PatientID</th>
             <th>FirstName</th>
             <th>LastName</th>
@@ -26,6 +27,7 @@
         </thead>
         <tbody>
         <tr th:each="patient :${patients}">
+	    <td><input class="select-row" data-rows-group-id="users" type="checkbox" id="123" data-id="123" /></td>
             <td th:text="${patient.patientId}"></td> <td th:text="${patient.firstName}"></td>
             <td th:text="${patient.lastName}"></td>
             <td th:text="${patient.dob}"></td>
@@ -33,8 +35,10 @@
             <td th:text="${patient.contactNumber}"></td>
             <td th:text="${patient.email}"></td>
             <td th:text="${patient.address}"></td>
+            <td><a class="btn btn-primary" href="">Edit</a></td>
         </tr>
         </tbody>
+	<a class="btn btn-primary" href="">Delete</a>
     </table>
 
 </div>
