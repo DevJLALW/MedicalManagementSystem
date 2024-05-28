@@ -56,4 +56,8 @@ public class PatientServiceImpl implements PatientService{
         return patientRepository.findById(patientId)
                 .orElseThrow(() -> new NoSuchElementException("Patient not found with id " + patientId));
     }
+
+   public List<Patient> searchPatients(String keyword){
+        return patientRepository.searchPatients(keyword);
+    }
 }

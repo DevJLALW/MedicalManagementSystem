@@ -15,4 +15,6 @@ public interface PatientService {
     public boolean deletePatient(Integer patientId);
 
     public Patient findPatientById(Integer patientId);
+
+    public List<Patient> searchPatients(String keyword);
 }

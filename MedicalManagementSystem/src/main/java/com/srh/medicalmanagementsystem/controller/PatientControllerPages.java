@@ -63,4 +63,18 @@ public class PatientControllerPages {
 
         return "redirect:/patients/all";
     }
+
+    @GetMapping("/search")
+    public String searchPatients(@RequestParam("keyword") String keyword, Model model) {
+        List<Patient> patientList =patientService.searchPatients(keyword);
+        /*System.out.println("After Patient list");
+        for(Patient patient: patientList){
+            System.out.println("ID"+patient.getPatientId());
+            System.out.println("Name"+patient.getFirstName());
+        }*/
+
+        model.addAttribute("patients", patientList);
+
+        return "patients/ShowPatients";
+    }
 }

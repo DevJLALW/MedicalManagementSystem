@@ -9,7 +9,12 @@
 <body>
 <div class="container">
     <h1 class="text-center my-4">Patients Information</h1>
-
+    <form action="#" th:action="@{/patients/search}" method="get">
+        <div class="form-group">
+            <input type="text" class="form-control" name="keyword" placeholder="Search for patients...">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
     <a class="btn btn-primary" href="/patients/create">New Patient Entry</a>
     <a id="deleteButton" class="btn btn-danger" href="#" onclick="return confirm('Are you sure you want to delete this patient?');">Delete</a>
     <table class="table">
