@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 public class PatientServiceImpl implements PatientService{
@@ -26,9 +27,11 @@ public class PatientServiceImpl implements PatientService{
         return patientRepository.save(patient);
     }
 
-    public Optional<Patient> updatePatient(int patientId, Patient patientDetails) {
-        return patientRepository.findById(patientId).map(existingPatient -> {
-            existingPatient.setFirstName(patientDetails.getFirstName());
+    public Patient updatePatient(int patientId, Patient patientDetails) {
+        Patient existingPatient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new NoSuchElementException("Patient not found with id " + patientId));
+
+        existingPatient.setFirstName(patientDetails.getFirstName());
             existingPatient.setLastName(patientDetails.getLastName());
             existingPatient.setDob(patientDetails.getDob());
             existingPatient.setGender(patientDetails.getGender());
@@ -36,7 +39,7 @@ public class PatientServiceImpl implements PatientService{
             existingPatient.setEmail(patientDetails.getEmail());
             existingPatient.setAddress(patientDetails.getAddress());
             return patientRepository.save(existingPatient);
-        });
+
     }
 
     public boolean deletePatient(Integer patientId) {
@@ -49,7 +52,8 @@ public class PatientServiceImpl implements PatientService{
     }
 
 
-    public Optional<Patient> findPatientById(Integer patientId) {
-        return patientRepository.findById(patientId);
+    public Patient findPatientById(Integer patientId) {
+        return patientRepository.findById(patientId)
+                .orElseThrow(() -> new NoSuchElementException("Patient not found with id " + patientId));
     }
 }

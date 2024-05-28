@@ -10,9 +10,9 @@ public interface PatientService {
 
     public Patient savePatient(Patient patient);
 
-    public Optional<Patient> updatePatient(int id, Patient patientDetails);
+    public Patient updatePatient(int id, Patient patientDetails);
 
     public boolean deletePatient(Integer patientId);
 
-    public Optional<Patient> findPatientById(Integer patientId);
+    public Patient findPatientById(Integer patientId);
 }

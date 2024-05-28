@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/patients")
@@ -30,11 +30,10 @@ public class PatientController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Patient> updatePatient(@PathVariable Integer id, @RequestBody Patient patientDetails) {
-        Optional<Patient> updatedPatient = patientService.updatePatient(id, patientDetails);
-
-        if (updatedPatient.isPresent()) {
-            return ResponseEntity.ok(updatedPatient.get());
-        } else {
+       try{
+        Patient updatedPatient = patientService.updatePatient(id, patientDetails);
+            return ResponseEntity.ok(updatedPatient);
+        } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }
     }
@@ -53,11 +52,12 @@ public class PatientController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Patient> findPatientById(@PathVariable Integer id) {
-        Optional<Patient> patient = patientService.findPatientById(id);
+        try {
+        Patient patient = patientService.findPatientById(id);
 
-        if (patient.isPresent()) {
-            return ResponseEntity.ok(patient.get());
-        } else {
+
+            return ResponseEntity.ok(patient);
+        } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }
     }

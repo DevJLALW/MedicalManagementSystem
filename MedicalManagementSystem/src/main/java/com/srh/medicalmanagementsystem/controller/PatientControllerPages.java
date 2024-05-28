@@ -2,7 +2,7 @@ package com.srh.medicalmanagementsystem.controller;
 
 import com.srh.medicalmanagementsystem.entity.Patient;
 import com.srh.medicalmanagementsystem.service.PatientService;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +20,7 @@ public class PatientControllerPages {
     public PatientControllerPages(PatientService patientService){
         this.patientService = patientService;
     }
+
     @GetMapping("/all")
     public String getAllPatientsPage(Model model){
         List<Patient> patientList= patientService.getAllPatients();
@@ -37,9 +38,29 @@ public class PatientControllerPages {
 
     @PostMapping("/create")
     public String createPatient(@ModelAttribute("patient") Patient patient) {
-        System.out.println("Date of Birth received from form: " + patient.getDob());
 
         patientService.savePatient(patient);
+        return "redirect:/patients/all";
+    }
+
+    @GetMapping("/update/{patientId}")
+    public String showUpdatePatientPage(@PathVariable("patientId") Integer patientId,Model model) {
+        Patient patient= patientService.findPatientById(patientId);
+        model.addAttribute("patient", patient);
+        return "patients/UpdatePatient";
+    }
+
+    @PostMapping("/update/{patientId}")
+    public String updatePatient(@PathVariable("patientId") Integer patientId, @ModelAttribute("patient") Patient patient) {
+
+        patientService.updatePatient(patientId, patient);
+        return "redirect:/patients/all";
+    }
+
+    @GetMapping("/delete/{patientId}")
+    public String deletePatient(@PathVariable("patientId") Integer patientId) {
+       patientService.deletePatient(patientId);
+
         return "redirect:/patients/all";
     }
 }

@@ -23,6 +23,7 @@ public class Patient {
     private String lastName;
 
     @Column(name = "DOB", nullable = false)
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     private Date dob;
 
