@@ -2,6 +2,7 @@ package com.srh.medicalmanagementsystem.service;
 
 import com.srh.medicalmanagementsystem.dao.PatientRepository;
 import com.srh.medicalmanagementsystem.entity.Patient;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class PatientServiceImpl implements PatientService{
         return patientRepository.findAll();
     }
 
+    @Transactional
     public Patient savePatient(Patient patient) {
         return patientRepository.save(patient);
     }
@@ -31,13 +33,20 @@ public class PatientServiceImpl implements PatientService{
         Patient existingPatient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new NoSuchElementException("Patient not found with id " + patientId));
 
-        existingPatient.setFirstName(patientDetails.getFirstName());
+            existingPatient.setFirstName(patientDetails.getFirstName());
             existingPatient.setLastName(patientDetails.getLastName());
             existingPatient.setDob(patientDetails.getDob());
             existingPatient.setGender(patientDetails.getGender());
             existingPatient.setContactNumber(patientDetails.getContactNumber());
             existingPatient.setEmail(patientDetails.getEmail());
             existingPatient.setAddress(patientDetails.getAddress());
+            existingPatient.setMedicalHistory(patientDetails.getMedicalHistory());
+            existingPatient.setInsuranceID(patientDetails.getInsuranceID());
+            existingPatient.setDoctorID(patientDetails.getDoctorID());
+            existingPatient.setRoomID(patientDetails.getRoomID());
+            existingPatient.setRecordID(patientDetails.getRecordID());
+            existingPatient.setEmployeeID(patientDetails.getEmployeeID());
+
             return patientRepository.save(existingPatient);
 
     }

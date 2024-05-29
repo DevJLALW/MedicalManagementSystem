@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -38,5 +40,38 @@ public class Patient {
 
     @Column(name = "Address", nullable = false)
     private String address;
+
+    @Column(name = "MedicalHistory", nullable = false)
+    private String medicalHistory;
+
+    @Column(name = "InsuranceID", nullable = false)
+    private String insuranceID;
+
+    @Column(name = "DoctorID", nullable = false)
+    private Integer doctorID;
+
+    @Column(name = "NurseID", nullable = false)
+    private Integer nurseID;
+
+    @Column(name = "RoomID", nullable = false)
+    private Integer roomID;
+
+    @Column(name = "RecordID", nullable = false)
+    private Integer recordID;
+
+    @Column(name = "Timestamp", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp timestamp;
+
+    @Column(name = "EmployeeID", nullable = false)
+    private Integer employeeID;
+
+    @Column(name = "Password", nullable = true)
+    private String password;
+
+    @PrePersist
+    protected void onCreate() {
+        this.timestamp = Timestamp.from(Instant.now());
+    }
 }
 
