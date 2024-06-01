@@ -1,9 +1,11 @@
 package com.srh.medicalmanagementsystem.entity;
 
+import com.srh.medicalmanagementsystem.validation.ValidEmail;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import jakarta.validation.constraints.*;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Date;
@@ -19,23 +21,31 @@ public class Patient {
     private Integer patientId;
 
     @Column(name = "FirstName", nullable = false)
+    @NotEmpty(message = "First name is mandatory")
     private String firstName;
 
     @Column(name = "LastName", nullable = false)
+    @NotEmpty(message = "Last name is mandatory")
     private String lastName;
 
     @Column(name = "DOB", nullable = false)
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
+    @NotNull(message = "Date of birth is mandatory")
+    @Past(message = "Date of birth must be in the past")
     private Date dob;
 
     @Column(name = "Gender", nullable = false)
+    @NotEmpty(message = "Gender is mandatory")
     private String gender;
 
     @Column(name = "ContactNumber", nullable = false)
+    @NotEmpty(message = "Contact number is mandatory")
+    @Pattern(regexp = "^\\+?[0-9]*$", message = "Contact number must contain only digits and optionally start with a '+'")
     private String contactNumber;
 
-    @Column(name = "Email", nullable = false)
+    @Column(name = "Email", nullable = true)
+    @ValidEmail(message = "Email should be valid")
     private String email;
 
     @Column(name = "Address", nullable = false)

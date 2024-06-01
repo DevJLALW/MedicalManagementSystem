@@ -17,18 +17,21 @@
             <div class="col-sm-8">
                 <input type="text" th:field="*{firstName}" class="form-control" />
             </div>
+            <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-4 col-form-label">Last Name</label>
             <div class="col-sm-8">
                 <input type="text" th:field="*{lastName}" class="form-control" />
             </div>
+            <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-4 col-form-label">Date of Birth</label>
             <div class="col-sm-8">
                 <input type="date" th:field="*{dob}" class="form-control" />
             </div>
+            <div th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}">Date of Birth error</div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-4 col-form-label">Gender</label>
@@ -38,18 +41,21 @@
                 <option value="Female">Female</option>
                 <option value="Others">Others</option>
             </select>
+            <div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Gender error</div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-4 col-form-label">Contact Number</label>
             <div class="col-sm-8">
                 <input type="text" th:field="*{contactNumber}" class="form-control" />
             </div>
+            <div th:if="${#fields.hasErrors('contactNumber')}" th:errors="*{contactNumber}">Contact Number error</div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-4 col-form-label">Email</label>
+            <label class="col-sm-4 col-form-label">Email ID</label>
             <div class="col-sm-8">
                 <input type="text" th:field="*{email}" class="form-control" />
             </div>
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email ID error</div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-4 col-form-label">Address</label>
@@ -58,47 +64,42 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-4 col-form-label">MedicalHistory</label>
+            <label class="col-sm-4 col-form-label">Medical History</label>
             <div class="col-sm-8">
                 <input type="text" th:field="*{medicalHistory}" class="form-control" />
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-4 col-form-label">InsuranceID</label>
+            <label class="col-sm-4 col-form-label">Insurance ID</label>
             <div class="col-sm-8">
                 <input type="text" th:field="*{insuranceID}" class="form-control" />
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-4 col-form-label">DoctorID</label>
+            <label class="col-sm-4 col-form-label">Doctor ID</label>
             <div class="col-sm-8">
                 <input type="text" th:field="*{doctorID}" class="form-control" />
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-4 col-form-label">NurseID</label>
+            <label class="col-sm-4 col-form-label">Nurse ID</label>
             <div class="col-sm-8">
                 <input type="text" th:field="*{nurseID}" class="form-control" />
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-4 col-form-label">RoomID</label>
+            <label class="col-sm-4 col-form-label">Room ID</label>
             <div class="col-sm-8">
                 <input type="text" th:field="*{roomID}" class="form-control" />
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-4 col-form-label">RecordID</label>
+            <label class="col-sm-4 col-form-label">Record ID</label>
             <div class="col-sm-8">
                 <input type="text" th:field="*{recordID}" class="form-control" />
             </div>
         </div>
-        <div class="row mb-3">
-            <label class="col-sm-4 col-form-label">EmployeeID</label>
-            <div class="col-sm-8">
-                <input type="text" th:field="*{employeeID}" class="form-control" />
-            </div>
-        </div>
+
 
         <div>
             <button type="submit" class="btn btn-primary">Create Patient</button>

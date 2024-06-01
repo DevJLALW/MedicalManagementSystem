@@ -5,7 +5,10 @@ import com.srh.medicalmanagementsystem.service.PatientService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.validation.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -37,8 +40,12 @@ public class PatientControllerPages {
     }
 
     @PostMapping("/create")
-    public String createPatient(@ModelAttribute("patient") Patient patient) {
+    public String createPatient(@Valid @ModelAttribute("patient") Patient patient, BindingResult bindingResult, Model model) {
 
+
+        if(bindingResult.hasErrors()){
+            return "patients/CreatePatient";
+        }
         patientService.savePatient(patient);
         return "redirect:/patients/all";
     }
