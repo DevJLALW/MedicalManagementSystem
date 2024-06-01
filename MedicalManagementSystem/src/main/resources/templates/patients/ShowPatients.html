@@ -16,7 +16,7 @@
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
     <a class="btn btn-primary" href="/patients/create">New Patient Entry</a>
-    <a id="deleteButton" class="btn btn-danger" href="#" onclick="return confirm('Are you sure you want to delete this patient?');">Delete</a>
+    <button id="deleteButton" class="btn btn-danger" onclick="deleteSelectedPatients()">Delete</button>
     <table class="table">
         <thead>
         <tr>
@@ -41,7 +41,7 @@
         </thead>
         <tbody>
         <tr th:each="patient :${patients}">
-            <td><input class="select-row" data-rows-group-id="users" type="checkbox" th:id="'patient_' + ${patient.patientId}" th:data-id="${patient.patientId}" onclick="updateDeleteButton(this)" /></td>
+            <td><input class="select-row" type="checkbox" name="patientIds" th:value="${patient.patientId}" /></td>
             <td th:text="${patient.patientId}"></td> <td th:text="${patient.firstName}"></td>
             <td th:text="${patient.lastName}"></td>
             <td th:text="${patient.dob}"></td>
@@ -68,11 +68,32 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
-    function updateDeleteButton(checkbox) {
-        const deleteButton = document.getElementById('deleteButton');
-        const patientId = checkbox.getAttribute('data-id');
-        deleteButton.href = '/patients/delete/' + patientId;
-    }
+    function deleteSelectedPatients() {
+       const checkboxes = document.querySelectorAll('input[name="patientIds"]:checked');
+       const ids = Array.from(checkboxes).map(cb => cb.value);
+
+       if (ids.length === 0) {
+           alert('No patients selected for deletion.');
+           return;
+       }
+
+       if (!confirm('Are you sure you want to delete the selected patients?')) {
+           return;
+       }
+
+       const form = document.createElement('form');
+       form.method = 'POST';
+       form.action = '/patients/delete';
+       ids.forEach(id => {
+           const input = document.createElement('input');
+           input.type = 'hidden';
+           input.name = 'patientIds';
+           input.value = id;
+           form.appendChild(input);
+       });
+       document.body.appendChild(form);
+       form.submit();
+   }
 </script>
 </body>
 </html>

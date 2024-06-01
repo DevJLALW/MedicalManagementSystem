@@ -1,5 +1,6 @@
 package com.srh.medicalmanagementsystem.entity;
 
+import com.srh.medicalmanagementsystem.validation.PastOrPresentDate;
 import com.srh.medicalmanagementsystem.validation.ValidEmail;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -32,11 +33,11 @@ public class Patient {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     @NotNull(message = "Date of birth is mandatory")
-    @Past(message = "Date of birth must be in the past")
+    @PastOrPresentDate(message = "Date of birth must be in the past or present")
     private Date dob;
 
     @Column(name = "Gender", nullable = false)
-    @NotEmpty(message = "Gender is mandatory")
+    @NotNull(message = "Gender is mandatory")
     private String gender;
 
     @Column(name = "ContactNumber", nullable = false)
@@ -51,22 +52,22 @@ public class Patient {
     @Column(name = "Address", nullable = false)
     private String address;
 
-    @Column(name = "MedicalHistory", nullable = false)
+    @Column(name = "MedicalHistory", nullable = true)
     private String medicalHistory;
 
-    @Column(name = "InsuranceID", nullable = false)
+    @Column(name = "InsuranceID", nullable = true)
     private String insuranceID;
 
-    @Column(name = "DoctorID", nullable = false)
+    @Column(name = "DoctorID", nullable = true)
     private Integer doctorID;
 
-    @Column(name = "NurseID", nullable = false)
+    @Column(name = "NurseID", nullable = true)
     private Integer nurseID;
 
-    @Column(name = "RoomID", nullable = false)
+    @Column(name = "RoomID", nullable = true)
     private Integer roomID;
 
-    @Column(name = "RecordID", nullable = false)
+    @Column(name = "RecordID", nullable = true)
     private Integer recordID;
 
     @Column(name = "Timestamp", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

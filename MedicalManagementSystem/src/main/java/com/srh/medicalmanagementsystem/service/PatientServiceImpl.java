@@ -6,8 +6,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
+
 import java.util.NoSuchElementException;
 
 @Service
@@ -21,7 +22,9 @@ public class PatientServiceImpl implements PatientService{
     }
     @Override
     public List<Patient> getAllPatients() {
-        return patientRepository.findAll();
+        List<Patient> patients = patientRepository.findAll();
+        patients.sort(Comparator.comparing(Patient::getPatientId).reversed());
+        return patients;
     }
 
     @Transactional
@@ -51,14 +54,18 @@ public class PatientServiceImpl implements PatientService{
 
     }
 
-    public boolean deletePatient(Integer patientId) {
-        if (patientRepository.existsById(patientId)) {
-            patientRepository.deleteById(patientId);
-            return true;
-        } else {
-            return false;
+        public boolean deletePatients(List<Integer> patientIds) {
+            boolean allDeleted = true;
+            for(Integer patientId: patientIds) {
+                if (patientRepository.existsById(patientId)) {
+                    patientRepository.deleteById(patientId);
+
+                } else {
+                    allDeleted= false;
+                }
+            }
+            return allDeleted;
         }
-    }
 
 
     public Patient findPatientById(Integer patientId) {

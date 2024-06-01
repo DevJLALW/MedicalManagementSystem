@@ -12,7 +12,7 @@ public interface PatientService {
 
     public Patient updatePatient(int id, Patient patientDetails);
 
-    public boolean deletePatient(Integer patientId);
+    public boolean deletePatients(List<Integer> patientIds);
 
     public Patient findPatientById(Integer patientId);
 

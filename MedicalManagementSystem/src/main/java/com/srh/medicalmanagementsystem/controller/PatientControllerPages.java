@@ -27,7 +27,6 @@ public class PatientControllerPages {
     @GetMapping("/all")
     public String getAllPatientsPage(Model model){
         List<Patient> patientList= patientService.getAllPatients();
-        patientList.sort(Comparator.comparing(Patient::getPatientId).reversed());
         model.addAttribute("patients",patientList);
 
         return "patients/ShowPatients";
@@ -64,9 +63,9 @@ public class PatientControllerPages {
         return "redirect:/patients/all";
     }
 
-    @GetMapping("/delete/{patientId}")
-    public String deletePatient(@PathVariable("patientId") Integer patientId) {
-       patientService.deletePatient(patientId);
+    @PostMapping("/delete")
+    public String deletePatient(@RequestParam("patientIds") List<Integer> patientIds) {
+       patientService.deletePatients(patientIds);
 
         return "redirect:/patients/all";
     }
@@ -74,12 +73,6 @@ public class PatientControllerPages {
     @GetMapping("/search")
     public String searchPatients(@RequestParam("keyword") String keyword, Model model) {
         List<Patient> patientList =patientService.searchPatients(keyword);
-        /*System.out.println("After Patient list");
-        for(Patient patient: patientList){
-            System.out.println("ID"+patient.getPatientId());
-            System.out.println("Name"+patient.getFirstName());
-        }*/
-
         model.addAttribute("patients", patientList);
 
         return "patients/ShowPatients";
