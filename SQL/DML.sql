@@ -14,44 +14,74 @@ INSERT INTO Patients (FirstName, LastName, DOB, Gender, ContactNumber, Email, Ad
 ('Jeff', 'Yellow', '1978-09-09', 'Male', '9012345678', 'jeff.yellow@example.com', '606 Ash St'),
 ('Janet', 'Gray', '1988-10-10', 'Female', '0123456789', 'janet.gray@example.com', '707 Spruce St');
 
--- Insert records into Doctors table
-INSERT INTO Doctors (FirstName, LastName, Specialization, ContactNumber, Email) VALUES
-('Alice', 'Brown', 'Cardiology', '1234509876', 'alice.brown@example.com'),
-('Bob', 'White', 'Neurology', '2345609876', 'bob.white@example.com'),
-('Charlie', 'Black', 'Orthopedics', '3456709876', 'charlie.black@example.com'),
-('David', 'Green', 'Pediatrics', '4567809876', 'david.green@example.com'),
-('Eva', 'Red', 'Dermatology', '5678909876', 'eva.red@example.com'),
-('Frank', 'Blue', 'Oncology', '6789009876', 'frank.blue@example.com'),
-('Grace', 'Yellow', 'Gastroenterology', '7890109876', 'grace.yellow@example.com'),
-('Henry', 'Gray', 'Pulmonology', '8901209876', 'henry.gray@example.com'),
-('Ivy', 'Purple', 'Endocrinology', '9012309876', 'ivy.purple@example.com'),
-('Jack', 'Orange', 'Urology', '0123409876', 'jack.orange@example.com');
+-- Insert records into Employee table
+INSERT INTO Employee (FirstName, LastName, ContactNumber, Email, Role, Status) VALUES
+('Alice', 'Brown', '1234509876', 'alice.brown@example.com', 'Doctor', 1),
+('Bob', 'White', '2345609876', 'bob.white@example.com', 'Doctor', 1),
+('Charlie', 'Black', '3456709876', 'charlie.black@example.com', 'Doctor', 1),
+('David', 'Green', '4567809876', 'david.green@example.com', 'Doctor', 1),
+('Eva', 'Red', '5678909876', 'eva.red@example.com', 'Doctor', 1),
+('Frank', 'Blue', '6789009876', 'frank.blue@example.com', 'Doctor', 1),
+('Grace', 'Yellow', '7890109876', 'grace.yellow@example.com', 'Doctor', 1),
+('Henry', 'Gray', '8901209876', 'henry.gray@example.com', 'Doctor', 1),
+('Ivy', 'Purple', '9012309876', 'ivy.purple@example.com', 'Doctor', 1),
+('Jack', 'Orange', '0123409876', 'jack.orange@example.com', 'Doctor', 1),
+('Nancy', 'Smith', '2345678902', 'nancy.smith@example.com', 'Nurse', 1),
+('Olivia', 'Johnson', '3456789013', 'olivia.johnson@example.com', 'Nurse', 1),
+('Patricia', 'Brown', '4567890124', 'patricia.brown@example.com', 'Nurse', 1),
+('Quincy', 'Williams', '5678901235', 'quincy.williams@example.com', 'Nurse', 1),
+('Rachel', 'Jones', '6789012346', 'rachel.jones@example.com', 'Nurse', 1),
+('Samantha', 'Garcia', '7890123457', 'samantha.garcia@example.com', 'Nurse', 1),
+('Tina', 'Martinez', '8901234568', 'tina.martinez@example.com', 'Nurse', 1),
+('Uma', 'Davis', '9012345679', 'uma.davis@example.com', 'Nurse', 1),
+('Victoria', 'Rodriguez', '0123456780', 'victoria.rodriguez@example.com', 'Nurse', 1),
+('Wendy', 'Martinez', '1234567891', 'wendy.martinez@example.com', 'Nurse', 1),
+('Xander', 'Thompson', '2345678903', 'xander.thompson@example.com', 'Medical Assistant', 1),
+('Yara', 'Anderson', '3456789014', 'yara.anderson@example.com', 'Medical Assistant', 1),
+('Zack', 'Thomas', '4567890125', 'zack.thomas@example.com', 'Medical Assistant', 1),
+('Aaron', 'Harris', '5678901236', 'aaron.harris@example.com', 'Medical Assistant', 1),
+('Bella', 'Clark', '6789012347', 'bella.clark@example.com', 'Medical Assistant', 1),
+('Cathy', 'Lewis', '7890123458', 'cathy.lewis@example.com', 'Medical Assistant', 1),
+('Diana', 'Walker', '8901234569', 'diana.walker@example.com', 'Medical Assistant', 1),
+('Evan', 'Hall', '9012345670', 'evan.hall@example.com', 'Medical Assistant', 1),
+('Fiona', 'Allen', '0123456781', 'fiona.allen@example.com', 'Medical Assistant', 1),
+('George', 'Young', '1234567892', 'george.young@example.com', 'Medical Assistant', 1);
 
--- Insert records into Nurses table
-INSERT INTO Nurses (FirstName, LastName, ContactNumber, Email, AssignedDoctorID) VALUES
-('Nancy', 'Smith', '2345678902', 'nancy.smith@example.com', 1),
-('Olivia', 'Johnson', '3456789013', 'olivia.johnson@example.com', 2),
-('Patricia', 'Brown', '4567890124', 'patricia.brown@example.com', 3),
-('Quincy', 'Williams', '5678901235', 'quincy.williams@example.com', 4),
-('Rachel', 'Jones', '6789012346', 'rachel.jones@example.com', 5),
-('Samantha', 'Garcia', '7890123457', 'samantha.garcia@example.com', 6),
-('Tina', 'Martinez', '8901234568', 'tina.martinez@example.com', 7),
-('Uma', 'Davis', '9012345679', 'uma.davis@example.com', 8),
-('Victoria', 'Rodriguez', '0123456780', 'victoria.rodriguez@example.com', 9),
-('Wendy', 'Martinez', '1234567891', 'wendy.martinez@example.com', 10);
+-- Insert records into Specialization table
+INSERT INTO Specialization (DoctorID, SpecializationName) VALUES
+(1, 'Cardiology'),
+(2, 'Neurology'),
+(3, 'Orthopedics'),
+(4, 'Pediatrics'),
+(5, 'Dermatology'),
+(6, 'Oncology'),
+(7, 'Gastroenterology'),
+(8, 'Pulmonology'),
+(9, 'Endocrinology'),
+(10, 'Urology');
 
--- Insert records into Medical Assistants table
-INSERT INTO MedicalAssistants (FirstName, LastName, ContactNumber, Email, AssignedDoctorID) VALUES
-('Xander', 'Thompson', '2345678903', 'xander.thompson@example.com', 1),
-('Yara', 'Anderson', '3456789014', 'yara.anderson@example.com', 2),
-('Zack', 'Thomas', '4567890125', 'zack.thomas@example.com', 3),
-('Aaron', 'Harris', '5678901236', 'aaron.harris@example.com', 4),
-('Bella', 'Clark', '6789012347', 'bella.clark@example.com', 5),
-('Cathy', 'Lewis', '7890123458', 'cathy.lewis@example.com', 6),
-('Diana', 'Walker', '8901234569', 'diana.walker@example.com', 7),
-('Evan', 'Hall', '9012345670', 'evan.hall@example.com', 8),
-('Fiona', 'Allen', '0123456781', 'fiona.allen@example.com', 9),
-('George', 'Young', '1234567892', 'george.young@example.com', 10);
+-- Insert records into DoctorNurseAssignment table
+INSERT INTO DoctorNurseAssignment (DoctorID, NurseID) VALUES
+(1, 11),
+(2, 12),
+(3, 13),
+(4, 14),
+(5, 15),
+(6, 16),
+(7, 17),
+(8, 18),
+(9, 19),
+(10, 20),
+(1, 21),
+(2, 22),
+(3, 23),
+(4, 24),
+(5, 25),
+(6, 26),
+(7, 27),
+(8, 28),
+(9, 29),
+(10, 30);
 
 -- Insert records into PatientAdmissions table
 INSERT INTO PatientAdmissions (PatientID, RoomNumber, AdmitDate, DischargeDate) VALUES
@@ -120,13 +150,13 @@ INSERT INTO Calls (PatientID, CallDate, Purpose, Resolved) VALUES
 
 -- Insert records into Assignments table
 INSERT INTO Assignments (PatientID, NurseID, AssistantID, StartDate, EndDate) VALUES
-(1, 1, 1, '2023-01-01', '2023-01-05'),
-(2, 2, 2, '2023-02-01', '2023-02-07'),
-(3, 3, 3, '2023-03-01', '2023-03-04'),
-(4, 4, 4, '2023-04-01', '2023-04-10'),
-(5, 5, 5, '2023-05-01', '2023-05-06'),
-(6, 6, 6, '2023-06-01', '2023-06-08'),
-(7, 7, 7, '2023-07-01', '2023-07-05'),
-(8, 8, 8, '2023-08-01', '2023-08-09'),
-(9, 9, 9, '2023-09-01', '2023-09-11'),
-(10, 10, 10, '2023-10-01', '2023-10-03');
+(1, 11, 21, '2023-01-01', '2023-01-05'),
+(2, 12, 22, '2023-02-01', '2023-02-07'),
+(3, 13, 23, '2023-03-01', '2023-03-04'),
+(4, 14, 24, '2023-04-01', '2023-04-10'),
+(5, 15, 25, '2023-05-01', '2023-05-06'),
+(6, 16, 26, '2023-06-01', '2023-06-08'),
+(7, 17, 27, '2023-07-01', '2023-07-05'),
+(8, 18, 28, '2023-08-01', '2023-08-09'),
+(9, 19, 29, '2023-09-01', '2023-09-11'),
+(10, 20, 30, '2023-10-01', '2023-10-03');
