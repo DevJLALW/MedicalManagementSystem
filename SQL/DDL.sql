@@ -13,22 +13,8 @@ DROP TABLE IF EXISTS MedicalAssistants;
 DROP TABLE IF EXISTS Nurses;
 DROP TABLE IF EXISTS Doctors;
 DROP TABLE IF EXISTS Patients;
-DROP TABLE IF EXISTS Employee;
-DROP TABLE IF EXISTS DoctorNurseAssignment;
-DROP TABLE IF EXISTS Specialization;
 
 
--- Create Employee table
-CREATE TABLE Employee (
-    EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
-    FirstName VARCHAR(255),
-    LastName VARCHAR(255),
-    Email VARCHAR(255),
-    Password VARBINARY(60) null,
-    ContactNumber VARCHAR(255),
-    Role VARCHAR(50),
-    Status TINYINT(1)
-);
 
 -- Create Patients table
 CREATE TABLE Patients (
@@ -39,35 +25,39 @@ CREATE TABLE Patients (
     Gender VARCHAR(50),
     ContactNumber VARCHAR(255),
     Email VARCHAR(255),
-    Address VARCHAR(255),
-    MedicalHistory TEXT,
-    InsuranceID INT,
-    DoctorID INT,
-    NurseID INT,
-    RoomID INT,
-    RecordID INT,
-    Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    EmployeeID INT,
-    Password VARBINARY(60) null,
-    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
-    FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID),
-    FOREIGN KEY (NurseID) REFERENCES Employee(EmployeeID)
-)AUTO_INCREMENT=100101;
-
--- Create Doctor Nurse Assignment
-CREATE TABLE DoctorNurseAssignment (
-    AssignmentID INT AUTO_INCREMENT PRIMARY KEY,
-    DoctorID INT,
-    NurseID INT,
-    FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID),
-    FOREIGN KEY (NurseID) REFERENCES Employee(EmployeeID)
+    Address VARCHAR(255)
 );
 
--- Create Specialization table
-CREATE TABLE Specialization (
-    DoctorID INT PRIMARY KEY,
-    SpecializationName VARCHAR(255),
-    FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID)
+-- Create Doctors table
+CREATE TABLE Doctors (
+    DoctorID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    Specialization VARCHAR(255),
+    ContactNumber VARCHAR(255),
+    Email VARCHAR(255)
+);
+
+-- Create Nurses table
+CREATE TABLE Nurses (
+    NurseID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    ContactNumber VARCHAR(255),
+    Email VARCHAR(255),
+    AssignedDoctorID INT,
+    FOREIGN KEY (AssignedDoctorID) REFERENCES Doctors(DoctorID)
+);
+
+-- Create Medical Assistants table
+CREATE TABLE MedicalAssistants (
+    AssistantID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    ContactNumber VARCHAR(255),
+    Email VARCHAR(255),
+    AssignedDoctorID INT,
+    FOREIGN KEY (AssignedDoctorID) REFERENCES Doctors(DoctorID)
 );
 
 -- Create Patient Admissions table
@@ -89,7 +79,7 @@ CREATE TABLE Diagnoses (
     Disease VARCHAR(255),
     Notes TEXT,
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
-    FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID)
+    FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
 );
 
 -- Create Medications table
@@ -102,7 +92,7 @@ CREATE TABLE Medications (
     StartDate DATE,
     EndDate DATE,
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
-    FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID)
+    FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
 );
 
 -- Create Payments table
@@ -135,7 +125,18 @@ CREATE TABLE Assignments (
     StartDate DATE,
     EndDate DATE NULL,
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
-    FOREIGN KEY (NurseID) REFERENCES Employee(EmployeeID),
-    FOREIGN KEY (AssistantID) REFERENCES Employee(EmployeeID)
+    FOREIGN KEY (NurseID) REFERENCES Nurses(NurseID),
+    FOREIGN KEY (AssistantID) REFERENCES MedicalAssistants(AssistantID)
 );
+
+ALTER TABLE Patient
+ADD COLUMN MedicalHistory TEXT,
+ADD COLUMN InsuranceID INT,
+ADD COLUMN DoctorID INT,
+ADD COLUMN NurseID INT,
+ADD COLUMN RoomID INT,
+ADD COLUMN RecordID INT,
+ADD COLUMN Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN EmployeeID INT,
+ADD COLUMN Password VARBINARY(60) null;
 
