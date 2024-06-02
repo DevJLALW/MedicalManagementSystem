@@ -97,7 +97,7 @@ INSERT INTO PatientAdmissions (PatientID, RoomNumber, AdmitDate, DischargeDate) 
 (10, '110', '2023-10-01', '2023-10-03');
 
 -- Insert records into Diagnoses table
-INSERT INTO Diagnoses (PatientID, DoctorID, DiagnosisDate, Disease, Notes) VALUES
+INSERT INTO Diagnosis (PatientID, DoctorID, DiagnosisDate, Disease, Notes) VALUES
 (1, 1, '2023-01-02', 'Flu', 'Rest and hydration'),
 (2, 2, '2023-02-02', 'Migraine', 'Prescribed medication'),
 (3, 3, '2023-03-02', 'Fracture', 'Cast applied'),
