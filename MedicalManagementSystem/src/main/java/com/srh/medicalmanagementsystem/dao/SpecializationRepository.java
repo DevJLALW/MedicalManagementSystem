@@ -1,4 +1,4 @@
 package com.srh.medicalmanagementsystem.dao;
 
-public class SpecializationRepository {
+public interface SpecializationRepository {
 }

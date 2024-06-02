@@ -1,4 +1,4 @@
 package com.srh.medicalmanagementsystem.dao;
 
-public class DoctorNurseAssignmentRepository {
+public interface DoctorNurseAssignmentRepository {
 }
