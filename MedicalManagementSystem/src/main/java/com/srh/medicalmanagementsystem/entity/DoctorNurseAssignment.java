@@ -10,11 +10,11 @@ public class DoctorNurseAssignment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int assignmentId;
+    private Integer assignmentId;
 
     @Column(name = "DoctorID", nullable = false)
-    private int doctorId;
+    private Integer doctorId;
 
     @Column(name = "NurseID", nullable = false)
-    private int nurseId;
+    private Integer nurseId;
 }

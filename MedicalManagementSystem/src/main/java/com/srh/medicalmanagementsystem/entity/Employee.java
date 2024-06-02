@@ -13,12 +13,15 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employeeId;
+    @Column(name = "EmployeeID")
+    private Integer employeeId;
 
     @Column(name = "FirstName", nullable = false)
+    @NotEmpty(message = "First name is mandatory")
     private String firstName;
 
     @Column(name = "LastName", nullable = false)
+    @NotEmpty(message = "Last name is mandatory")
     private String lastName;
 
     @Column(name = "ContactNumber", nullable = false)
@@ -37,5 +40,6 @@ public class Employee {
     private String role;
 
     @Column(name = "Status", nullable = false)
-    private boolean status;
+    private Integer status;
+
 }

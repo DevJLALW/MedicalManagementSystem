@@ -10,7 +10,7 @@ public class Specialization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int doctorId;
+    private Integer doctorId;
 
     @Column(name = "SpecializationName", nullable = false)
     private String Specialization;
