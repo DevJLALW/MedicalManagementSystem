@@ -19,7 +19,7 @@ public class Medication {
 
     @ManyToOne
     @JoinColumn(name = "DoctorID")
-    private Doctor doctor;
+    private Employee doctor;
 
     @Column(name = "MedicationName", nullable = false)
     private String medicationName;

@@ -38,7 +38,7 @@ public class PatientController {
         }
     }
 
-
+/*
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePatient(@PathVariable Integer id) {
         boolean isDeleted = patientService.deletePatient(id);
@@ -48,7 +48,7 @@ public class PatientController {
         } else {
             return ResponseEntity.notFound().build(); // returns a 404 Not Found response.
         }
-    }
+    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<Patient> findPatientById(@PathVariable Integer id) {

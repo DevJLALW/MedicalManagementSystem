@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Diagnoses")
+@Table(name = "Diagnosis")
 @Data
 public class Diagnosis {
 
@@ -19,7 +19,7 @@ public class Diagnosis {
 
     @ManyToOne
     @JoinColumn(name = "DoctorID")
-    private Doctor doctor;
+    private Employee doctor;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "DiagnosisDate", nullable = false)

@@ -19,11 +19,11 @@ public class Assignment {
 
     @ManyToOne
     @JoinColumn(name = "NurseID")
-    private Nurse nurse;
+    private Employee nurse;
 
     @ManyToOne
     @JoinColumn(name = "AssistantID")
-    private MedicalAssistant assistant;
+    private Employee assistant;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "StartDate", nullable = false)
