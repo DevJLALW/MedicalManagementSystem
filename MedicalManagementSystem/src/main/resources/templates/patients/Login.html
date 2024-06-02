@@ -1,22 +1,37 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Login</title>
+    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+
 <body>
-<h1>Login</h1>
-<form th:action="@{/login}" method="post">
-    <div>
-        <label for="patientId">Patient ID:</label>
-        <input type="text" id="patientId" name="username" />
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" />
-    </div>
-    <div>
-        <button type="submit">Login</button>
-    </div>
-</form>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 mx-auto rounded border p-4 m-4">
+				<h2 class="text-center mb-5">Login</h2>
+				<form method="post" enctype="multipart/form-data" th:action="" th:object="">
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label" >User Name</label>
+            			<div class="col-sm-8">
+							<input type="text" name="userName" id="userName" placeholder="Enter your username" class="form-control">
+           				</div>
+					</div>
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label">Password</label>
+            			<div class="col-sm-8">
+						<input type="password" name="password" id="password" placeholder="Enter your password" class="form-control">
+           				</div>
+					</div>
+					<div class="row mb-3">
+						<button type="submit" class="btn btn-primary">Login</button>
+					</div>
+					<a href="">Forgot Password?</a><br/>
+					<a href="./register.html">Register here</a>
+			</div>
+		</div>	
+	</div>
 </body>
 </html>
