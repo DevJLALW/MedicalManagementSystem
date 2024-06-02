@@ -13,6 +13,9 @@ public class DOBValidator implements ConstraintValidator<PastOrPresentDate, Date
     @Override
     public boolean isValid(Date dob, ConstraintValidatorContext context){
 
+        if (dob == null) {
+            return false;
+        }
         LocalDate localDob=dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         return !(localDob.isAfter(LocalDate.now()));
     }

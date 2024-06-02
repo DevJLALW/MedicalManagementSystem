@@ -25,14 +25,14 @@ public class AuthController {
 
     @GetMapping("/index")
     public String home() {
-        return "index";
+        return "patients/index";
     }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         UserDto user = new UserDto();
         model.addAttribute("user", user);
-        return "register";
+        return "patients/register";
     }
 
     @PostMapping("/register/save")
@@ -48,22 +48,22 @@ public class AuthController {
 
         if (result.hasErrors()) {
             model.addAttribute("user", userDto);
-            return "/register";
+            return "patients/register";
         }
 
         userService.saveUser(userDto);
-        return "redirect:/register?success";
+        return "redirect:/patients/register?success";
     }
 
     @GetMapping("/users")
     public String users(Model model) {
         List<UserDto> users = userService.findAllUsers();
         model.addAttribute("users", users);
-        return "users";
+        return "patients/users";
     }
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "patients/login";
     }
 }
