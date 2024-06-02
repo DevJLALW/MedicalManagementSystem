@@ -10,7 +10,7 @@
 <div class="container row mb-3">
     <h1 class="text-center my-4">Patients Information</h1>
     <form action="#" th:action="@{/patients/search}" method="get">
-        <input id="search" type="text" placeholder="Search..">
+        <input id="search" type="text" name="keyword" placeholder="Search..">
         <button id="button">Search</button>
     </form>
 </div>
@@ -24,6 +24,7 @@
             <th>FirstName</th>
             <th>LastName</th>
             <th>DOB</th>
+            <th>Age</th>
             <th>Gender</th>
             <th>ContactNumber</th>
             <th>Email</th>
@@ -44,6 +45,7 @@
             <td th:text="${patient.patientId}"></td> <td th:text="${patient.firstName}"></td>
             <td th:text="${patient.lastName}"></td>
             <td th:text="${patient.dob}"></td>
+            <td th:text="${patient.age}"></td>
             <td th:text="${patient.gender}"></td>
             <td th:text="${patient.contactNumber}"></td>
             <td th:text="${patient.email}"></td>

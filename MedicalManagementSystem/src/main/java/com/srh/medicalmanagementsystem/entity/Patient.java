@@ -5,6 +5,8 @@ import com.srh.medicalmanagementsystem.validation.ValidEmail;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
+import org.hibernate.annotations.Formula;
 import org.springframework.format.annotation.DateTimeFormat;
 import jakarta.validation.constraints.*;
 import java.sql.Timestamp;
@@ -84,5 +86,9 @@ public class Patient {
     protected void onCreate() {
         this.timestamp = Timestamp.from(Instant.now());
     }
+
+
+    @Formula("(YEAR(CURDATE()) - YEAR(DOB)) - (DATE_FORMAT(CURDATE(), '%m%d') < DATE_FORMAT(DOB, '%m%d'))")
+    private int age;
 }
 

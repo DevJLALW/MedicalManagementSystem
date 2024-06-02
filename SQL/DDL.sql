@@ -52,7 +52,7 @@ CREATE TABLE Patients (
     FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
     FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID),
     FOREIGN KEY (NurseID) REFERENCES Employee(EmployeeID)
-);
+) AUTO_INCREMENT=100101;
 
 -- Create Doctor Nurse Assignment
 CREATE TABLE DoctorNurseAssignment (
