@@ -4,6 +4,7 @@ import com.srh.medicalmanagementsystem.dao.PatientRepository;
 import com.srh.medicalmanagementsystem.entity.Patient;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -15,10 +16,12 @@ import java.util.NoSuchElementException;
 public class PatientServiceImpl implements PatientService{
 
     private PatientRepository patientRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public PatientServiceImpl(PatientRepository patientRepository){
+    public PatientServiceImpl(PatientRepository patientRepository, PasswordEncoder passwordEncoder){
         this.patientRepository = patientRepository;
+        this.passwordEncoder = passwordEncoder;
     }
     @Override
     public List<Patient> getAllPatients() {
@@ -29,6 +32,10 @@ public class PatientServiceImpl implements PatientService{
 
     @Transactional
     public Patient savePatient(Patient patient) {
+        if (patient.getPassword() != null && !patient.getPassword().isEmpty()) {
+            String encodedPassword = passwordEncoder.encode(patient.getPassword());
+            patient.setPassword(encodedPassword);
+        }
         return patientRepository.save(patient);
     }
 
