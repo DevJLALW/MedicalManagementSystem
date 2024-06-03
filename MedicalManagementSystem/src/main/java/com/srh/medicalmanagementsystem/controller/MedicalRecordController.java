@@ -1,57 +1,56 @@
 package com.srh.medicalmanagementsystem.controller;
 
 import com.srh.medicalmanagementsystem.entity.MedicalRecord;
+import com.srh.medicalmanagementsystem.entity.MedicalRecord;
+import com.srh.medicalmanagementsystem.entity.MedicalRecord;
 import com.srh.medicalmanagementsystem.service.MedicalRecordService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import com.srh.medicalmanagementsystem.service.MedicalRecordService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
-@Controller
+import org.springframework.http.ResponseEntity;
+
+@RestController
+@RequestMapping("/medicalRecords")
 public class MedicalRecordController {
 
-    @Autowired
-    MedicalRecordService medicalRecordService;
+    /*private MedicalRecordService medicalRecordService;
 
-    @GetMapping("/records")
-    public String getAllMedicalRecord(Model model) {
-        List<MedicalRecord> records = medicalRecordService.getAllMedicalRecord();
-        model.addAttribute("records", records);
-        return "records";
+    public MedicalRecordController(MedicalRecordService medicalRecordService) {
+        this.medicalRecordService = medicalRecordService;
     }
 
-    @RequestMapping("/medical/save")
-    public String showForm(Model model) {
-        MedicalRecord medicalRecord = new MedicalRecord();
-        model.addAttribute("medicalRecord", medicalRecord);
-        return "patients/medicalRecord";
+    @GetMapping
+    public List<MedicalRecord> getAllMedicalRecords () {
+        return medicalRecordService.getAllMedicalRecord();
     }
 
-    @PostMapping("/medical/save")
-    public String submitForm(@ModelAttribute("medicalRecord") MedicalRecord medicalRecord) {
-        medicalRecordService.saveOrUpdate(medicalRecord);
-        return "redirect:/medical/save/success";
+    @PostMapping
+    public ResponseEntity<MedicalRecord> createMedicalRecord(@RequestBody MedicalRecord medicalRecord){
+        MedicalRecord newMedicalRecord = medicalRecordService.saveMedicalRecord(medicalRecord);
+        return ResponseEntity.ok(newMedicalRecord);
+    };
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MedicalRecord> updateMedicalRecord(@PathVariable Integer id, @RequestBody MedicalRecord medicalRecordDetails) {
+        try{
+            MedicalRecord updatedMedicalRecordDetails = medicalRecordService.updateMedicalRecord(id, medicalRecordDetails);
+            return ResponseEntity.ok(updatedMedicalRecordDetails);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @GetMapping("/medical/save/success")
-    public String showSuccess() {
-        return "patients/medicalRecord_success";
-    }
-/*
-    @RequestMapping("/medical/save/success/new")
-    public String showNewForm(Model model){
+    @GetMapping("/{id}")
+    public ResponseEntity<MedicalRecord> findMedicalRecordById(@PathVariable Integer id) {
+        try {
+            MedicalRecord medicalRecord = medicalRecordService.findMedicalRecordById(id);
 
-        MedicalRecord medicalRecord = new MedicalRecord();
-        model.addAttribute("medicalRecord", medicalRecord);
-        return "redirect:/medical/save";
-    }
-*/
-
-    @GetMapping("/medical/save/new")
-    public String showNewForm(Model model) {
-        return "redirect:/medical/save";
-    }
+            return ResponseEntity.ok(medicalRecord);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }*/
 }

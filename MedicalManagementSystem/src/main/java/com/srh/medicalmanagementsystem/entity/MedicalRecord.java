@@ -1,34 +1,48 @@
 package com.srh.medicalmanagementsystem.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Entity
-@Table(name = "Medical_Record")
+@Table(name = "MedicalRecord")
 @Data
 public class MedicalRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private int medicalRecordId;
-    @Column
+    @Column(name = "MedicalRecordID")
+    private Integer medicalRecordId;
+
+    @Column(name = "Diagnosis", nullable = false)
+    @NotEmpty(message = "Diagnosis is mandatory")
     private String diagnosis;
-    @Column
+
+    @Column(name = "DiagnosisNotes", nullable = false)
+    @NotEmpty(message = "Diagnosis Notes is mandatory")
     private String diagnosisNotes;
-    @Column
+
+    @Column(name = "MedicalResult", nullable = false)
+    @NotEmpty(message = "Medical Result is mandatory")
     private String medicalResult;
-    @Column
+
+    @Column(name = "MedicationsPrescribed", nullable = false)
+    @NotEmpty(message = "Medications Prescribed is mandatory")
     private String medicationsPrescribed;
+
     @Column
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     private Date date;
-    @Column
+
+    @Column(name = "EmployeeId", nullable = false)
+    @NotEmpty(message = "Employee Id is mandatory")
     private Integer employeeId;
-    @Column
+
+    @Column(name = "PatientId", nullable = false)
+    @NotEmpty(message = "Patient Id is mandatory")
     private Integer patientId;
 
     public int getRecordId() {
@@ -127,17 +141,5 @@ public class MedicalRecord {
         this.patientId = patientId;
     }
 
-    @Override
-    public String toString() {
-        return "MedicalRecord{" +
-                "medicalRecordId=" + medicalRecordId +
-                ", diagnosis='" + diagnosis + '\'' +
-                ", diagnosisNotes='" + diagnosisNotes + '\'' +
-                ", medicalResult='" + medicalResult + '\'' +
-                ", medicationsPrescribed='" + medicationsPrescribed + '\'' +
-                ", date=" + date +
-                ", employeeId=" + employeeId +
-                ", PatientId=" + patientId +
-                '}';
-    }
+
 }
