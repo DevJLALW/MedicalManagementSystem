@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration Success</title>
+    <style type="text/css">
+        span {
+            display: inline-block;
+            width: 200px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+    <h2>Registration Succeeded!</h2>
+    <span>Record id:</span><span th:text="${medicalRecord.medicalRecordId}"></span><br/>
+    <span>Employee id:</span><span th:text="${medicalRecord.employeeId}"></span><br/>
+    <span>Patient id:</span><span th:text="${medicalRecord.patientId}"></span><br/>
+    <span>Record Date:</span><span th:text="${medicalRecord.date}"></span><br/>
+    <span>Diagnosis:</span><span th:text="${medicalRecord.diagnosis}"></span><br/>
+    <span>Diagnosis Note:</span><span th:text="${medicalRecord.diagnosisNotes}"></span><br/>
+    <span>Medical Result:</span><span th:text="${medicalRecord.medicalResult}"></span><br/>
+    <span>Medications Prescribed:</span><span th:text="${medicalRecord.medicationsPrescribed}"></span><br/>
+</div>
+</body>
+</html>

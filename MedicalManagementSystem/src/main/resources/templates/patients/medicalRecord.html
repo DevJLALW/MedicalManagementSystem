@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical Records Form</title>
+</head>
+<body>
+<div class="centered">
+    <h1>Medical Records Form</h1>
+    <form th:action="@{/medical/save}" method="post" th:object="${medicalRecord}">
+        <label>Record id:</label>
+        <input type="text" th:field="*{medicalRecordId}" /><br/>
+
+        <label>Employee id:</label>
+        <input type="text" th:field="*{employeeId}" /><br/>
+
+        <label>Patient id:</label>
+        <input type="text" th:field="*{patientId}" /><br/>
+
+        <label>Record Date:</label>
+        <input type="date" th:field="*{date}" /><br/>
+
+        <label>Diagnosis:</label>
+        <input type="text" th:field="*{diagnosis}" /><br/>
+
+        <label>Diagnosis Note:</label>
+        <textarea rows="5" cols="25" th:field="*{diagnosisNotes}"></textarea><br/>
+
+        <label>Medical Result:</label>
+        <input type="text" th:field="*{medicalResult}" /><br/>
+
+        <label>Medications Prescribed:</label>
+        <input type="text" th:field="*{medicationsPrescribed}" /><br/>
+
+        <button type="submit">Save</button>
+    </form>
+</div>
+</body>
+</html>
