@@ -40,7 +40,18 @@ public class MedicalRecordController {
     public String showSuccess() {
         return "patients/medicalRecord_success";
     }
+/*
+    @RequestMapping("/medical/save/success/new")
+    public String showNewForm(Model model){
 
+        MedicalRecord medicalRecord = new MedicalRecord();
+        model.addAttribute("medicalRecord", medicalRecord);
+        return "redirect:/medical/save";
+    }
+*/
 
-
+    @GetMapping("/medical/save/new")
+    public String showNewForm(Model model) {
+        return "redirect:/medical/save";
+    }
 }

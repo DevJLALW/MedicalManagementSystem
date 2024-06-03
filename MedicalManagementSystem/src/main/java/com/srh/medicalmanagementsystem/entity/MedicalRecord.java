@@ -124,7 +124,7 @@ public class MedicalRecord {
     }
 
     public void setPatientId(Integer patientId) {
-        patientId = patientId;
+        this.patientId = patientId;
     }
 
     @Override
