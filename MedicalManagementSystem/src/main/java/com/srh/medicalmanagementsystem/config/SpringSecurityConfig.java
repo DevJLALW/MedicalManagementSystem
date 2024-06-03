@@ -15,7 +15,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
-
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -31,13 +30,13 @@ public class SpringSecurityConfig {
                 .requestMatchers("/register/**").permitAll()
                 .requestMatchers("/index").permitAll()
                 .requestMatchers("/login").permitAll()
-                .requestMatchers("/users").hasRole("ADMIN")
+                .requestMatchers("/patients").hasRole("ADMIN")
                 .and()
                 .formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/users")
+                                .defaultSuccessUrl("/patients")
                                 .permitAll()
                 ).logout(
                         logout -> logout
@@ -48,8 +47,9 @@ public class SpringSecurityConfig {
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
-        builder.userDetailsService(userDetailsService)
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
 }
