@@ -15,7 +15,7 @@ public class MedicalRecordController {
 
     @Autowired
     MedicalRecordService medicalRecordService;
-/*
+
     @GetMapping("/records")
     public String getAllMedicalRecord(Model model) {
         List<MedicalRecord> records = medicalRecordService.getAllMedicalRecord();
@@ -42,5 +42,5 @@ public class MedicalRecordController {
     }
 
 
- */
+
 }

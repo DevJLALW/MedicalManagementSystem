@@ -2,6 +2,7 @@ package com.srh.medicalmanagementsystem.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Entity
@@ -11,6 +12,7 @@ public class MedicalRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private int medicalRecordId;
     @Column
     private String diagnosis;
@@ -22,6 +24,7 @@ public class MedicalRecord {
     private String medicationsPrescribed;
     @Column
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     private Date date;
     @Column
     private Integer employeeId;
@@ -76,13 +79,13 @@ public class MedicalRecord {
         this.date = date;
     }
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    private Employee employee;
+    private Employee employee;*/
 
     public int getMedicalRecordId() {
         return medicalRecordId;
@@ -92,7 +95,7 @@ public class MedicalRecord {
         this.medicalRecordId = medicalRecordId;
     }
 
-    public Patient getPatient() {
+    /*public Patient getPatient() {
         return patient;
     }
 
@@ -106,7 +109,7 @@ public class MedicalRecord {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
-    }
+    }*/
 
     public Integer getEmployeeId() {
         return employeeId;
