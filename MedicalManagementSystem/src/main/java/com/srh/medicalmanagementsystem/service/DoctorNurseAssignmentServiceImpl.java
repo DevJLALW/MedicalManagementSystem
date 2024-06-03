@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class DoctorNurseAssignmentServiceImpl implements DoctorNurseAssignmentService{
@@ -16,6 +17,7 @@ public class DoctorNurseAssignmentServiceImpl implements DoctorNurseAssignmentSe
 
     @Autowired
     public DoctorNurseAssignmentServiceImpl(DoctorNurseAssignmentRepository assignmentRepository) {
+
         this.assignmentRepository = assignmentRepository;
     }
 

@@ -17,6 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Autowired
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+
         this.employeeRepository = employeeRepository;
     }
 
@@ -54,6 +55,7 @@ public class EmployeeServiceImpl implements EmployeeService{
                 Employee deletingEmployee = employeeRepository.findById(employeeId)
                         .orElseThrow(() -> new NoSuchElementException("Employee not found with id " + employeeId));
                 deletingEmployee.setStatus(0);
+                employeeRepository.save(deletingEmployee);
             } else {
                 allDeleted= false;
             }

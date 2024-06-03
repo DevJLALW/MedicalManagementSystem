@@ -28,4 +28,25 @@ public class EmployeeController {
         Employee newEmployee = employeeService.saveEmployee(employee);
         return ResponseEntity.ok(newEmployee);
     };
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Integer id, @RequestBody Employee employeeDetails) {
+        try{
+            Employee updatedEmployeeDetails = employeeService.updateEmployee(id, employeeDetails);
+            return ResponseEntity.ok(updatedEmployeeDetails);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Employee> findEmployeeById(@PathVariable Integer id) {
+        try {
+            Employee employee = employeeService.findEmployeeById(id);
+
+            return ResponseEntity.ok(employee);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

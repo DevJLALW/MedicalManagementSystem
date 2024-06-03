@@ -10,6 +10,7 @@ public class DoctorNurseAssignment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "AssignmentID")
     private Integer assignmentId;
 
     @Column(name = "DoctorID", nullable = false)
