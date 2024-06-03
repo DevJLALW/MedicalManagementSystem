@@ -1,8 +1,8 @@
 package com.srh.medicalmanagementsystem.controller;
 
-import com.srh.medicalmanagementsystem.dao.UserDto;
-import com.srh.medicalmanagementsystem.entity.User;
-import com.srh.medicalmanagementsystem.service.UserService;
+import com.srh.medicalmanagementsystem.dao.PatientRepository;
+import com.srh.medicalmanagementsystem.entity.Patient;
+import com.srh.medicalmanagementsystem.service.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,56 +14,57 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+
 @Controller
 public class AuthController {
-    private UserService userService;
+    private final PatientService patientService;
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public AuthController(PatientService patientService) {
+        this.patientService = patientService;
     }
 
     @GetMapping("/index")
     public String home() {
-        return "patients/index";
+        return "index";
     }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        UserDto user = new UserDto();
-        model.addAttribute("user", user);
-        return "patients/register";
+        Patient patient = new Patient();
+        model.addAttribute("patient", patient);
+        return "register";
     }
 
     @PostMapping("/register/save")
-    public String registration(@Valid @ModelAttribute("user") UserDto userDto,
+    public String registration(@Valid @ModelAttribute("patient") Patient patient,
                                BindingResult result,
                                Model model) {
-        User existingUser = userService.findUserByPatientId(userDto.getPatientId());
+        Patient existingPatient = patientService.findPatientById(patient.getPatientId());
 
-        if (existingUser != null && existingUser.getPatientId() != null && !existingUser.getPatientId().isEmpty()) {
-            result.rejectValue("patientId", null,
-                    "There is already an account registered with the same Patient ID");
+        if (existingPatient != null) {
+            result.rejectValue("patientID", null,
+                    "There is already an account registered with the same patient ID");
         }
 
         if (result.hasErrors()) {
-            model.addAttribute("user", userDto);
-            return "patients/register";
+            model.addAttribute("patient", patient);
+            return "register";
         }
 
-        userService.saveUser(userDto);
-        return "redirect:/patients/register?success";
+        patientService.savePatient(patient);
+        return "redirect:/register?success";
     }
 
-    @GetMapping("/users")
-    public String users(Model model) {
-        List<UserDto> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "patients/users";
+    @GetMapping("/patients")
+    public String patients(Model model) {
+        List<Patient> patients = patientService.findAllPatients();
+        model.addAttribute("patients", patients);
+        return "patients";
     }
 
     @GetMapping("/login")
     public String login() {
-        return "patients/login";
+        return "login";
     }
 }
