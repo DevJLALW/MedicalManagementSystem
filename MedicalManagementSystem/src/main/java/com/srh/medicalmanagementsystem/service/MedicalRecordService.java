@@ -16,5 +16,7 @@ public interface MedicalRecordService {
 
     public MedicalRecord findMedicalRecordById(Integer medicalRecordId);
 
-   // public List<MedicalRecord> searchMedicalRecords(String keyword);
+    public List<MedicalRecord> searchMedicalRecords(String keyword);
+
+    // public List<MedicalRecord> searchMedicalRecords(String keyword);
 }

@@ -34,6 +34,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService
     }
 
 
+    @Override
     public MedicalRecord updateMedicalRecord(int medicalRecordId, MedicalRecord medicalRecordDetails) {
         MedicalRecord existingMedicalRecord = medicalRecordRepository.findById(medicalRecordId)
                 .orElseThrow(() -> new NoSuchElementException("MedicalRecord not found with id " + medicalRecordId));
@@ -44,10 +45,11 @@ public class MedicalRecordServiceImpl implements MedicalRecordService
         existingMedicalRecord.setMedicationsPrescribed(medicalRecordDetails.getMedicationsPrescribed());
         existingMedicalRecord.setDate(medicalRecordDetails.getDate());
         existingMedicalRecord.setEmployeeId(medicalRecordDetails.getEmployeeId());
-        existingMedicalRecord.setMedicalRecordId(medicalRecordDetails.getMedicalRecordId());
+        existingMedicalRecord.setPatientId(medicalRecordDetails.getPatientId());
         return medicalRecordRepository.save(existingMedicalRecord);
     }
 
+    @Override
     public boolean deleteMedicalRecords(List<Integer> medicalRecordIds) {
         boolean allDeleted = true;
         for(Integer medicalRecordId: medicalRecordIds) {
@@ -67,9 +69,9 @@ public class MedicalRecordServiceImpl implements MedicalRecordService
                 .orElseThrow(() -> new NoSuchElementException("MedicalRecord not found with id " + medicalRecordId));
     }
 
-
-   /* public List<MedicalRecord> searchMedicalRecords(String keyword) {
+    @Override
+   public List<MedicalRecord> searchMedicalRecords(String keyword) {
         return medicalRecordRepository.searchMedicalRecords(keyword);
-    }*/
+    }
 }
 

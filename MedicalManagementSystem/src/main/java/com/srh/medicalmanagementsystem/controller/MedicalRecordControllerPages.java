@@ -2,6 +2,7 @@ package com.srh.medicalmanagementsystem.controller;
 
 
 import com.srh.medicalmanagementsystem.entity.MedicalRecord;
+import com.srh.medicalmanagementsystem.entity.Patient;
 import com.srh.medicalmanagementsystem.service.MedicalRecordService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -67,13 +68,13 @@ public class MedicalRecordControllerPages {
     }
 
     @PostMapping("/delete")
-    public String deleteMedicalRecord(@RequestParam("medicalRecordIds") List<Integer> medicalRecordIds) {
+    public String deleteMedicalRecord(@RequestParam("medicalRecordId") List<Integer> medicalRecordIds) {
         medicalRecordService.deleteMedicalRecords(medicalRecordIds);
 
         return "redirect:/medicalRecords/all";
     }
-
-    /*@GetMapping("/search")
+/*
+    @GetMapping("/search")
     public String searchMedicalRecords(
             @RequestParam("keyword") String keyword,
             Model model
@@ -83,4 +84,13 @@ public class MedicalRecordControllerPages {
 
         return "medicalRecords/ShowMedicalRecords";
     }*/
+
+
+    @GetMapping("/search")
+    public String searchMedicalRecords(@RequestParam("keyword") String keyword, Model model) {
+        List<MedicalRecord> medicalRecordList =medicalRecordService.searchMedicalRecords(keyword);
+        model.addAttribute("medicalRecords", medicalRecordList);
+
+        return "patients/ShowMedicalRecords";
+    }
 }
