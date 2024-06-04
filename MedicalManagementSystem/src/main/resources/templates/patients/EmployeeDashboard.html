@@ -27,13 +27,13 @@
 			<div class="col-md-8 mx-auto rounded border p-4 m-4">
 				<h2 class="text-center mb-5">Dashboard</h2>
                 <div class="row mb-3">
-                    <button type="submit" class="btn btn-primary">Show Patient Information</button>
+                    <button type="submit" onclick="getPatientInfo()" class="btn btn-primary">Show Patient Information</button>
                 </div>
                 <div class="row mb-3">
                     <button type="submit" class="btn btn-primary">Doctor Assignment</button>
                 </div>
                 <div class="row mb-3">
-                    <button type="submit" class="btn btn-primary">Employee Information</button>
+                    <button type="submit" onclick="getEmployeeInfo()" class="btn btn-primary">Employee Information</button>
                 </div>
                 <div class="row mb-3">
                     <button type="submit" class="btn btn-primary">Room Management</button>
@@ -42,5 +42,12 @@
 		</div>
 	</div>		
 </body>
-
+<script>
+    function getPatientInfo(){
+        location.replace("/patients/all")
+    }
+    function getEmployeeInfo(){
+        location.replace("/employees/all")
+    }
+</script>
 </html>
