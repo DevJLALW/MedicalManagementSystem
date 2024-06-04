@@ -25,8 +25,7 @@ public class SpringSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
+        http.authorizeRequests()
                 .requestMatchers("/register/**").permitAll()
                 .requestMatchers("/index").permitAll()
                 .requestMatchers("/login").permitAll()
@@ -35,8 +34,8 @@ public class SpringSecurityConfig {
                 .formLogin(
                         form -> form
                                 .loginPage("/login")
-                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/patients")
+                                .loginProcessingUrl("/perform_login")
+                                .defaultSuccessUrl("/medicalmanagement/dashboard")
                                 .permitAll()
                 ).logout(
                         logout -> logout

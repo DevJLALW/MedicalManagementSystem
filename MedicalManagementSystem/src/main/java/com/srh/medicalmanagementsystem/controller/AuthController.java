@@ -26,7 +26,7 @@ public class AuthController {
 
     @GetMapping("/index")
     public String home() {
-        return "index";
+        return "patients/index";
     }
 
     @GetMapping("/register")
@@ -56,15 +56,22 @@ public class AuthController {
         return "redirect:/register?success";
     }
 
-    @GetMapping("/patients")
+    /*@GetMapping("/patients")
     public String patients(Model model) {
         List<Patient> patients = patientService.findAllPatients();
         model.addAttribute("patients", patients);
         return "patients";
-    }
+    }*/
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "patients/Login";
     }
+
+    @GetMapping("/medicalmanagement/dashboard")
+    public String dashboard() {
+        return "patients/EmployeeDashboard";
+    }
+
+
 }
