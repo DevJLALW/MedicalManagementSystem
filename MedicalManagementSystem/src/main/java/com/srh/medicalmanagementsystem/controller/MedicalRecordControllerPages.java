@@ -32,7 +32,7 @@ public class MedicalRecordControllerPages {
     @GetMapping("/create")
     public String showCreateMedicalRecordPage(Model model) {
         model.addAttribute("medicalRecord", new MedicalRecord());
-        return "medicalRecords/CreateMedicalRecord";
+        return "patients/createMedicalRecord";
     }
 
     @PostMapping("/create")
@@ -41,7 +41,7 @@ public class MedicalRecordControllerPages {
             BindingResult bindingResult, Model model
     ) {
         if(bindingResult.hasErrors()){
-            return "medicalRecords/CreateMedicalRecord";
+            return "patients/createMedicalRecord";
         }
         medicalRecordService.saveMedicalRecord(medicalRecord);
         return "redirect:/medicalRecords/all";

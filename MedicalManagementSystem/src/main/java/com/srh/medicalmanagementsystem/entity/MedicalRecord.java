@@ -38,14 +38,14 @@ public class MedicalRecord {
     private Date date;
 
     @Column(name = "EmployeeId", nullable = false)
-    @NotEmpty(message = "Employee Id is mandatory")
+   // @NotEmpty(message = "Employee Id is mandatory")
     private Integer employeeId;
 
     @Column(name = "PatientId", nullable = false)
-    @NotEmpty(message = "Patient Id is mandatory")
+ //   @NotEmpty(message = "Patient Id is mandatory")
     private Integer patientId;
 
-    public int getRecordId() {
+    /*public int getRecordId() {
         return medicalRecordId;
     }
 
@@ -93,13 +93,13 @@ public class MedicalRecord {
         this.date = date;
     }
 
-    /*@ManyToOne
+    *//*@ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    private Employee employee;*/
+    private Employee employee;*//*
 
     public int getMedicalRecordId() {
         return medicalRecordId;
@@ -109,7 +109,7 @@ public class MedicalRecord {
         this.medicalRecordId = medicalRecordId;
     }
 
-    /*public Patient getPatient() {
+    *//*public Patient getPatient() {
         return patient;
     }
 
@@ -123,7 +123,7 @@ public class MedicalRecord {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
-    }*/
+    }*//*
 
     public Integer getEmployeeId() {
         return employeeId;
@@ -139,7 +139,7 @@ public class MedicalRecord {
 
     public void setPatientId(Integer patientId) {
         this.patientId = patientId;
-    }
+    }*/
 
 
 }
