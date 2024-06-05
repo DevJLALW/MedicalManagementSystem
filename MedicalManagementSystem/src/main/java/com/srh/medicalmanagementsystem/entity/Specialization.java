@@ -13,5 +13,5 @@ public class Specialization {
     private Integer doctorId;
 
     @Column(name = "SpecializationName", nullable = false)
-    private String Specialization;
+    private String specializationName;
 }

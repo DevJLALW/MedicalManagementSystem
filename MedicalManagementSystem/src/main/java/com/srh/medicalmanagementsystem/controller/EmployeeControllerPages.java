@@ -25,7 +25,7 @@ public class EmployeeControllerPages {
         List<Employee> employeeList= employeeService.getAllEmployees();
         model.addAttribute("employees",employeeList);
 
-        return "patients/ShowEmployees";
+        return "employees/ShowEmployees";
     }
 
     @GetMapping("/create")
@@ -56,7 +56,7 @@ public class EmployeeControllerPages {
         return "employees/UpdateEmployee";
     }
 
-    @PostMapping("/update/{employeeId}")
+    @PutMapping("/update/{employeeId}")
     public String updateEmployee(
             @PathVariable("employeeId") Integer employeeId,
             @ModelAttribute("employee") Employee employee
