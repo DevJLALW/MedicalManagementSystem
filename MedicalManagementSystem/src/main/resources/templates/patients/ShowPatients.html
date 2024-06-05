@@ -15,23 +15,22 @@
             margin-top: 5px;
             width:30%;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
 <div class="container row mb-3">
     <h1 class="text-center my-4">Patients Information</h1>
-    <!--<form action="#" th:action="@{/patients/search}" method="get">
-        <input id="search" type="text" name="keyword" placeholder="Search..">
-        <button id="button">Search</button>
-    </form>-->
 </div>
-    <a class="btn btn-primary" href="/patients/create">New Patient Entry</a>
+    <a class="btn btn-primary" href="/patients/create" style="margin-left:12px;">New Patient Entry</a>
     <button id="deleteButton" class="btn btn-danger" onclick="deleteSelectedPatients()">Delete</button>
-<div class="container row mb-3">
+<div class="container row mb-3" style="margin-top: 5px;">
     <form action="#" th:action="@{/patients/search}" method="get">
-        <input id="search" class="width" type="text" name="keyword" placeholder="Search for Patient ID, First Name, Last Name, Email">
-        <button id="button">Search</button>
-        <button id="reset" onclick="getPatientInfo()">Reset</button>
+        <input type="text" id="searchQuery" name="searchQuery" placeholder="Search for Patient ID, First Name, Last Name, Email">
+        <button type="button" id="searchButton">Search</button>
+        <button type="button" id="resetButton" class="hidden">Reset</button>
     </form>
 </div>
     <table class="table">
@@ -123,6 +122,31 @@
     function getPatientInfo(){
         location.replace("/patients/all")
     }
+    document.addEventListener('DOMContentLoaded', () => {
+            const searchForm = document.getElementById('searchForm');
+            const searchButton = document.getElementById('searchButton');
+            const resetButton = document.getElementById('resetButton');
+            const searchResults = document.getElementById('searchResults');
+
+            searchButton.addEventListener('click', () => {
+                const query = document.getElementById('searchQuery').value;
+
+                if (query) {
+                    performSearch(query);
+                    resetButton.classList.remove('hidden');
+                }
+            });
+
+            resetButton.addEventListener('click', () => {
+                searchForm.reset();
+                resetButton.classList.add('hidden');
+                searchResults.innerHTML = '';
+            });
+
+            function performSearch(query) {
+                searchResults.innerHTML = `Results for "${query}"`;
+            }
+        });
 </script>
 </body>
 </html>
