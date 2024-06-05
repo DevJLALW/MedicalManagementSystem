@@ -25,13 +25,13 @@ public class EmployeeControllerPages {
         List<Employee> employeeList= employeeService.getAllEmployees();
         model.addAttribute("employees",employeeList);
 
-        return "employees/ShowEmployees";
+        return "patients/ShowEmployees";
     }
 
     @GetMapping("/create")
     public String showCreateEmployeePage(Model model) {
         model.addAttribute("employee", new Employee());
-        return "employees/CreateEmployee";
+        return "patients/CreateEmployee";
     }
 
     @PostMapping("/create")
@@ -40,7 +40,7 @@ public class EmployeeControllerPages {
             BindingResult bindingResult, Model model
     ) {
         if(bindingResult.hasErrors()){
-            return "employees/CreateEmployee";
+            return "patients/CreateEmployee";
         }
         employeeService.saveEmployee(employee);
         return "redirect:/employees/all";
@@ -53,7 +53,7 @@ public class EmployeeControllerPages {
     ) {
         Employee employee= employeeService.findEmployeeById(employeeId);
         model.addAttribute("employee", employee);
-        return "employees/UpdateEmployee";
+        return "patients/UpdateEmployee";
     }
 
     @PutMapping("/update/{employeeId}")
@@ -80,6 +80,6 @@ public class EmployeeControllerPages {
         List<Employee> employeeList =employeeService.searchEmployees(keyword);
         model.addAttribute("employees", employeeList);
 
-        return "employees/ShowEmployees";
+        return "patients/ShowEmployees";
     }
 }
