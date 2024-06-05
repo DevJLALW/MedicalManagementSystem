@@ -81,6 +81,11 @@ public class PatientServiceImpl implements PatientService{
     }
 
    public List<Patient> searchPatients(String keyword){
-        return patientRepository.searchPatients(keyword);
+       Integer patientId = null;
+       try {
+           patientId = Integer.valueOf(keyword);
+       } catch (NumberFormatException ignored) {
+       }
+        return patientRepository.searchPatients(patientId,keyword);
     }
 }

@@ -4,6 +4,7 @@ import com.srh.medicalmanagementsystem.dao.EmployeeRepository;
 import com.srh.medicalmanagementsystem.entity.Employee;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -14,11 +15,13 @@ import java.util.NoSuchElementException;
 public class EmployeeServiceImpl implements EmployeeService{
 
     private EmployeeRepository employeeRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder) {
 
         this.employeeRepository = employeeRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -30,6 +33,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Transactional
     public Employee saveEmployee(Employee employee) {
+
+        if(employee.getPassword() != null && !employee.getPassword().isEmpty()){
+
+            String encoderPassword = passwordEncoder.encode(employee.getPassword());
+            employee.setPassword(encoderPassword);
+        }
         return employeeRepository.save(employee);
     }
 

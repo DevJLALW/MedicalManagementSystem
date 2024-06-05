@@ -3,6 +3,7 @@ package com.srh.medicalmanagementsystem.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,7 +28,9 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .requestMatchers("/register/**", "/index", "/login").permitAll()
+                .requestMatchers(HttpMethod.POST,"/patients/delete").hasRole("ADMIN")
                 .requestMatchers("/patients/**").hasRole("ADMIN")
+                .requestMatchers("/employees/**").hasRole("ADMIN")
                 .anyRequest().authenticated() // Ensures that any other request requires authentication
                 .and()
                 .formLogin(
