@@ -71,13 +71,33 @@ public class EmployeeControllerPages {
 
         return "redirect:/employees/all";
     }
+//
+//    @GetMapping("/search")
+//    public String searchEmployees(
+//            @RequestParam("keyword") String keyword,
+//            Model model
+//    ) {
+//        List<Employee> employeeList =employeeService.searchEmployees(keyword);
+//        model.addAttribute("employees", employeeList);
+//
+//        return "patients/ShowEmployees";
+//    }
 
     @GetMapping("/search")
     public String searchEmployees(
             @RequestParam("keyword") String keyword,
             Model model
     ) {
-        List<Employee> employeeList =employeeService.searchEmployees(keyword);
+        List<Employee> employeeList;
+        try {
+            // Attempt to parse the keyword as an integer
+            Integer employeeId = Integer.parseInt(keyword);
+            employeeList = employeeService.searchEmployeesById(employeeId);
+        } catch (NumberFormatException e) {
+            // If parsing fails, treat it as a string keyword
+            employeeList =  employeeService.searchEmployeesByKeyword(keyword);
+        }
+//        List<Employee> employeeList =employeeService.searchEmployees(employeeId);
         model.addAttribute("employees", employeeList);
 
         return "patients/ShowEmployees";

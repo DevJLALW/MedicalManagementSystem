@@ -15,5 +15,7 @@ public interface EmployeeService {
 
     public Employee findEmployeeById(Integer employeeId);
 
-    public List<Employee> searchEmployees(String keyword);
+    public List<Employee> searchEmployeesByKeyword(String keyword);
+
+    public List<Employee> searchEmployeesById(Integer employeeId);
 }

@@ -79,7 +79,12 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public List<Employee> searchEmployees(String keyword) {
-        return employeeRepository.searchEmployees(keyword);
+    public List<Employee> searchEmployeesByKeyword(String keyword) {
+        return employeeRepository.searchEmployeesByKeyword(keyword);
+    }
+
+    @Override
+    public List<Employee> searchEmployeesById(Integer employeeId) {
+        return employeeRepository.searchEmployeesById(employeeId);
     }
 }
