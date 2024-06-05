@@ -56,7 +56,7 @@ public class EmployeeControllerPages {
         return "patients/UpdateEmployee";
     }
 
-    @PutMapping("/update/{employeeId}")
+    @PostMapping("/update/{employeeId}")
     public String updateEmployee(
             @PathVariable("employeeId") Integer employeeId,
             @ModelAttribute("employee") Employee employee

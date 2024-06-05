@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-8 mx-auto rounded border p-4 m-4">
             <h2 class="text-center mb-5">Update Employee Details</h2>
-            <form method="post" enctype="multipart/form-data" th:action="@{/employees/update/{employee}(employeeId=${employee.employeeId})}" th:object="${employee}">
+            <form method="post" enctype="multipart/form-data" th:action="@{/employees/update/{employeeId}(employeeId=${employee.employeeId})}" th:object="${employee}">
                 <div class="row mb-3">
                     <label class="col-sm-4 col-form-label">Employee ID</label>
                     <div class="col-sm-8">
@@ -42,7 +42,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-4 col-form-label">Status</label>
                     <div class="col-sm-8">
-                        <select name="status" id="status" class="form-control">
+                        <select name="status" id="status" th:field="*{status}" class="form-control">
                             <option value="1">Employed</option>
                             <option value="0">Not employed</option>
                         </select>
@@ -72,6 +72,7 @@
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary">Update Employee</button>
+                    <button type="submit" class="btn btn-primary" onclick="history.back()">Back</button>
                 </div>
             </form>
         </div>
