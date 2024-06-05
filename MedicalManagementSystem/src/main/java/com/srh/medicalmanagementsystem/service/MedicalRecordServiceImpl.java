@@ -2,7 +2,6 @@ package com.srh.medicalmanagementsystem.service;
 
 import com.srh.medicalmanagementsystem.dao.MedicalRecordRepository;
 import com.srh.medicalmanagementsystem.entity.MedicalRecord;
-import com.srh.medicalmanagementsystem.entity.MedicalRecord;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @Service
 public class MedicalRecordServiceImpl implements MedicalRecordService
 {
@@ -64,14 +65,22 @@ public class MedicalRecordServiceImpl implements MedicalRecordService
     }
 
 
+    @Override
     public MedicalRecord findMedicalRecordById(Integer medicalRecordId) {
         return medicalRecordRepository.findById(medicalRecordId)
                 .orElseThrow(() -> new NoSuchElementException("MedicalRecord not found with id " + medicalRecordId));
     }
 
     @Override
-   public List<MedicalRecord> searchMedicalRecords(String keyword) {
-        return medicalRecordRepository.searchMedicalRecords(keyword);
+   public List<MedicalRecord> searchMedicalRecords(Integer id) {
+        return medicalRecordRepository.searchMedicalRecords(id);
     }
+
+    @Override
+    public List<MedicalRecord> findMedicalRecordByPatientId(Integer patientId) {
+        return medicalRecordRepository.findMedicalRecordByPatientId(patientId);
+    }
+
+
 }
 

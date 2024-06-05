@@ -4,6 +4,7 @@ import com.srh.medicalmanagementsystem.entity.MedicalRecord;
 
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MedicalRecordService {
     public List<MedicalRecord> getAllMedicalRecord();
@@ -14,9 +15,14 @@ public interface MedicalRecordService {
 
     public boolean deleteMedicalRecords(List<Integer> medicalRecordId);
 
-    public MedicalRecord findMedicalRecordById(Integer medicalRecordId);
+//    public MedicalRecord findMedicalRecordById(Integer medicalRecordId);
 
-    public List<MedicalRecord> searchMedicalRecords(String keyword);
+  //  public List<MedicalRecord> searchMedicalRecords(String keyword);
 
     // public List<MedicalRecord> searchMedicalRecords(String keyword);
+
+    MedicalRecord findMedicalRecordById(Integer medicalRecordId);
+    List<MedicalRecord> searchMedicalRecords(Integer id);
+
+    List<MedicalRecord> findMedicalRecordByPatientId(Integer patientId);
 }

@@ -55,7 +55,7 @@ public class MedicalRecordControllerPages {
     ) {
         MedicalRecord medicalRecord= medicalRecordService.findMedicalRecordById(medicalRecordId);
         model.addAttribute("medicalRecord", medicalRecord);
-        return "medicalRecords/UpdateMedicalRecord";
+        return "patients/UpdateMedicalRecord";
     }
 
     @PostMapping("/update/{medicalRecordId}")
@@ -88,9 +88,16 @@ public class MedicalRecordControllerPages {
 
     @GetMapping("/search")
     public String searchMedicalRecords(@RequestParam("keyword") String keyword, Model model) {
-        List<MedicalRecord> medicalRecordList =medicalRecordService.searchMedicalRecords(keyword);
+        Integer id = Integer.valueOf(keyword);
+        List<MedicalRecord> medicalRecordList = medicalRecordService.searchMedicalRecords(id);
         model.addAttribute("medicalRecords", medicalRecordList);
+        return "patients/ShowMedicalRecords";
+    }
 
+    @GetMapping("/searchByPatientId")
+    public String findMedicalRecordByPatientId(@RequestParam("patientId") Integer patientId, Model model) {
+        List<MedicalRecord> medicalRecordList = medicalRecordService.findMedicalRecordByPatientId(patientId);
+        model.addAttribute("medicalRecords", medicalRecordList);
         return "patients/ShowMedicalRecords";
     }
 }
