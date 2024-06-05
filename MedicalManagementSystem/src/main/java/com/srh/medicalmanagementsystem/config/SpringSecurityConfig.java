@@ -29,8 +29,10 @@ public class SpringSecurityConfig {
         http.authorizeRequests()
                 .requestMatchers("/register/**", "/index", "/login").permitAll()
                 .requestMatchers(HttpMethod.POST,"/patients/delete").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,"/medicalRecords/delete").hasRole("ADMIN")
                 .requestMatchers("/patients/**").hasRole("ADMIN")
                 .requestMatchers("/employees/**").hasRole("ADMIN")
+                .requestMatchers("/medicalRecords/**").hasRole("ADMIN")
                 .anyRequest().authenticated() // Ensures that any other request requires authentication
                 .and()
                 .formLogin(
