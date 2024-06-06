@@ -31,13 +31,13 @@ public class DoctorNurseAssignmentControllerPages {
 
     @GetMapping("/create")
     public String showCreateDoctorNurseAssignmentPage(Model model) {
-        model.addAttribute("doctorNurseAssignment", new DoctorNurseAssignment());
+        model.addAttribute("assignment", new DoctorNurseAssignmentDto());
         return "patients/CreateDoctorNurseAssignment";
     }
 
     @PostMapping("/create")
     public String createDoctorNurseAssignment(
-            @Valid @ModelAttribute("doctorNurseAssignment") DoctorNurseAssignmentDto assignment,
+            @Valid @ModelAttribute("assignment") DoctorNurseAssignmentDto assignment,
             BindingResult bindingResult, Model model
     ) {
         if(bindingResult.hasErrors()){

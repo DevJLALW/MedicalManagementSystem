@@ -21,6 +21,9 @@ public class DoctorNurseAssignmentDto {
         this.nurseLastName = nurseLastName;
     }
 
+    public DoctorNurseAssignmentDto() {};
+
+
     public Integer getAssignmentId() {
         return assignmentId;
     }
