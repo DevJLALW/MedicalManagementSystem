@@ -25,8 +25,9 @@ public class PatientControllerPages {
     private MedicalRecordService medicalRecordService;
 
     @Autowired
-    public PatientControllerPages(PatientService patientService){
+    public PatientControllerPages(PatientService patientService, MedicalRecordService medicalRecordService){
         this.patientService = patientService;
+        this.medicalRecordService = medicalRecordService;
     }
 
     @GetMapping("/all")
