@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Room</title>
+</head>
+<body>
+<h1>Edit Room</h1>
+<form action="#" th:action="@{/rooms/update/{id}(id=${room.id})}" th:object="${room}" method="post">
+    <label for="patientId">Patient ID:</label>
+    <input type="number" id="patientId" th:field="*{patientId}" required/><br/>
+
+    <label for="roomNumber">Room Number:</label>
+    <input type="text" id="roomNumber" th:field="*{roomNumber}" required/><br/>
+
+    <label for="roomType">Room Type:</label>
+    <select id="roomType" th:field="*{roomType}" required>
+        <option value="General Ward" th:selected="${room.roomType == 'General Ward'}">General Ward</option>
+        <option value="Semi-Private Room" th:selected="${room.roomType == 'Semi-Private Room'}">Semi-Private Room</option>
+        <option value="Private Room" th:selected="${room.roomType == 'Private Room'}">Private Room</option>
+        <option value="ICU" th:selected="${room.roomType == 'ICU'}">ICU</option>
+        <option value="CCU" th:selected="${room.roomType == 'CCU'}">CCU</option>
+    </select><br/>
+
+    <label for="roomAdmissionStartDate">Room Admission Start Date:</label>
+    <input type="date" id="roomAdmissionStartDate" th:field="*{roomAdmissionStartDate}" required/><br/>
+
+    <label for="roomAdmissionEndDate">Room Admission End Date:</label>
+    <input type="date" id="roomAdmissionEndDate" th:field="*{roomAdmissionEndDate}" required/><br/>
+
+    <!--
+    <label for="numberOfDays">Number of Days:</label>
+    <input type="text" id="numberOfDays" th:field="*{numberOfDays}" readonly/><br/>
+
+    <label for="totalRoomCost">Total Room Cost:</label>
+    <input type="text" id="totalRoomCost" th:field="*{totalRoomCost}" readonly/><br/>
+    -->
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
