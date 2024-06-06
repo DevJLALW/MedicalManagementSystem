@@ -13,4 +13,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     @Query("Select e from Employee e where e.employeeId = :employeeId")
     List<Employee> searchEmployeesById(@Param("employeeId") Integer employeeId);
+
+    @Query("Select e from Employee e where e.role like %:keyword% or e.lastName like %:keyword% or e.email like %:keyword% or e.role like %:keyword%")
+    List<Employee> getRoleSpecificEmployees(@Param("keyword") String keyword);
 }

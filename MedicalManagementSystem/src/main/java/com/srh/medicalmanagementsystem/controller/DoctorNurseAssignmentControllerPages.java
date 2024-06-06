@@ -3,6 +3,7 @@ package com.srh.medicalmanagementsystem.controller;
 import com.srh.medicalmanagementsystem.entity.DoctorNurseAssignment;
 import com.srh.medicalmanagementsystem.entity.DoctorNurseAssignmentDto;
 import com.srh.medicalmanagementsystem.service.DoctorNurseAssignmentService;
+import com.srh.medicalmanagementsystem.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,11 @@ import java.util.List;
 public class DoctorNurseAssignmentControllerPages {
 
     private DoctorNurseAssignmentService doctorNurseAssignmentService;
+    private EmployeeService employeeService;
 
-    public DoctorNurseAssignmentControllerPages(DoctorNurseAssignmentService doctorNurseAssignmentService) {
+    public DoctorNurseAssignmentControllerPages(DoctorNurseAssignmentService doctorNurseAssignmentService, EmployeeService employeeService) {
         this.doctorNurseAssignmentService = doctorNurseAssignmentService;
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/all")
@@ -32,6 +35,12 @@ public class DoctorNurseAssignmentControllerPages {
     @GetMapping("/create")
     public String showCreateDoctorNurseAssignmentPage(Model model) {
         model.addAttribute("assignment", new DoctorNurseAssignmentDto());
+        model.addAttribute("doctors", employeeService.getRoleSpecificEmployees("Doctor"));
+//        model.addAttribute("nurses",
+//                employeeService.getRoleSpecificEmployees("Nurse")
+//                        .addAll(employeeService.getRoleSpecificEmployees("Medical Assistant")));
+        model.addAttribute("nurses",
+                employeeService.getRoleSpecificEmployees("Nurse"));
         return "patients/CreateDoctorNurseAssignment";
     }
 
