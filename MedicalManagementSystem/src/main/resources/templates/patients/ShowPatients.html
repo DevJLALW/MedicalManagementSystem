@@ -20,10 +20,6 @@
 <body>
 <div class="container row mb-3">
     <h1 class="text-center my-4">Patients Information</h1>
-    <!--<form action="#" th:action="@{/patients/search}" method="get">
-        <input id="search" type="text" name="keyword" placeholder="Search..">
-        <button id="button">Search</button>
-    </form>-->
 </div>
     <a class="btn btn-primary" href="/patients/create" style="margin-left: 12px;">New Patient Entry</a>
     <button id="deleteButton" class="btn btn-danger" onclick="deleteSelectedPatients()">Delete</button>
@@ -47,14 +43,15 @@
             <th>ContactNumber</th>
             <th>Email</th>
             <th>Address</th>
-            <th>MedicalHistory</th>
+            <!--<th>MedicalHistory</th>
             <th>InsuranceID</th>
             <th>DoctorID</th>
             <th>NurseID</th>
             <th>RoomID</th>
-            <th>RecordID</th>
+            <th>RecordID</th>-->
             <th>CreatedDate</th>
             <th>EmployeeID</th>
+            <th>MoreInformation</th>
         </tr>
         </thead>
         <tbody>
@@ -68,14 +65,18 @@
             <td th:text="${patient.contactNumber}"></td>
             <td th:text="${patient.email}"></td>
             <td th:text="${patient.address}"></td>
-            <td th:text="${patient.medicalHistory}"></td>
+            <!--<td th:text="${patient.medicalHistory}"></td>
             <td th:text="${patient.insuranceID}"></td>
             <td th:text="${patient.doctorID}"></td>
             <td th:text="${patient.nurseID}"></td>
             <td th:text="${patient.roomID}"></td>
-            <td th:text="${patient.recordID}"></td>
+            <td th:text="${patient.recordID}"></td>-->
             <td th:text="${patient.timestamp}"></td>
             <td th:text="${patient.employeeID}"></td>
+            <td style="white-space:nowrap">
+                <a class="btn btn-primary btn-sm" th:href="@{/patients/details/{patientId}(patientId=${patient.patientId})}">More Information</a>
+
+            </td>
             <td style="white-space:nowrap">
                 <a class="btn btn-primary btn-sm" th:href="@{/patients/update/{patientId}(patientId=${patient.patientId})}">Edit</a>
 

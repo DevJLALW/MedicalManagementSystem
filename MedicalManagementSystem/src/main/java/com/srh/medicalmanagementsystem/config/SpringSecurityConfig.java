@@ -12,12 +12,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private AuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -39,7 +43,7 @@ public class SpringSecurityConfig {
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/perform_login")
-                                .defaultSuccessUrl("/medicalmanagement/dashboard")
+                                .successHandler(customAuthenticationSuccessHandler)
                                 .permitAll()
                 ).logout(
                         logout -> logout
