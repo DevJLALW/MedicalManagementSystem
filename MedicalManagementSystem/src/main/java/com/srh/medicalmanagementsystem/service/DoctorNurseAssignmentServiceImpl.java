@@ -2,13 +2,13 @@ package com.srh.medicalmanagementsystem.service;
 
 import com.srh.medicalmanagementsystem.dao.DoctorNurseAssignmentRepository;
 import com.srh.medicalmanagementsystem.entity.DoctorNurseAssignment;
+import com.srh.medicalmanagementsystem.entity.DoctorNurseAssignmentDto;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class DoctorNurseAssignmentServiceImpl implements DoctorNurseAssignmentService{
@@ -22,16 +22,20 @@ public class DoctorNurseAssignmentServiceImpl implements DoctorNurseAssignmentSe
     }
 
     @Override
-    public List<DoctorNurseAssignment> getAllDoctorNurseAssignments() {
-        List<DoctorNurseAssignment> assignments = assignmentRepository.findAll();
+    public List<DoctorNurseAssignmentDto> getAllDoctorNurseAssignments() {
+        List<DoctorNurseAssignmentDto> assignments = assignmentRepository.findAllAssignments();
         assignments.sort(Comparator.comparing(
-                DoctorNurseAssignment::getAssignmentId
+                DoctorNurseAssignmentDto::getAssignmentId
         ).reversed());
         return assignments;
     }
 
     @Transactional
-    public DoctorNurseAssignment saveDoctorNurseAssignment (DoctorNurseAssignment assignment) {
+    public DoctorNurseAssignment saveDoctorNurseAssignment (DoctorNurseAssignmentDto assignmentDto) {
+        DoctorNurseAssignment assignment = new DoctorNurseAssignment();
+        assignment.setAssignmentId(assignmentDto.getAssignmentId());
+        assignment.setDoctorId(assignmentDto.getDoctorId());
+        assignment.setNurseId(assignmentDto.getNurseId());
         return assignmentRepository.save(assignment);
     }
 
@@ -48,8 +52,12 @@ public class DoctorNurseAssignmentServiceImpl implements DoctorNurseAssignmentSe
         return allDeleted;
     }
 
-    public List<DoctorNurseAssignment> findAssignmentsByIds (Integer employeeId) {
-        return assignmentRepository.searchAssignments(employeeId);
+    public List<DoctorNurseAssignmentDto> findAssignmentsByIds (Integer employeeId) {
+        return assignmentRepository.searchAssignmentsById(employeeId);
+    }
+
+    public List<DoctorNurseAssignmentDto> findAssignmentsByName(String name) {
+        return assignmentRepository.searchAssignmentsByKeyword(name);
     }
 
 }
