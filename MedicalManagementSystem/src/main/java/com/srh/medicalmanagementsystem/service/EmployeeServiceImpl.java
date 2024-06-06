@@ -87,4 +87,9 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<Employee> searchEmployeesById(Integer employeeId) {
         return employeeRepository.searchEmployeesById(employeeId);
     }
+
+    @Override
+    public List<Employee> getRoleSpecificEmployees(String keyword) {
+        return employeeRepository.getRoleSpecificEmployees(keyword);
+    }
 }
