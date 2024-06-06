@@ -22,11 +22,11 @@ public class PatientController {
         return patientService.getAllPatients();
     }
 
-    @PostMapping
+   /* @PostMapping
     public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) {
         Patient savedPatient = patientService.savePatient(patient);
         return ResponseEntity.ok(savedPatient);
-    }
+    }*/
 
     @PutMapping("/{id}")
     public ResponseEntity<Patient> updatePatient(@PathVariable Integer id, @RequestBody Patient patientDetails) {

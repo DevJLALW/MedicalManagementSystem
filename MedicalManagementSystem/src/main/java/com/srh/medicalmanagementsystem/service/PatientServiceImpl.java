@@ -2,6 +2,7 @@ package com.srh.medicalmanagementsystem.service;
 
 import com.srh.medicalmanagementsystem.dao.PatientRepository;
 import com.srh.medicalmanagementsystem.entity.Patient;
+import com.srh.medicalmanagementsystem.entity.PatientDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,14 +32,41 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Transactional
-    public Patient savePatient(Patient patient) {
+    public Patient savePatient(PatientDTO patientDTO) {
+        Patient patient = convertToEntity(patientDTO);
+        System.out.println("patient.getPassword(): "+patient.getPassword());
+
         if (patient.getPassword() != null && !patient.getPassword().isEmpty()) {
             String encodedPassword = passwordEncoder.encode(patient.getPassword());
             patient.setPassword(encodedPassword);
+            System.out.println("Check if password is encoded");
         }
+        patient.setEmployeeID(patientDTO.getEmployeeID());
         return patientRepository.save(patient);
     }
 
+    private Patient convertToEntity(PatientDTO patientDTO) {
+        Patient patient = new Patient();
+
+        patient.setPatientId(patientDTO.getPatientId());
+        patient.setFirstName(patientDTO.getFirstName());
+        patient.setLastName(patientDTO.getLastName());
+        patient.setDob(patientDTO.getDob());
+        patient.setGender(patientDTO.getGender());
+        patient.setContactNumber(patientDTO.getContactNumber());
+        patient.setEmail(patientDTO.getEmail());
+        patient.setAddress(patientDTO.getAddress());
+        patient.setMedicalHistory(patientDTO.getMedicalHistory());
+        patient.setInsuranceID(patientDTO.getInsuranceID());
+        patient.setDoctorID(patientDTO.getDoctorID());
+        patient.setNurseID(patientDTO.getNurseID());
+        patient.setRoomID(patientDTO.getRoomID());
+        patient.setRecordID(patientDTO.getRecordID());
+        patient.setPassword(patientDTO.getPassword());
+        patient.setEmployeeID(patientDTO.getEmployeeID());
+
+        return patient;
+    }
     public Patient updatePatient(int patientId, Patient patientDetails) {
         Patient existingPatient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new NoSuchElementException("Patient not found with id " + patientId));

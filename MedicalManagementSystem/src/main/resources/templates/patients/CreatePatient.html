@@ -108,6 +108,7 @@
             <label class="col-sm-4 col-form-label">Password</label>
             <div class="col-sm-8">
                 <input type="password" th:field="*{password}" class="form-control" />
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red">password error</div>
             </div>
         </div>
 

@@ -3,12 +3,13 @@ package com.srh.medicalmanagementsystem.entity;
 import com.srh.medicalmanagementsystem.validation.PastOrPresentDate;
 import com.srh.medicalmanagementsystem.validation.ValidEmail;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
-
-
 import org.hibernate.annotations.Formula;
 import org.springframework.format.annotation.DateTimeFormat;
-import jakarta.validation.constraints.*;
+
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Date;
@@ -16,7 +17,7 @@ import java.util.Date;
 @Entity
 @Table(name = "Patients")
 @Data
-public class Patient {
+public class PatientDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,7 +81,7 @@ public class Patient {
     private Integer employeeID;
 
     @Column(name = "Password", nullable = true)
-   // @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$", message = "Password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, one digit, and one special character")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$", message = "Password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, one digit, and one special character")
     private String password;
 
     @PrePersist

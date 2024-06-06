@@ -1,6 +1,7 @@
 package com.srh.medicalmanagementsystem.controller;
 
 import com.srh.medicalmanagementsystem.entity.Patient;
+import com.srh.medicalmanagementsystem.entity.PatientDTO;
 import com.srh.medicalmanagementsystem.service.PatientService;
 import com.srh.medicalmanagementsystem.entity.MedicalRecord;
 import com.srh.medicalmanagementsystem.service.MedicalRecordService;
@@ -40,12 +41,12 @@ public class PatientControllerPages {
 
     @GetMapping("/create")
     public String showCreatePatientPage(Model model) {
-        model.addAttribute("patient", new Patient());
+        model.addAttribute("patient", new PatientDTO());
         return "patients/CreatePatient";
     }
 
     @PostMapping("/create")
-    public String createPatient(@Valid @ModelAttribute("patient") Patient patient, BindingResult bindingResult, HttpServletRequest request) {
+    public String createPatient(@Valid @ModelAttribute("patient") PatientDTO patientdto, BindingResult bindingResult, HttpServletRequest request) {
 
 
         if(bindingResult.hasErrors()){
@@ -57,8 +58,9 @@ public class PatientControllerPages {
             System.out.println("Null employeeID");
         }
         Integer employeeIDInt = Integer.parseInt(employeeID);
-        patient.setEmployeeID(employeeIDInt);
-        patientService.savePatient(patient);
+        patientdto.setEmployeeID(employeeIDInt);
+       // Patient patient = convertToEntity(patientdto);
+        patientService.savePatient(patientdto);
         return "redirect:/patients/all";
     }
 

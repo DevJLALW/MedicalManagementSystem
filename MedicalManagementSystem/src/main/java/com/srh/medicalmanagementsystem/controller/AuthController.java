@@ -36,7 +36,7 @@ public class AuthController {
         return "register";
     }
 
-    @PostMapping("/register/save")
+    /*@PostMapping("/register/save")
     public String registration(@Valid @ModelAttribute("patient") Patient patient,
                                BindingResult result,
                                Model model) {
@@ -54,7 +54,7 @@ public class AuthController {
 
         patientService.savePatient(patient);
         return "redirect:/register?success";
-    }
+    }*/
 
     /*@GetMapping("/patients")
     public String patients(Model model) {
