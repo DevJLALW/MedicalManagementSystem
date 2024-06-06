@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Patient Event Record</title>
+</head>
+<body>
+<h1>Create Patient Event Record</h1>
+<form th:action="@{/patientEventRecord/create}" th:object="${patientEventRecord}" method="post">
+    <label>Patient ID:</label>
+    <input type="text" th:field="*{patientId}" /><br/>
+
+    <label>Event date:</label>
+    <input type="date" th:field="*{eventDate}" /><br/>
+
+    <label>Details:</label>
+    <input type="text" th:field="*{details}" /><br/>
+
+    <label>Assigned Doctor ID:</label>
+    <input type="text" th:field="*{assignedDoctorId}" /><br/>
+
+    <label>Assigned Nurse ID:</label>
+    <input type="text" th:field="*{assignedNurseId}" /><br/>
+
+    <label>Event Type:</label>
+    <input type="text" th:field="*{eventDescriptions.description}" /><br/>
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

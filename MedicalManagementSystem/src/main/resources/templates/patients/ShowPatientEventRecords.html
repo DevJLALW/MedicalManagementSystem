@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patient Event Records</title>
+</head>
+<body>
+<h1>Patient Event Records</h1>
+<a th:href="@{/patientEventRecord/create}">Add New Record</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Patient ID</th>
+        <th>Event date</th>
+        <th>Details</th>
+        <th>Assigned doctor ID</th>
+        <th>Assigned nurse ID</th>
+        <th>Event Type</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="record : ${patientEventRecords}">
+        <td th:text="${record.eventId}"></td>
+        <td th:text="${record.patientId}"></td>
+        <td th:text="${record.eventDate}"></td>
+        <td th:text="${record.details}"></td>
+        <td th:text="${record.assignedDoctorId}"></td>
+        <td th:text="${record.assignedNurseId}"></td>
+        <td th:text="${record.eventDescriptions.description}"></td>
+        <td>
+            <a th:href="@{/patientEventRecord/update/{id}(id=${record.eventId})}">Edit</a>
+            <a th:href="@{/patientEventRecord/delete/{id}(id=${record.eventId})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

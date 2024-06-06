@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Event Description</title>
+</head>
+<body>
+<h1>Update Event Description</h1>
+<form th:action="@{/eventDescriptions/update/{id}(id=${eventDescriptions.eventType})}" th:object="${eventDescriptions}" method="post">
+    <label>Description:</label>
+    <input type="text" th:field="*{description}" /><br/>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
