@@ -39,5 +39,33 @@
         </div>
     </div>
 </div>
+<table class="table">
+    <thead>
+    <tr>
+
+        <th>Medical Record ID</th>
+        <th>Diagnosis</th>
+        <th>Diagnosis Notes</th>
+        <th>Medical Result</th>
+        <th>Medications Prescribed</th>
+        <th>Date</th>
+        <th>Employee ID</th>
+        <th>Patient ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="medicalRecord :${medicalRecords}">
+        <td th:text="${medicalRecord.medicalRecordId}"></td>
+        <td th:text="${medicalRecord.diagnosis}"></td>
+        <td th:text="${medicalRecord.diagnosisNotes}"></td>
+        <td th:text="${medicalRecord.medicalResult}"></td>
+        <td th:text="${medicalRecord.medicationsPrescribed}"></td>
+        <td th:text="${medicalRecord.date}"></td>
+        <td th:text="${medicalRecord.employeeId}"></td>
+        <td th:text="${medicalRecord.patientId}"></td>
+
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
