@@ -31,17 +31,17 @@ public class RoomController {
         return "patients/CreateRoom";
     }
 
-    @PostMapping("/rooms")
-    public String saveRoom(@ModelAttribute("room") Room room) {
-        roomService.saveRoom(room);
-        return "redirect:/Rooms";
-    }
-
     @GetMapping("/rooms/edit/{id}")
     public String editRoomForm(@PathVariable Long id, Model model) {
         Room room = roomService.findById(id);
         model.addAttribute("room", room);
         return "patients/EditRoom";
+    }
+
+    @PostMapping("/rooms")
+    public String saveRoom(@ModelAttribute("room") Room room) {
+        roomService.saveRoom(room);
+        return "redirect:/Rooms";
     }
 
     @PostMapping("/rooms/update/{id}")

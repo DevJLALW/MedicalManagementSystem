@@ -3,6 +3,7 @@
 <head>
     <title>Edit Room</title>
 </head>
+
 <body>
 <h1>Edit Room</h1>
 <form action="#" th:action="@{/rooms/update/{id}(id=${room.id})}" th:object="${room}" method="post">

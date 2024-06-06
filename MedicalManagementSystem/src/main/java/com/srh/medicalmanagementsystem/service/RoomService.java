@@ -5,7 +5,6 @@ import com.srh.medicalmanagementsystem.dao.RoomRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.Period;
 import java.util.List;
 import java.time.temporal.ChronoUnit;
 import jakarta.transaction.Transactional;

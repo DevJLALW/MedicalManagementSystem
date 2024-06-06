@@ -5,6 +5,7 @@
 </head>
 <body>
 <h1>Create Room</h1>
+
 <form action="#" th:action="@{/rooms}" th:object="${room}" method="post">
     <label for="patientId">Patient ID:</label>
     <input type="number" id="patientId" th:field="*{patientId}" required/><br/>
