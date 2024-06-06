@@ -37,6 +37,8 @@ public class SpringSecurityConfig {
                 .requestMatchers("/patients/**").hasRole("ADMIN")
                 .requestMatchers("/employees/**").hasRole("ADMIN")
                 .requestMatchers("/medicalRecords/**").hasRole("ADMIN")
+                .requestMatchers("/eventDescriptions/**").hasRole("ADMIN")
+                .requestMatchers("/patientEventRecord/**").hasRole("ADMIN")
                 .anyRequest().authenticated() // Ensures that any other request requires authentication
                 .and()
                 .formLogin(
