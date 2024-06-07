@@ -65,7 +65,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-        return "patients/Login";
+        return "patients/index";
     }
 
     @GetMapping("/medicalmanagement/dashboard")
