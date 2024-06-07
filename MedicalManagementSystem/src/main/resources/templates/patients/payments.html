@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Add Payment</title>
+
+<body>
+<h1>Add Payment</h1>
+<form action="#" th:action="@{/payments}" th:object="${payment}" method="post">
+    <label for="patient">Patient:</label>
+    <input type="text" id="patient" th:field="*{patientId}"/><br/>
+
+    <label for="paymentDate">Payment Date:</label>
+    <input type="date" id="paymentDate" th:field="*{paymentDate}"/><br/>
+
+    <label for="paymentMethod">Payment Method:</label>
+    <select id="paymentMethod" th:field="*{paymentMethod}">
+        <option value="CASH">Cash</option>
+        <option value="DEBIT_CREDIT">Debit/Credit</option>
+        <option value="BANK_TRANSFER">Bank Transfer</option>
+    </select><br/>
+
+    <label for="paymentDetails">Payment Details:</label>
+    <input type="text" id="paymentDetails" th:field="*{paymentDetails}"/><br/>
+
+    <label>Particulars: </label><br>
+
+    <label>
+        <input type="checkbox" id="doctorFeesCheckbox" onclick="toggleExtraInput('doctorFeesCheckbox', 'doctorFeesInput')">
+        Doctor Fees
+        <div id="doctorFeesInput" class="extra-input">
+            <label for="doctorFees">Enter Doctor Fees:</label>
+            <input type="text" id="doctorFees" th:field="*{doctorFees}"><br/>
+        </div>
+    </label><br>
+
+    <label>
+        <input type="checkbox" id="roomServiceCheckbox" onclick="toggleExtraInput('roomServiceCheckbox', 'roomServiceInput')">
+        Room Service
+        <div id="roomServiceInput" class="extra-input">
+            <label for="roomService">Enter Room Service Fees:</label>
+            <input type="text" id="roomService" th:field="*{roomService}"><br/>
+        </div>
+    </label><br>
+
+    <label>
+        <input type="checkbox" id="pharmacyCheckbox" onclick="toggleExtraInput('pharmacyCheckbox', 'pharmacyInput')">
+        Pharmacy
+        <div id="pharmacyInput" class="extra-input">
+            <label for="pharmacyCost">Enter Pharmacy Cost:</label>
+            <input type="text" id="pharmacyCost" th:field="*{pharmacyCost}"><br/>
+        </div>
+    </label><br>
+
+    <label for="status">Status:</label>
+    <select id="status" th:field="*{paymentStatus}">
+        <option value="PAID">Paid</option>
+        <option value="UNPAID">Unpaid</option>
+    </select><br/>
+
+    <button type="submit">Add Payment</button>
+</form>
+</body>
+
+<script>
+    function toggleExtraInput(checkboxId, inputId) {
+        var checkbox = document.getElementById(checkboxId);
+        var inputDiv = document.getElementById(inputId);
+        if (checkbox.checked) {
+            inputDiv.style.display = "block";
+        } else {
+            inputDiv.style.display = "none";
+        }
+    }
+</script>
+<style>
+    .extra-input {
+        display: none;
+    }
+</style>
+</head>
+</html>

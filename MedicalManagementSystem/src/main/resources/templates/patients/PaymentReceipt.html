@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Payment Receipt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .receipt-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .receipt-details {
+            margin-bottom: 20px;
+        }
+        .receipt-details label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="receipt-container">
+    <div class="receipt-header">
+        <h1>Payment Receipt</h1>
+    </div>
+    <div class="receipt-details">
+        <label>Payment ID:</label>
+        <span th:text="${payment.paymentId}"></span><br/>
+        <label>Patient ID:</label>
+        <span th:text="${payment.patientId}"></span><br/>
+        <label>Payment Date:</label>
+        <span th:text="${payment.paymentDate}"></span><br/>
+        <label>Payment Method:</label>
+        <span th:text="${payment.paymentMethod}"></span><br/>
+        <label>Payment Details:</label>
+        <span th:text="${payment.paymentDetails}"></span><br/>
+        <label>Doctor Fees:</label>
+        <span th:text="${payment.doctorFees}"></span><br/>
+        <label>Room Service:</label>
+        <span th:text="${payment.roomService}"></span><br/>
+        <label>Pharmacy Cost:</label>
+        <span th:text="${payment.pharmacyCost}"></span><br/>
+        <label>Total Amount:</label>
+        <span th:text="${payment.totalAmount}"></span><br/>
+        <label>Status:</label>
+        <span th:text="${payment.paymentStatus}"></span><br/>
+    </div>
+    <div class="receipt-footer">
+        <p>Thank you for your payment.</p>
+    </div>
+</div>
+</body>
+</html>

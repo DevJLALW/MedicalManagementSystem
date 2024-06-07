@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Payments</title>
+</head>
+<body>
+<h1>Payments</h1>
+<a href="/payments/add">Add Payment</a>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Patient ID</th>
+        <th>Date</th>
+        <th>Method</th>
+        <th>Details</th>
+        <th>Doctor Fees</th>
+        <th>Room Service</th>
+        <th>Total Amount</th>
+        <th>Status</th>
+        <th>Receipt</th>
+    </tr>
+    <tr th:each="payment : ${payments}">
+        <td th:text="${payment.paymentId}"></td>
+        <td th:text="${payment.patientId}"></td>
+        <td th:text="${payment.paymentDate}"></td>
+        <td th:text="${payment.paymentMethod}"></td>
+        <td th:text="${payment.paymentDetails}"></td>
+        <td th:text="${payment.doctorFees}"></td>
+        <td th:text="${payment.roomService}"></td>
+        <td th:text="${payment.totalAmount}"></td>
+        <td th:text="${payment.paymentStatus}"></td>
+        <td>
+            <a th:href="@{/payments/receipt/{id}(id=${payment.paymentId})}" target="_blank">Download Receipt</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
