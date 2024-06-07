@@ -36,6 +36,7 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.POST,"/medicalRecords/delete").hasRole("ADMIN")
                 .requestMatchers("/patients/**").hasRole("ADMIN")
                 .requestMatchers("/employees/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET,"/employees/searchDoctors").hasRole("ADMIN")
                 .requestMatchers("/medicalRecords/**").hasRole("ADMIN")
                 .requestMatchers("/eventDescriptions/**").hasRole("ADMIN")
                 .requestMatchers("/patientEventRecord/**").hasRole("ADMIN")

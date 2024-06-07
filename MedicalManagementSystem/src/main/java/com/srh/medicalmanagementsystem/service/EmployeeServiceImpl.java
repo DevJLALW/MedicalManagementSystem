@@ -92,4 +92,10 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<Employee> getRoleSpecificEmployees(String keyword) {
         return employeeRepository.getRoleSpecificEmployees(keyword);
     }
+
+    @Override
+    public List<Employee> searchDoctorsByName(String name) {
+        System.out.println("Searching doctors in repository with name: " + name);
+        return employeeRepository.searchDoctorsByName(name);
+    }
 }
