@@ -40,7 +40,7 @@
             <label class="col-sm-4 col-form-label">Gender<span class="text-danger">*</span></label>
             <div class="col-sm-8">
                 <select name="gender" id="gender" th:field="*{gender}"  class="form-control">
-                    <option value="" disabled selected>Select Gender</option>
+                    <option value="" selected>Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Others">Others</option>
@@ -146,7 +146,7 @@
 
         <div>
             <button type="submit" class="btn btn-primary">Create Patient</button>
-            <button type="submit" class="btn btn-primary" onclick="history.back()">Back</button>
+            <a href="/patients/all" type="submit" class="btn btn-primary" >Back</a>
         </div>
     </form>
 </div>
@@ -161,7 +161,7 @@
             function loadDoctorList() {
                 var query = $('#doctorFilter').val();
                 $.ajax({
-                    url: /*[[@{/employees/searchDoctors}]]*/,
+                   // url: /*[[@{/employees/searchDoctors}]]*/,
                     type: 'GET',
                     data: { 'query': query },
                     success: function(data) {
