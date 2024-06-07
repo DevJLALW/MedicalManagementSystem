@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         try {
             Integer id = Integer.parseInt(username);
             patient = patientService.findPatientById(id);
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             System.out.println("Exception"+e);
         }
 

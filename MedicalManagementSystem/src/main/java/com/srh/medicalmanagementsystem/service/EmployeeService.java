@@ -20,4 +20,6 @@ public interface EmployeeService {
     public List<Employee> searchEmployeesById(Integer employeeId);
 
     public  List<Employee> getRoleSpecificEmployees(String keyword);
+
+    public List<Employee> searchDoctorsByName(String name);
 }
