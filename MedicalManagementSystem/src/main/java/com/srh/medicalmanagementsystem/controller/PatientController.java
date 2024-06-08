@@ -28,7 +28,7 @@ public class PatientController {
         return ResponseEntity.ok(savedPatient);
     }*/
 
-    @PutMapping("/{id}")
+   /* @PutMapping("/{id}")
     public ResponseEntity<Patient> updatePatient(@PathVariable Integer id, @RequestBody Patient patientDetails) {
        try{
         Patient updatedPatient = patientService.updatePatient(id, patientDetails);
@@ -36,7 +36,7 @@ public class PatientController {
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }
-    }
+    }*/
 
 /*
     @DeleteMapping("/{id}")
