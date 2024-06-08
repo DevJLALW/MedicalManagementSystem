@@ -26,7 +26,8 @@ public class PatientServiceImpl implements PatientService{
     }
     @Override
     public List<Patient> getAllPatients() {
-        List<Patient> patients = patientRepository.findAll();
+       // List<Patient> patients = patientRepository.findAll();
+        List<Patient> patients = patientRepository.findAllActivePatients();
         patients.sort(Comparator.comparing(Patient::getPatientId).reversed());
         return patients;
     }
@@ -42,6 +43,7 @@ public class PatientServiceImpl implements PatientService{
             System.out.println("Check if password is encoded");
         }
         patient.setEmployeeID(patientDTO.getEmployeeID());
+        patient.setStatus(1);
         return patientRepository.save(patient);
     }
 
@@ -96,16 +98,9 @@ public class PatientServiceImpl implements PatientService{
     }
 
         public boolean deletePatients(List<Integer> patientIds) {
-            boolean allDeleted = true;
-            for(Integer patientId: patientIds) {
-                if (patientRepository.existsById(patientId)) {
-                    patientRepository.deleteById(patientId);
-
-                } else {
-                    allDeleted= false;
-                }
-            }
-            return allDeleted;
+            int affectedRows = patientRepository.updateStatusToInactive(patientIds);
+            return affectedRows > 0;
+           
         }
 
 
