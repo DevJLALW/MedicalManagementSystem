@@ -4,6 +4,7 @@ USE HospitalDB;
 
 -- Drop existing tables if they exist
 DROP TABLE IF EXISTS Assignments;
+DROP TABLE IF EXISTS Appointments;
 DROP TABLE IF EXISTS Calls;
 DROP TABLE IF EXISTS Payments;
 DROP TABLE IF EXISTS Medications;
@@ -27,7 +28,7 @@ CREATE TABLE Employee (
     Password VARBINARY(60) null,
     ContactNumber VARCHAR(255),
     Role VARCHAR(50),
-    Status TINYINT(1)
+    Status INT
 );
 
 -- Create Patients table
@@ -139,3 +140,14 @@ CREATE TABLE Assignments (
     FOREIGN KEY (AssistantID) REFERENCES Employee(EmployeeID)
 );
 
+CREATE TABLE Appointments (
+    AppointmentID INT AUTO_INCREMENT PRIMARY KEY,
+    PatientID INT,
+    DoctorID INT,
+    AppointmentDate INT,
+    StartTime TIME,
+    EndTime TIME,
+    Status INT,
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+    FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID)
+);
