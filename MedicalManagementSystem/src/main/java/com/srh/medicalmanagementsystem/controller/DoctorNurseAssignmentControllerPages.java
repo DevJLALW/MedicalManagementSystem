@@ -1,6 +1,5 @@
 package com.srh.medicalmanagementsystem.controller;
 
-import com.srh.medicalmanagementsystem.entity.DoctorNurseAssignment;
 import com.srh.medicalmanagementsystem.entity.DoctorNurseAssignmentDto;
 import com.srh.medicalmanagementsystem.service.DoctorNurseAssignmentService;
 import com.srh.medicalmanagementsystem.service.EmployeeService;
@@ -36,9 +35,6 @@ public class DoctorNurseAssignmentControllerPages {
     public String showCreateDoctorNurseAssignmentPage(Model model) {
         model.addAttribute("assignment", new DoctorNurseAssignmentDto());
         model.addAttribute("doctors", employeeService.getRoleSpecificEmployees("Doctor"));
-//        model.addAttribute("nurses",
-//                employeeService.getRoleSpecificEmployees("Nurse")
-//                        .addAll(employeeService.getRoleSpecificEmployees("Medical Assistant")));
         model.addAttribute("nurses",
                 employeeService.getRoleSpecificEmployees("Nurse"));
         return "patients/CreateDoctorNurseAssignment";
@@ -62,28 +58,6 @@ public class DoctorNurseAssignmentControllerPages {
 
         return "redirect:/employees/doctor-nurse-assignment/all";
     }
-//
-//    @GetMapping("/search")
-//    public String searchAssignmentsByEmployeeId(
-//            @RequestParam("id") Integer id,
-//            Model model
-//    ) {
-//        List<DoctorNurseAssignmentDto> assignmentList =doctorNurseAssignmentService.findAssignmentsByIds(id);
-//        model.addAttribute("doctorNurseAssignmentsList", assignmentList);
-//
-//        return "patients/ShowDoctorNurseAssignments";
-//    }
-//
-//    @GetMapping("/search")
-//    public String searchAssignmentsByEmployeeName(
-//            @RequestParam("name") String name,
-//            Model model
-//    ) {
-//        List<DoctorNurseAssignmentDto> assignmentList =doctorNurseAssignmentService.findAssignmentsByName(name);
-//        model.addAttribute("doctorNurseAssignmentsList", assignmentList);
-//
-//        return "patients/ShowDoctorNurseAssignments";
-//    }
 
     @GetMapping("/search")
     public String searchDoctorNurseAssignments(
@@ -95,11 +69,9 @@ public class DoctorNurseAssignmentControllerPages {
             // Attempt to parse the keyword as an integer
             Integer employeeId = Integer.parseInt(keyword);
             assignmentsList =doctorNurseAssignmentService.findAssignmentsByIds(employeeId);
-            System.out.println(assignmentsList);
         } catch (NumberFormatException e) {
             // If parsing fails, treat it as a string keyword
             assignmentsList =doctorNurseAssignmentService.findAssignmentsByName(keyword);
-            System.out.println(assignmentsList);
         }
         model.addAttribute("assignmentsList", assignmentsList);
 
