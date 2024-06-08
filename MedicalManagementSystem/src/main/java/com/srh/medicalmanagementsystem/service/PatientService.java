@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface PatientService {
     public List<Patient> getAllPatients();
 
+    public List<Patient> getInactivePatients();
+
     public Patient savePatient(PatientDTO patientDTO);
 
     public Patient updatePatient(int id, PatientDTO patientDetails);

@@ -36,6 +36,13 @@ public class PatientControllerPages {
         return "patients/ShowPatients";
     }
 
+    @GetMapping("/inactive")
+    public String getInactivePatientsPage(Model model) {
+        List<Patient> patientList = patientService.getInactivePatients();
+        model.addAttribute("patients", patientList);
+        return "patients/ShowInactivePatients";
+    }
+
     @GetMapping("/create")
     public String showCreatePatientPage(Model model) {
         model.addAttribute("patient", new PatientDTO());

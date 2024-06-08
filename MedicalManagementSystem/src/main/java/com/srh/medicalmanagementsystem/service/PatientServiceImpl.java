@@ -32,6 +32,14 @@ public class PatientServiceImpl implements PatientService{
         return patients;
     }
 
+    @Override
+    public List<Patient> getInactivePatients() {
+
+        List<Patient> patients = patientRepository.findInactivePatients();
+        patients.sort(Comparator.comparing(Patient::getPatientId).reversed());
+        return patients;
+    }
+
     @Transactional
     public Patient savePatient(PatientDTO patientDTO) {
         Patient patient = convertToEntity(patientDTO);
@@ -100,7 +108,7 @@ public class PatientServiceImpl implements PatientService{
         public boolean deletePatients(List<Integer> patientIds) {
             int affectedRows = patientRepository.updateStatusToInactive(patientIds);
             return affectedRows > 0;
-           
+
         }
 
 
