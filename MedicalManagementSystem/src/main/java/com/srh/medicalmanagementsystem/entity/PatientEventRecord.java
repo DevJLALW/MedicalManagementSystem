@@ -15,10 +15,10 @@ public class PatientEventRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EventId")
-    private int eventId;
+    private Integer eventId;
 
     @Column(name = "PatientId", nullable = false)
-    private int patientId;
+    private Integer patientId;
 
     @Column
     @Temporal(TemporalType.DATE)
@@ -26,14 +26,19 @@ public class PatientEventRecord {
     private Date eventDate;
 
 
+    @Column(name = "EventType", nullable = false)
+    private String eventType;
+
     @Column(name = "Details", nullable = false)
     private String details;
 
     @Column(name = "AssignedDoctorId", nullable = false)
-    private int assignedDoctorId;
+    private Integer assignedDoctorId;
 
     @Column(name = "AssignedNurseId", nullable = false)
-    private int assignedNurseId;
+    private Integer assignedNurseId;
+
+
 
 
 
@@ -101,9 +106,6 @@ public class PatientEventRecord {
     //@ManyToOne(cascade = CascadeType.ALL)
    // @JoinColumn(name = "EventType", referencedColumnName = "eventType")
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "EventType")
-    private EventDescriptions eventDescriptions;
 
 
 }

@@ -12,10 +12,10 @@
         <th>ID</th>
         <th>Patient ID</th>
         <th>Event date</th>
+        <th>Event Type</th>
         <th>Details</th>
         <th>Assigned doctor ID</th>
         <th>Assigned nurse ID</th>
-        <th>Event Type</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -24,13 +24,16 @@
         <td th:text="${record.eventId}"></td>
         <td th:text="${record.patientId}"></td>
         <td th:text="${record.eventDate}"></td>
+        <td th:text="${record.eventType}"></td>
         <td th:text="${record.details}"></td>
         <td th:text="${record.assignedDoctorId}"></td>
         <td th:text="${record.assignedNurseId}"></td>
-        <td th:text="${record.eventDescriptions.description}"></td>
         <td>
-            <a th:href="@{/patientEventRecord/update/{id}(id=${record.eventId})}">Edit</a>
-            <a th:href="@{/patientEventRecord/delete/{id}(id=${record.eventId})}">Delete</a>
+            <a th:href="@{/patientEventRecord/update/{eventId}(eventId=${record.eventId})}">Edit</a>
+            <form th:action="@{/patientEventRecord/delete}" method="post" style="display:inline;">
+                <input type="hidden" th:name="patientEventRecordId" th:value="${record.eventId}" />
+                <button type="submit">Delete</button>
+            </form>
         </td>
     </tr>
     </tbody>
