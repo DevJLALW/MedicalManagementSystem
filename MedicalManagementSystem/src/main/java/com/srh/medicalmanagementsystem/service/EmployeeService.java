@@ -22,4 +22,5 @@ public interface EmployeeService {
     public  List<Employee> getRoleSpecificEmployees(String keyword);
 
     public List<Employee> searchDoctorsByName(String name);
+    public List<Employee> searchNurseByName(String name);
 }

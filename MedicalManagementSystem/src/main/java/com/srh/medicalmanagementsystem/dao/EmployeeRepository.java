@@ -19,4 +19,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     @Query("SELECT e FROM Employee e WHERE e.role = 'Doctor' AND e.status=1 AND (e.firstName LIKE %:keyword% OR e.lastName LIKE %:keyword%)")
     List<Employee> searchDoctorsByName(@Param("keyword") String keyword);
+
+    @Query("SELECT e FROM Employee e WHERE e.role = 'Nurse' AND e.status=1 AND (e.firstName LIKE %:keyword% OR e.lastName LIKE %:keyword%)")
+    List<Employee> searchNurseByName(@Param("keyword") String keyword);
 }

@@ -95,7 +95,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public List<Employee> searchDoctorsByName(String name) {
-        System.out.println("Searching doctors in repository with name: " + name);
+      
         return employeeRepository.searchDoctorsByName(name);
+    }
+
+    @Override
+    public List<Employee> searchNurseByName(String name) {
+
+        return employeeRepository.searchNurseByName(name);
     }
 }

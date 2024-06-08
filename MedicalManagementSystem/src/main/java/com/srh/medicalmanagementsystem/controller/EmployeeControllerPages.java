@@ -102,11 +102,4 @@ public class EmployeeControllerPages {
 
         return "patients/ShowEmployees";
     }
-    /*@GetMapping("/employees/searchDoctors")
-    public List<Employee> searchDoctors(@RequestParam("query") String query) {
-        System.out.println("Searching doctors with query: " + query);
-        List<Employee> doctors = employeeService.searchDoctorsByName(query);
-        System.out.println("Found doctors: " + doctors);
-        return doctors;
-    }*/
 }

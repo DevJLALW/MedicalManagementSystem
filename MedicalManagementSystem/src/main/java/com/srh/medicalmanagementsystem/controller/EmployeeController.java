@@ -28,4 +28,11 @@ public class EmployeeController {
         System.out.println(doctors);
         return ResponseEntity.ok(doctors);
     }
+
+    @GetMapping("/searchNurse")
+    public ResponseEntity<List<Employee>> searchNurse(@RequestParam("query") String query) {
+        List<Employee> nurses = employeeService.searchNurseByName(query);
+        System.out.println(nurses);
+        return ResponseEntity.ok(nurses);
+    }
 }
