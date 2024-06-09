@@ -38,6 +38,15 @@
                 <div class="row mb-3">
                     <button type="submit" class="btn btn-primary">Room Management</button>
                 </div>
+                <div class="row mb-3">
+                    <button type="submit" onclick="getRoomsInfo()" class="btn btn-primary">Show Rooms</button>
+                </div>
+                <div class="row mb-3">
+                    <button type="submit" onclick="getMedicalRecordsInfo()" class="btn btn-primary">Show Medical Records</button>
+                </div>
+                <div class="row mb-3">
+                    <button type="submit" onclick="getAppointmentsInfo()" class="btn btn-primary">Show Appointments</button>
+                </div>
 			</div>
 		</div>
 	</div>		
@@ -49,5 +58,15 @@
     function getEmployeeInfo(){
         location.replace("/employees/all")
     }
+    function getRoomsInfo(){
+        location.replace("/rooms")
+    }
+    function getMedicalRecordsInfo(){
+        location.replace("/medicalRecords/all")
+    }
+    function getAppointmentsInfo(){
+        location.replace("/appointments/all")
+    }
+
 </script>
 </html>
