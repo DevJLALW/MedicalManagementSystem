@@ -15,14 +15,14 @@
     </style>
 </head>
 <body>
-    <a class="btn btn-primary" style="float:right" href="/index">Logout</a>
+    <a class="btn btn-primary" style="float:right;margin-right: 5px; margin-top: 2px;" href="/index">Logout</a>
     <br/> 
     <h1 class="text-center mb-4">Patients Information</h1>
 <div class="container row mb-3">
 </div>
     <a class="btn btn-primary" href="/patients/create" style="margin-left: 12px;">New Patient Entry</a>
     <button id="deleteButton" class="btn btn-danger" onclick="deleteSelectedPatients()">Delete</button>
-    <a class="btn btn-primary" style="float:right" href="/medicalmanagement/dashboard">Back</a>
+    <a class="btn btn-primary" style="float:right; margin-right: 5px;" href="/medicalmanagement/dashboard">Back</a>
     <div class="container row mb-3">
     <form action="#" th:action="@{/patients/search}" method="get">
         <input id="search" class="width" type="text" name="keyword" placeholder="Search for Patient ID, First Name, Last Name, Email">
