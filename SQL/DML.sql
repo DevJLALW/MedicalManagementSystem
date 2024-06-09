@@ -2,17 +2,17 @@
 USE HospitalDB;
 
 -- Insert records into Patients table
-INSERT INTO Patients (FirstName, LastName, DOB, Gender, ContactNumber, Email, Address) VALUES
-('John', 'Doe', '1980-01-01', 'Male', '1234567890', 'john.doe@example.com', '123 Main St'),
-('Jane', 'Smith', '1990-02-02', 'Female', '2345678901', 'jane.smith@example.com', '456 Oak St'),
-('Jim', 'Brown', '1975-03-03', 'Male', '3456789012', 'jim.brown@example.com', '789 Pine St'),
-('Jake', 'White', '1985-04-04', 'Male', '4567890123', 'jake.white@example.com', '101 Maple St'),
-('Jill', 'Black', '1995-05-05', 'Female', '5678901234', 'jill.black@example.com', '202 Elm St'),
-('Joan', 'Green', '1982-06-06', 'Female', '6789012345', 'joan.green@example.com', '303 Cedar St'),
-('Jerry', 'Red', '1992-07-07', 'Male', '7890123456', 'jerry.red@example.com', '404 Birch St'),
-('Jenny', 'Blue', '1987-08-08', 'Female', '8901234567', 'jenny.blue@example.com', '505 Walnut St'),
-('Jeff', 'Yellow', '1978-09-09', 'Male', '9012345678', 'jeff.yellow@example.com', '606 Ash St'),
-('Janet', 'Gray', '1988-10-10', 'Female', '0123456789', 'janet.gray@example.com', '707 Spruce St');
+INSERT INTO Patients (FirstName, LastName, DOB, Gender, ContactNumber, Email, Address, Status) VALUES
+('John', 'Doe', '1980-01-01', 'Male', '1234567890', 'john.doe@example.com', '123 Main St', 1),
+('Jane', 'Smith', '1990-02-02', 'Female', '2345678901', 'jane.smith@example.com', '456 Oak St', 1),
+('Jim', 'Brown', '1975-03-03', 'Male', '3456789012', 'jim.brown@example.com', '789 Pine St', 1),
+('Jake', 'White', '1985-04-04', 'Male', '4567890123', 'jake.white@example.com', '101 Maple St', 1),
+('Jill', 'Black', '1995-05-05', 'Female', '5678901234', 'jill.black@example.com', '202 Elm St', 1),
+('Joan', 'Green', '1982-06-06', 'Female', '6789012345', 'joan.green@example.com', '303 Cedar St', 1),
+('Jerry', 'Red', '1992-07-07', 'Male', '7890123456', 'jerry.red@example.com', '404 Birch St', 1),
+('Jenny', 'Blue', '1987-08-08', 'Female', '8901234567', 'jenny.blue@example.com', '505 Walnut St', 1),
+('Jeff', 'Yellow', '1978-09-09', 'Male', '9012345678', 'jeff.yellow@example.com', '606 Ash St', 1),
+('Janet', 'Gray', '1988-10-10', 'Female', '0123456789', 'janet.gray@example.com', '707 Spruce St', 1);
 
 -- Insert records into Employee table
 INSERT INTO Employee (FirstName, LastName, ContactNumber, Email, Role, Status) VALUES
