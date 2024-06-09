@@ -1,8 +1,0 @@
-CREATE TABLE Appointment (
-    AppointmentID INT AUTO_INCREMENT PRIMARY KEY,
-    PatientID INT NOT NULL,
-    DoctorID INT NOT NULL,
-    StartDateTime DATETIME,
-    EndDateTime DATETIME,
-    AppointmentStatus VARCHAR(255) NOT NULL
-);
