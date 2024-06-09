@@ -23,4 +23,9 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
        @Transactional
        @Query("UPDATE Patient p SET p.status = 0 WHERE p.patientId IN :patientIds")
        int updateStatusToInactive(@Param("patientIds") List<Integer> patientIds);
+
+       @Modifying
+       @Transactional
+       @Query("UPDATE Patient p SET p.password = :password WHERE p.patientId = :patientId")
+       int updatePatientPassword(@Param("patientId") Integer patientId, @Param("password") String password);
 }

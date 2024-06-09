@@ -126,18 +126,24 @@ public class PatientServiceImpl implements PatientService{
         return patientRepository.searchPatients(patientId,keyword);
     }
 
+    @Override
     public void updatePassword(Integer patientId, String newPassword) {
-        //Patient patient = findById(patientId);
+        System.out.println("Impl newPassword: " + newPassword);
+
+
         Patient existingPatient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new NoSuchElementException("Patient not found with id " + patientId));
-        if (existingPatient != null) {
-            if (newPassword != null && !newPassword.isEmpty()) {
-                String encodedPassword = passwordEncoder.encode(newPassword);
-                existingPatient.setPassword(encodedPassword);
 
-            }
 
-            patientRepository.save(existingPatient);
+        if (newPassword != null && !newPassword.isEmpty()) {
+            String encodedPassword = passwordEncoder.encode(newPassword);
+
+
+
+            int updatedRows = patientRepository.updatePatientPassword(patientId, encodedPassword);
+
+
+            
         }
     }
 }
