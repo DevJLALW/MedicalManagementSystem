@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Appointment</title>
+</head>
+<body>
+<h1>Update Appointment</h1>
+<form th:action="@{/appointments/update/{id}(id=${appointment.appointmentId})}" th:object="${appointment}" method="post">
+    <label>Patient ID:</label>
+    <input type="text" th:field="*{patientId}" /><br/>
+    <label>Doctor ID:</label>
+    <input type="text" th:field="*{doctorId}" /><br/>
+    <label>Date:</label>
+    <input type="text" th:field="*{startDateTime}" th:value="${#dates.format(appointment.startDateTime, 'yyyy-MM-dd')}" name="date"/><br/> <!-- Add name attribute -->
+    <label>Slot:</label>
+    <select name="slot">
+        <option th:each="slot : ${availableSlots}" th:value="${slot}" th:text="${slot}" th:selected="${slot == #dates.format(appointment.startDateTime, 'HH:mm') + '-' + #dates.format(appointment.endDateTime, 'HH:mm')}"></option>
+    </select><br/>
+    <label>Appointment Status:</label>
+    <input type="text" th:field="*{appointmentStatus}" /><br/>
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>
