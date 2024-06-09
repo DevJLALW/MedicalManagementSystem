@@ -1,6 +1,7 @@
 package com.srh.medicalmanagementsystem.controller;
 
 import com.srh.medicalmanagementsystem.entity.Appointment;
+import com.srh.medicalmanagementsystem.entity.MedicalRecord;
 import com.srh.medicalmanagementsystem.service.AppointmentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +28,14 @@ public class AppointmentController {
     public String getAllAppointments(Model model) {
         List<Appointment> appointments = appointmentService.getAllAppointments();
         model.addAttribute("appointments", appointments);
-        return "patients/showAppointments";
+        return "patients/ShowAppointments";
     }
 
     @GetMapping("/create")
     public String showCreateAppointmentForm(Model model) {
         model.addAttribute("appointment", new Appointment());
         model.addAttribute("availableSlots", appointmentService.getAvailableSlots());
-        return "patients/createAppointment";
+        return "patients/CreateAppointment";
     }
 
     @PostMapping("/create")
@@ -47,7 +48,7 @@ public class AppointmentController {
     ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("availableSlots", appointmentService.getAvailableSlots());
-            return "patients/createAppointment";
+            return "patients/CreateAppointment";
         }
 
         try {
@@ -69,7 +70,7 @@ public class AppointmentController {
         }
 
         model.addAttribute("availableSlots", appointmentService.getAvailableSlots());
-        return "patients/createAppointment";
+        return "patients/CreateAppointment";
     }
 
     @GetMapping("/update/{id}")
@@ -77,7 +78,7 @@ public class AppointmentController {
         Appointment appointment = appointmentService.getAppointmentById(id);
         model.addAttribute("appointment", appointment);
         model.addAttribute("availableSlots", appointmentService.getAvailableSlots());
-        return "patients/updateAppointment";
+        return "patients/UpdateAppointment";
     }
 
     @PostMapping("/update/{id}")
@@ -90,9 +91,9 @@ public class AppointmentController {
             Model model
     ) {
         if (bindingResult.hasErrors()) {
-            //System.out.println(bindingResult.getAllErrors());
+            System.out.println(bindingResult.getAllErrors());
             model.addAttribute("availableSlots", appointmentService.getAvailableSlots());
-            return "patients/updateAppointment";
+            return "patients/UpdateAppointment";
         }
 
         try {
@@ -114,7 +115,7 @@ public class AppointmentController {
         }
 
         model.addAttribute("availableSlots", appointmentService.getAvailableSlots());
-        return "patients/showAppointments";
+        return "patients/ShowAppointments";
     }
 
 
@@ -124,4 +125,18 @@ public class AppointmentController {
         appointmentService.deleteAppointment(id);
         return "redirect:/appointments/all";
     }
+
+
+
+
+    @GetMapping("/search")
+    public String searchAppointmentsByPatientId(
+            @RequestParam("patientId") Integer patientId,
+            Model model
+    ) {
+        List<Appointment> appointments = appointmentService.getAppointmentsByPatientId(patientId);
+        model.addAttribute("appointments", appointments);
+        return "patients/ShowAppointments";
+    }
+
 }

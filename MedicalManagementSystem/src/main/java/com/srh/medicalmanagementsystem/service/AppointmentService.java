@@ -22,4 +22,6 @@ public interface AppointmentService {
     List<String> getAvailableSlots();
 
     boolean isSlotAvailableForDate(int doctorId, String slot, Date date);
+
+    List<Appointment> getAppointmentsByPatientId(Integer patientId);
 }

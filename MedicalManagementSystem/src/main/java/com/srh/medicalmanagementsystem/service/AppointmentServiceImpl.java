@@ -2,6 +2,7 @@ package com.srh.medicalmanagementsystem.service;
 
 import com.srh.medicalmanagementsystem.dao.AppointmentRepository;
 import com.srh.medicalmanagementsystem.entity.Appointment;
+import com.srh.medicalmanagementsystem.entity.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,6 +83,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
 
-
+    @Override
+    public List<Appointment> getAppointmentsByPatientId(Integer patientId) {
+        return appointmentRepository.findByPatientId(patientId);
+    }
 
 }

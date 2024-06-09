@@ -2,10 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Appointments</title>
+
 </head>
 <body>
 <h1>Appointments</h1>
 <a th:href="@{/appointments/create}">Add New Appointment</a>
+
+<form th:action="@{/appointments/search}" method="get">
+    <label for="patientId">Search by Patient ID:</label>
+    <input type="text" id="patientId" name="patientId">
+    <button type="submit">Search</button>
+</form>
 <table>
     <thead>
     <tr>
