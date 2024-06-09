@@ -35,7 +35,12 @@
                 <div class="row mb-3">
                     <label class="col-sm-4 col-form-label">Role</label>
                     <div class="col-sm-8">
-                        <input type="text" th:field="*{role}" class="form-control" />
+                        <select name="role" id="role" th:field="*{role}" class="form-control">
+                            <option value="Admin">Admin</option>
+                            <option value="Receptionist">Receptionist</option>
+                            <option value="Doctor">Doctor</option>
+                            <option value="Nurse">Nurse</option>
+                        </select>
                         <div th:if="${#fields.hasErrors('role')}" th:errors="*{role}" style="color:red">Role error</div>
                     </div>
                 </div>
