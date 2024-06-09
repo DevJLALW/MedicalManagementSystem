@@ -36,20 +36,24 @@ public class CustomUserDetailsService implements UserDetailsService {
             employee = employeeService.findEmployeeById(Integer.parseInt(username));
         }
 
+        System.out.println("Before");
 
-        if (patient != null) {
+        if (patient != null && patient.getStatus() == 1) {
+            System.out.println("Before patient");
             return org.springframework.security.core.userdetails.User.builder()
                     .username(String.valueOf(patient.getPatientId()))
                     .password(patient.getPassword())
                     .roles("ADMIN")
                     .build();
-        } else if (employee != null) {
+        } else if (employee != null && employee.getStatus() == 1) {
+            System.out.println("Before employee");
             return org.springframework.security.core.userdetails.User.builder()
                     .username(String.valueOf(employee.getEmployeeId()))
                     .password(employee.getPassword())
                     .roles("ADMIN")
                     .build();
         } else {
+            System.out.println("Invalid");
             throw new UsernameNotFoundException("Invalid username or password.");
         }
     }

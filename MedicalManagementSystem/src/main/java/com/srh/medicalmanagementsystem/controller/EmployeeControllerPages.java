@@ -31,6 +31,7 @@ public class EmployeeControllerPages {
     @GetMapping("/create")
     public String showCreateEmployeePage(Model model) {
         model.addAttribute("employee", new Employee());
+        model.addAttribute("actionUrl", "/employees/create");
         return "patients/CreateEmployee";
     }
 
@@ -40,6 +41,7 @@ public class EmployeeControllerPages {
             BindingResult bindingResult, Model model
     ) {
         if(bindingResult.hasErrors()){
+            model.addAttribute("actionUrl", "/employees/create");
             return "patients/CreateEmployee";
         }
         employeeService.saveEmployee(employee);

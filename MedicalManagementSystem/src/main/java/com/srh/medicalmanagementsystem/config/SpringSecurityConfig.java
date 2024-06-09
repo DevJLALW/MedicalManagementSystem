@@ -31,7 +31,7 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .requestMatchers("/register/**", "/index", "/login", "/patients/forgetPassword/**").permitAll()
+                .requestMatchers("/register/**", "/index", "/login", "/patients/forgetPassword/**","/registerEmployee").permitAll()
                 .requestMatchers(HttpMethod.POST,"/patients/delete").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST,"/medicalRecords/delete").hasRole("ADMIN")
                 .requestMatchers("/patients/**").hasRole("ADMIN")
