@@ -1,4 +1,4 @@
-CREATE TABLE `medical_record` (
+CREATE TABLE `medicalrecord` (
   `medicalRecordId` int NOT NULL AUTO_INCREMENT,
   `diagnosis` varchar(225) DEFAULT NULL,
   `diagnosisNotes` varchar(225) DEFAULT NULL,
@@ -8,4 +8,4 @@ CREATE TABLE `medical_record` (
   `employeeId` int DEFAULT NULL,
   `patientId` int DEFAULT NULL,
   PRIMARY KEY (`medicalRecordId`)
-)
+) 
