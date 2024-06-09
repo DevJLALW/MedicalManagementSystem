@@ -1,4 +1,6 @@
 -- Create database
+DROP DATABASE  IF EXISTS `hospitaldb`;
+
 CREATE DATABASE IF NOT EXISTS HospitalDB;
 USE HospitalDB;
 
@@ -49,6 +51,7 @@ CREATE TABLE Patients (
     RecordID INT,
     Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     EmployeeID INT,
+    Status INT,
     Password VARBINARY(60) null,
     FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
     FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID),
