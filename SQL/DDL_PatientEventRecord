@@ -1,0 +1,10 @@
+CREATE TABLE `patienteventrecord` (
+  `EventId` int NOT NULL AUTO_INCREMENT,
+  `PatientId` int NOT NULL,
+  `EventDate` date NOT NULL,
+  `EventType` varchar(255) NOT NULL,
+  `Details` varchar(255) NOT NULL,
+  `AssignedDoctorId` int NOT NULL,
+  `AssignedNurseId` int NOT NULL,
+  PRIMARY KEY (`EventId`)
+)
