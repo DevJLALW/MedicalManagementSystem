@@ -11,14 +11,19 @@
     <label>Doctor ID:</label>
     <input type="text" th:field="*{doctorId}" /><br/>
     <label>Date:</label>
-    <input type="text" th:field="*{startDateTime}" th:value="${#dates.format(appointment.startDateTime, 'yyyy-MM-dd')}" name="date"/><br/> <!-- Add name attribute -->
+    <input type="date" name="date" /><br/>
     <label>Slot:</label>
     <select name="slot">
-        <option th:each="slot : ${availableSlots}" th:value="${slot}" th:text="${slot}" th:selected="${slot == #dates.format(appointment.startDateTime, 'HH:mm') + '-' + #dates.format(appointment.endDateTime, 'HH:mm')}"></option>
+        <option th:each="slot : ${availableSlots}" th:value="${slot}" th:text="${slot}"></option>
     </select><br/>
     <label>Appointment Status:</label>
-    <input type="text" th:field="*{appointmentStatus}" /><br/>
-    <button type="submit">Update</button>
+    <select th:field="*{appointmentStatus}">
+        <option value="PENDING">Pending</option>
+        <option value="CONFIRMED">Confirmed</option>
+        <option value="CANCELED">Canceled</option>
+        <option value="COMPLETED">Completed</option>
+    </select><br/>
+    <button type="submit">Save</button>
 </form>
 </body>
 </html>

@@ -72,15 +72,15 @@ public class AppointmentController {
         return "patients/createAppointment";
     }
 
-   /* @GetMapping("/update/{id}")
+    @GetMapping("/update/{id}")
     public String showUpdateAppointmentForm(@PathVariable("id") int id, Model model) {
         Appointment appointment = appointmentService.getAppointmentById(id);
         model.addAttribute("appointment", appointment);
         model.addAttribute("availableSlots", appointmentService.getAvailableSlots());
         return "patients/updateAppointment";
     }
-*/
-    /*@PostMapping("/update/{id}")
+
+    @PostMapping("/update/{id}")
     public String updateAppointment(
             @PathVariable("id") int id,
             @Valid @ModelAttribute("appointment") Appointment appointment,
@@ -90,6 +90,7 @@ public class AppointmentController {
             Model model
     ) {
         if (bindingResult.hasErrors()) {
+            //System.out.println(bindingResult.getAllErrors());
             model.addAttribute("availableSlots", appointmentService.getAvailableSlots());
             return "patients/updateAppointment";
         }
@@ -103,7 +104,7 @@ public class AppointmentController {
                 appointment.setStartDateTime(dateFormat.parse(dateString + " " + times[0]));
                 appointment.setEndDateTime(dateFormat.parse(dateString + " " + times[1]));
 
-                appointmentService.saveAppointment(appointment);
+                appointmentService.updateAppointment(id,appointment);
                 return "redirect:/appointments/all";
             } else {
                 model.addAttribute("error", "Slot is already booked.");
@@ -113,8 +114,8 @@ public class AppointmentController {
         }
 
         model.addAttribute("availableSlots", appointmentService.getAvailableSlots());
-        return "patients/updateAppointment";
-    }*/
+        return "patients/showAppointments";
+    }
 
 
 
