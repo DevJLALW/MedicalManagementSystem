@@ -1,6 +1,7 @@
 package com.srh.medicalmanagementsystem.controller;
 
 import com.srh.medicalmanagementsystem.entity.Employee;
+import com.srh.medicalmanagementsystem.entity.Patient;
 import com.srh.medicalmanagementsystem.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,14 @@ public class EmployeeControllerPages {
         model.addAttribute("employees",employeeList);
 
         return "patients/ShowEmployees";
+    }
+
+    @GetMapping("/{employeeId}/assignedPatients")
+    public String getAllAssignedPatients(@PathVariable("employeeId") Integer employeeId, Model model) {
+        List<Patient> patientList= employeeService.getAllAssignedPatients(employeeId);
+        model.addAttribute("patients",patientList);
+
+        return "patients/ShowPatientsOfDoctor";
     }
 
     @GetMapping("/create")

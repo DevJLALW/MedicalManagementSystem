@@ -1,6 +1,7 @@
 package com.srh.medicalmanagementsystem.service;
 
 import com.srh.medicalmanagementsystem.entity.Employee;
+import com.srh.medicalmanagementsystem.entity.Patient;
 
 import java.util.List;
 
@@ -22,5 +23,8 @@ public interface EmployeeService {
     public  List<Employee> getRoleSpecificEmployees(String keyword);
 
     public List<Employee> searchDoctorsByName(String name);
+
     public List<Employee> searchNurseByName(String name);
+
+    public List<Patient> getAllAssignedPatients(Integer doctorId);
 }
