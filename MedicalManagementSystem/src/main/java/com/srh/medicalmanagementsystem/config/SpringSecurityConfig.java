@@ -31,16 +31,19 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .requestMatchers("/register/**", "/index", "/login").permitAll()
+                .requestMatchers("/register/**", "/index", "/login", "/patients/forgetPassword/**","/registerEmployee").permitAll()
                 .requestMatchers(HttpMethod.POST,"/patients/delete").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST,"/medicalRecords/delete").hasRole("ADMIN")
                 .requestMatchers("/patients/**").hasRole("ADMIN")
                 .requestMatchers("/employees/**").hasRole("ADMIN")
+                .requestMatchers("/appointments/**").hasRole("ADMIN")
+                .requestMatchers("/appointments/update/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET,"/employees/searchDoctors").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET,"/employees/searchNurse").hasRole("ADMIN")
                 .requestMatchers("/medicalRecords/**").hasRole("ADMIN")
                 .requestMatchers("/eventDescriptions/**").hasRole("ADMIN")
                 .requestMatchers("/patientEventRecord/**").hasRole("ADMIN")
-                .anyRequest().authenticated() // Ensures that any other request requires authentication
+                .anyRequest().authenticated()
                 .and()
                 .formLogin(
                         form -> form

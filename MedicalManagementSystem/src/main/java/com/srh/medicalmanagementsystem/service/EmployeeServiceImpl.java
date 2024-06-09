@@ -1,7 +1,9 @@
 package com.srh.medicalmanagementsystem.service;
 
 import com.srh.medicalmanagementsystem.dao.EmployeeRepository;
+import com.srh.medicalmanagementsystem.dao.PatientRepository;
 import com.srh.medicalmanagementsystem.entity.Employee;
+import com.srh.medicalmanagementsystem.entity.Patient;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,12 +17,14 @@ import java.util.NoSuchElementException;
 public class EmployeeServiceImpl implements EmployeeService{
 
     private EmployeeRepository employeeRepository;
+    private PatientRepository patientRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, PatientRepository patientRepository, PasswordEncoder passwordEncoder) {
 
         this.employeeRepository = employeeRepository;
+        this.patientRepository = patientRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -95,7 +99,18 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public List<Employee> searchDoctorsByName(String name) {
-        System.out.println("Searching doctors in repository with name: " + name);
+      
         return employeeRepository.searchDoctorsByName(name);
+    }
+
+    @Override
+    public List<Employee> searchNurseByName(String name) {
+
+        return employeeRepository.searchNurseByName(name);
+    }
+
+    @Override
+    public List<Patient> getAllAssignedPatients(Integer doctorId) {
+        return patientRepository.findPatientsByDoctorId(doctorId);
     }
 }

@@ -26,7 +26,16 @@ public class PatientServiceImpl implements PatientService{
     }
     @Override
     public List<Patient> getAllPatients() {
-        List<Patient> patients = patientRepository.findAll();
+       // List<Patient> patients = patientRepository.findAll();
+        List<Patient> patients = patientRepository.findAllActivePatients();
+        patients.sort(Comparator.comparing(Patient::getPatientId).reversed());
+        return patients;
+    }
+
+    @Override
+    public List<Patient> getInactivePatients() {
+
+        List<Patient> patients = patientRepository.findInactivePatients();
         patients.sort(Comparator.comparing(Patient::getPatientId).reversed());
         return patients;
     }
@@ -42,6 +51,7 @@ public class PatientServiceImpl implements PatientService{
             System.out.println("Check if password is encoded");
         }
         patient.setEmployeeID(patientDTO.getEmployeeID());
+        patient.setStatus(1);
         return patientRepository.save(patient);
     }
 
@@ -67,39 +77,38 @@ public class PatientServiceImpl implements PatientService{
 
         return patient;
     }
-    public Patient updatePatient(int patientId, Patient patientDetails) {
+    public Patient updatePatient(int patientId, PatientDTO patientDetails) {
+        Patient patient = convertToEntity(patientDetails);
         Patient existingPatient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new NoSuchElementException("Patient not found with id " + patientId));
 
-            existingPatient.setFirstName(patientDetails.getFirstName());
-            existingPatient.setLastName(patientDetails.getLastName());
-            existingPatient.setDob(patientDetails.getDob());
-            existingPatient.setGender(patientDetails.getGender());
-            existingPatient.setContactNumber(patientDetails.getContactNumber());
-            existingPatient.setEmail(patientDetails.getEmail());
-            existingPatient.setAddress(patientDetails.getAddress());
-            existingPatient.setMedicalHistory(patientDetails.getMedicalHistory());
-            existingPatient.setInsuranceID(patientDetails.getInsuranceID());
-            existingPatient.setDoctorID(patientDetails.getDoctorID());
-            existingPatient.setRoomID(patientDetails.getRoomID());
-            existingPatient.setRecordID(patientDetails.getRecordID());
-            existingPatient.setEmployeeID(patientDetails.getEmployeeID());
+            existingPatient.setFirstName(patient.getFirstName());
+            existingPatient.setLastName(patient.getLastName());
+            existingPatient.setDob(patient.getDob());
+            existingPatient.setGender(patient.getGender());
+            existingPatient.setContactNumber(patient.getContactNumber());
+            existingPatient.setEmail(patient.getEmail());
+            existingPatient.setAddress(patient.getAddress());
+            existingPatient.setMedicalHistory(patient.getMedicalHistory());
+            existingPatient.setInsuranceID(patient.getInsuranceID());
+            existingPatient.setDoctorID(patient.getDoctorID());
+            existingPatient.setRoomID(patient.getRoomID());
+            existingPatient.setRecordID(patient.getRecordID());
+          //  existingPatient.setEmployeeID(patient.getEmployeeID());
 
+        if (patient.getPassword() != null && !patient.getPassword().isEmpty()) {
+            String encodedPassword = passwordEncoder.encode(patient.getPassword());
+            existingPatient.setPassword(encodedPassword);
+
+        }
             return patientRepository.save(existingPatient);
 
     }
 
         public boolean deletePatients(List<Integer> patientIds) {
-            boolean allDeleted = true;
-            for(Integer patientId: patientIds) {
-                if (patientRepository.existsById(patientId)) {
-                    patientRepository.deleteById(patientId);
+            int affectedRows = patientRepository.updateStatusToInactive(patientIds);
+            return affectedRows > 0;
 
-                } else {
-                    allDeleted= false;
-                }
-            }
-            return allDeleted;
         }
 
 
@@ -115,5 +124,26 @@ public class PatientServiceImpl implements PatientService{
        } catch (NumberFormatException ignored) {
        }
         return patientRepository.searchPatients(patientId,keyword);
+    }
+
+    @Override
+    public void updatePassword(Integer patientId, String newPassword) {
+        System.out.println("Impl newPassword: " + newPassword);
+
+
+        Patient existingPatient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new NoSuchElementException("Patient not found with id " + patientId));
+
+
+        if (newPassword != null && !newPassword.isEmpty()) {
+            String encodedPassword = passwordEncoder.encode(newPassword);
+
+
+
+            int updatedRows = patientRepository.updatePatientPassword(patientId, encodedPassword);
+
+
+            
+        }
     }
 }

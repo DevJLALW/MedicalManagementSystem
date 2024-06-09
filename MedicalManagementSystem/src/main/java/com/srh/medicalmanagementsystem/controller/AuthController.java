@@ -1,7 +1,9 @@
 package com.srh.medicalmanagementsystem.controller;
 
 import com.srh.medicalmanagementsystem.dao.PatientRepository;
+import com.srh.medicalmanagementsystem.entity.Employee;
 import com.srh.medicalmanagementsystem.entity.Patient;
+import com.srh.medicalmanagementsystem.service.EmployeeService;
 import com.srh.medicalmanagementsystem.service.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,12 @@ import java.util.List;
 @Controller
 public class AuthController {
     private final PatientService patientService;
+    private EmployeeService employeeService;
 
     @Autowired
-    public AuthController(PatientService patientService) {
+    public AuthController(PatientService patientService,EmployeeService employeeService) {
         this.patientService = patientService;
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/index")
@@ -36,32 +40,29 @@ public class AuthController {
         return "register";
     }
 
-    /*@PostMapping("/register/save")
-    public String registration(@Valid @ModelAttribute("patient") Patient patient,
-                               BindingResult result,
-                               Model model) {
-        Patient existingPatient = patientService.findPatientById(patient.getPatientId());
 
-        if (existingPatient != null) {
-            result.rejectValue("patientID", null,
-                    "There is already an account registered with the same patient ID");
+    @GetMapping("/registerEmployee")
+    public String showRegisterEmployeePage(Model model) {
+        model.addAttribute("employee", new Employee());
+        model.addAttribute("actionUrl", "/registerEmployee");
+        return "patients/CreateEmployee";
+    }
+
+    @PostMapping("/registerEmployee")
+    public String resgisterEmployee(
+            @Valid @ModelAttribute("employee") Employee employee,
+            BindingResult bindingResult, Model model
+    ) {
+        System.out.println("Check if response is reached");
+        if(bindingResult.hasErrors()){
+            model.addAttribute("actionUrl", "/registerEmployee");
+            return "patients/CreateEmployee";
         }
+        Employee savedEmployee = employeeService.saveEmployee(employee);
+        model.addAttribute("employeeID", savedEmployee.getEmployeeId());
+        return "patients/EmployeeCreated";
+    }
 
-        if (result.hasErrors()) {
-            model.addAttribute("patient", patient);
-            return "register";
-        }
-
-        patientService.savePatient(patient);
-        return "redirect:/register?success";
-    }*/
-
-    /*@GetMapping("/patients")
-    public String patients(Model model) {
-        List<Patient> patients = patientService.findAllPatients();
-        model.addAttribute("patients", patients);
-        return "patients";
-    }*/
 
     @GetMapping("/login")
     public String login() {

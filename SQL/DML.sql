@@ -85,78 +85,78 @@ INSERT INTO DoctorNurseAssignment (DoctorID, NurseID) VALUES
 
 -- Insert records into PatientAdmissions table
 INSERT INTO PatientAdmissions (PatientID, RoomNumber, AdmitDate, DischargeDate) VALUES
-(1, '101', '2023-01-01', '2023-01-05'),
-(2, '102', '2023-02-01', '2023-02-07'),
-(3, '103', '2023-03-01', '2023-03-04'),
-(4, '104', '2023-04-01', '2023-04-10'),
-(5, '105', '2023-05-01', '2023-05-06'),
-(6, '106', '2023-06-01', '2023-06-08'),
-(7, '107', '2023-07-01', '2023-07-05'),
-(8, '108', '2023-08-01', '2023-08-09'),
-(9, '109', '2023-09-01', '2023-09-11'),
-(10, '110', '2023-10-01', '2023-10-03');
+(100101, '101', '2023-01-01', '2023-01-05'),
+(100102, '102', '2023-02-01', '2023-02-07'),
+(100103, '103', '2023-03-01', '2023-03-04'),
+(100104, '104', '2023-04-01', '2023-04-10'),
+(100105, '105', '2023-05-01', '2023-05-06'),
+(100106, '106', '2023-06-01', '2023-06-08'),
+(100107, '107', '2023-07-01', '2023-07-05'),
+(100108, '108', '2023-08-01', '2023-08-09'),
+(100109, '109', '2023-09-01', '2023-09-11'),
+(100110, '110', '2023-10-01', '2023-10-03');
 
 -- Insert records into Diagnoses table
 INSERT INTO Diagnosis (PatientID, DoctorID, DiagnosisDate, Disease, Notes) VALUES
-(1, 1, '2023-01-02', 'Flu', 'Rest and hydration'),
-(2, 2, '2023-02-02', 'Migraine', 'Prescribed medication'),
-(3, 3, '2023-03-02', 'Fracture', 'Cast applied'),
-(4, 4, '2023-04-02', 'Asthma', 'Inhaler prescribed'),
-(5, 5, '2023-05-02', 'Skin Rash', 'Topical cream prescribed'),
-(6, 6, '2023-06-02', 'Cancer', 'Chemotherapy initiated'),
-(7, 7, '2023-07-02', 'Ulcer', 'Dietary changes recommended'),
-(8, 8, '2023-08-02', 'Bronchitis', 'Antibiotics prescribed'),
-(9, 9, '2023-09-02', 'Diabetes', 'Insulin therapy started'),
-(10, 10, '2023-10-02', 'Kidney Stones', 'Surgery scheduled');
+(100101, 1, '2023-01-02', 'Flu', 'Rest and hydration'),
+(100102, 2, '2023-02-02', 'Migraine', 'Prescribed medication'),
+(100103, 3, '2023-03-02', 'Fracture', 'Cast applied'),
+(100104, 4, '2023-04-02', 'Asthma', 'Inhaler prescribed'),
+(100105, 5, '2023-05-02', 'Skin Rash', 'Topical cream prescribed'),
+(100106, 6, '2023-06-02', 'Cancer', 'Chemotherapy initiated'),
+(100107, 7, '2023-07-02', 'Ulcer', 'Dietary changes recommended'),
+(100108, 8, '2023-08-02', 'Bronchitis', 'Antibiotics prescribed'),
+(100109, 9, '2023-09-02', 'Diabetes', 'Insulin therapy started'),
+(100110, 10, '2023-10-02', 'Kidney Stones', 'Surgery scheduled');
 
 -- Insert records into Medications table
 INSERT INTO Medications (PatientID, DoctorID, MedicationName, Dosage, StartDate, EndDate) VALUES
-(1, 1, 'Paracetamol', '500mg', '2023-01-02', '2023-01-05'),
-(2, 2, 'Sumatriptan', '50mg', '2023-02-02', '2023-02-07'),
-(3, 3, 'Ibuprofen', '200mg', '2023-03-02', '2023-03-04'),
-(4, 4, 'Albuterol', '100mcg', '2023-04-02', '2023-04-10'),
-(5, 5, 'Hydrocortisone', '1%', '2023-05-02', '2023-05-06'),
-(6, 6, 'Cisplatin', '50mg', '2023-06-02', '2023-06-08'),
-(7, 7, 'Omeprazole', '20mg', '2023-07-02', '2023-07-05'),
-(8, 8, 'Azithromycin', '500mg', '2023-08-02', '2023-08-09'),
-(9, 9, 'Metformin', '500mg', '2023-09-02', '2023-09-11'),
-(10, 10, 'Tamsulosin', '0.4mg', '2023-10-02', '2023-10-03');
+(100101, 1, 'Paracetamol', '500mg', '2023-01-02', '2023-01-05'),
+(100102, 2, 'Sumatriptan', '50mg', '2023-02-02', '2023-02-07'),
+(100103, 3, 'Ibuprofen', '200mg', '2023-03-02', '2023-03-04'),
+(100104, 4, 'Albuterol', '100mcg', '2023-04-02', '2023-04-10'),
+(100105, 5, 'Hydrocortisone', '1%', '2023-05-02', '2023-05-06'),
+(100106, 6, 'Cisplatin', '50mg', '2023-06-02', '2023-06-08'),
+(100107, 7, 'Omeprazole', '20mg', '2023-07-02', '2023-07-05'),
+(100108, 8, 'Azithromycin', '500mg', '2023-08-02', '2023-08-09'),
+(100109, 9, 'Metformin', '500mg', '2023-09-02', '2023-09-11'),
+(100110, 10, 'Tamsulosin', '0.4mg', '2023-10-02', '2023-10-03');
 
 -- Insert records into Payments table
 INSERT INTO Payments (PatientID, Amount, PaymentDate, PaymentMethod, InsuranceDetails) VALUES
-(1, 100.00, '2023-01-03', 'Cash', NULL),
-(2, 200.00, '2023-02-03', 'Credit Card', NULL),
-(3, 300.00, '2023-03-03', 'E-Banking', NULL),
-(4, 400.00, '2023-04-03', 'Insurance', 'Policy ABC123'),
-(5, 500.00, '2023-05-03', 'Cash', NULL),
-(6, 600.00, '2023-06-03', 'Credit Card', NULL),
-(7, 700.00, '2023-07-03', 'E-Banking', NULL),
-(8, 800.00, '2023-08-03', 'Insurance', 'Policy XYZ456'),
-(9, 900.00, '2023-09-03', 'Cash', NULL),
-(10, 1000.00, '2023-10-03', 'Credit Card', NULL);
+(100101, 100.00, '2023-01-03', 'Cash', NULL),
+(100102, 200.00, '2023-02-03', 'Credit Card', NULL),
+(100103, 300.00, '2023-03-03', 'E-Banking', NULL),
+(100104, 400.00, '2023-04-03', 'Insurance', 'Policy ABC123'),
+(100105, 500.00, '2023-05-03', 'Cash', NULL),
+(100106, 600.00, '2023-06-03', 'Credit Card', NULL),
+(100107, 700.00, '2023-07-03', 'E-Banking', NULL),
+(100108, 800.00, '2023-08-03', 'Insurance', 'Policy XYZ456'),
+(100109, 900.00, '2023-09-03', 'Cash', NULL),
+(100110, 1000.00, '2023-10-03', 'Credit Card', NULL);
 
 -- Insert records into Calls table
 INSERT INTO Calls (PatientID, CallDate, Purpose, Resolved) VALUES
-(1, '2023-01-04 10:00:00', 'Follow-up', TRUE),
-(2, '2023-02-04 11:00:00', 'Prescription renewal', FALSE),
-(3, '2023-03-04 12:00:00', 'Appointment scheduling', TRUE),
-(4, '2023-04-04 13:00:00', 'Lab results', TRUE),
-(5, '2023-05-04 14:00:00', 'Medical advice', FALSE),
-(6, '2023-06-04 15:00:00', 'Billing inquiry', TRUE),
-(7, '2023-07-04 16:00:00', 'Insurance query', FALSE),
-(8, '2023-08-04 17:00:00', 'Feedback', TRUE),
-(9, '2023-09-04 18:00:00', 'Complaint', TRUE),
-(10, '2023-10-04 19:00:00', 'General inquiry', FALSE);
+(100101, '2023-01-04 10:00:00', 'Follow-up', TRUE),
+(100102, '2023-02-04 11:00:00', 'Prescription renewal', FALSE),
+(100103, '2023-03-04 12:00:00', 'Appointment scheduling', TRUE),
+(100104, '2023-04-04 13:00:00', 'Lab results', TRUE),
+(100105, '2023-05-04 14:00:00', 'Medical advice', FALSE),
+(100106, '2023-06-04 15:00:00', 'Billing inquiry', TRUE),
+(100107, '2023-07-04 16:00:00', 'Insurance query', FALSE),
+(100108, '2023-08-04 17:00:00', 'Feedback', TRUE),
+(100109, '2023-09-04 18:00:00', 'Complaint', TRUE),
+(100110, '2023-10-04 19:00:00', 'General inquiry', FALSE);
 
 -- Insert records into Assignments table
 INSERT INTO Assignments (PatientID, NurseID, AssistantID, StartDate, EndDate) VALUES
-(1, 11, 21, '2023-01-01', '2023-01-05'),
-(2, 12, 22, '2023-02-01', '2023-02-07'),
-(3, 13, 23, '2023-03-01', '2023-03-04'),
-(4, 14, 24, '2023-04-01', '2023-04-10'),
-(5, 15, 25, '2023-05-01', '2023-05-06'),
-(6, 16, 26, '2023-06-01', '2023-06-08'),
-(7, 17, 27, '2023-07-01', '2023-07-05'),
-(8, 18, 28, '2023-08-01', '2023-08-09'),
-(9, 19, 29, '2023-09-01', '2023-09-11'),
-(10, 20, 30, '2023-10-01', '2023-10-03');
+(100101, 11, 21, '2023-01-01', '2023-01-05'),
+(100102, 12, 22, '2023-02-01', '2023-02-07'),
+(100103, 13, 23, '2023-03-01', '2023-03-04'),
+(100104, 14, 24, '2023-04-01', '2023-04-10'),
+(100105, 15, 25, '2023-05-01', '2023-05-06'),
+(100106, 16, 26, '2023-06-01', '2023-06-08'),
+(100107, 17, 27, '2023-07-01', '2023-07-05'),
+(100108, 18, 28, '2023-08-01', '2023-08-09'),
+(100109, 19, 29, '2023-09-01', '2023-09-11'),
+(100110, 20, 30, '2023-10-01', '2023-10-03');

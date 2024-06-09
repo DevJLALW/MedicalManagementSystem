@@ -1,6 +1,7 @@
 package com.srh.medicalmanagementsystem.controller;
 
 import com.srh.medicalmanagementsystem.entity.Employee;
+import com.srh.medicalmanagementsystem.entity.Patient;
 import com.srh.medicalmanagementsystem.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -28,9 +29,18 @@ public class EmployeeControllerPages {
         return "patients/ShowEmployees";
     }
 
+    @GetMapping("/{employeeId}/assignedPatients")
+    public String getAllAssignedPatients(@PathVariable("employeeId") Integer employeeId, Model model) {
+        List<Patient> patientList= employeeService.getAllAssignedPatients(employeeId);
+        model.addAttribute("patients",patientList);
+
+        return "patients/ShowPatientsOfDoctor";
+    }
+
     @GetMapping("/create")
     public String showCreateEmployeePage(Model model) {
         model.addAttribute("employee", new Employee());
+        model.addAttribute("actionUrl", "/employees/create");
         return "patients/CreateEmployee";
     }
 
@@ -40,6 +50,7 @@ public class EmployeeControllerPages {
             BindingResult bindingResult, Model model
     ) {
         if(bindingResult.hasErrors()){
+            model.addAttribute("actionUrl", "/employees/create");
             return "patients/CreateEmployee";
         }
         employeeService.saveEmployee(employee);
@@ -102,11 +113,4 @@ public class EmployeeControllerPages {
 
         return "patients/ShowEmployees";
     }
-    /*@GetMapping("/employees/searchDoctors")
-    public List<Employee> searchDoctors(@RequestParam("query") String query) {
-        System.out.println("Searching doctors with query: " + query);
-        List<Employee> doctors = employeeService.searchDoctorsByName(query);
-        System.out.println("Found doctors: " + doctors);
-        return doctors;
-    }*/
 }
