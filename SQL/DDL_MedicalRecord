@@ -1,3 +1,11 @@
-CREATE TABLE Medical_Record (
-	medicalRecordId INT AUTO_INCREMENT PRIMARY KEY, diagnosis varchar(225), diagnosisNotes varchar(225), medicalResult varchar(225), medicationsPrescribed varchar(225),
- date date, employeeId int, patientId int);
+CREATE TABLE `medicalrecord` (
+  `medicalRecordId` int NOT NULL AUTO_INCREMENT,
+  `diagnosis` varchar(225) DEFAULT NULL,
+  `diagnosisNotes` varchar(225) DEFAULT NULL,
+  `medicalResult` varchar(225) DEFAULT NULL,
+  `medicationsPrescribed` varchar(225) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `employeeId` int DEFAULT NULL,
+  `patientId` int DEFAULT NULL,
+  PRIMARY KEY (`medicalRecordId`)
+) 

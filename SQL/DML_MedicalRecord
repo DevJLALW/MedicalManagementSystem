@@ -1,0 +1,17 @@
+INSERT INTO `medicalrecord` (
+    `diagnosis`,
+    `diagnosisNotes`,
+    `medicalResult`,
+    `medicationsPrescribed`,
+    `date`,
+    `employeeId`,
+    `patientId`
+) VALUES (
+    'Hypertension',
+    'Patient shows signs of high blood pressure',
+    'BP: 150/90',
+    'Amlodipine 5mg',
+    '2024-06-09',
+    101,
+    1001
+);
