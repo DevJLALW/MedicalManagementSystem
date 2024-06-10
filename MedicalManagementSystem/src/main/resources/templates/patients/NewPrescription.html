@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add New Prescription</title>
+</head>
+<body>
+<h1>Add New Prescription</h1>
+<form th:action="@{/prescriptions}" th:object="${prescription}" method="post">
+    <label>Patient ID:</label>
+    <input type="number" th:field="*{patientID}" required/><br/>
+    <label>Doctor ID:</label>
+    <input type="number" th:field="*{doctorID}" required/><br/>
+    <label>Medicine:</label>
+    <select th:field="*{inventory.inventoryID}" required>
+        <option th:each="inventory : ${inventories}" th:value="${inventory.inventoryID}" th:text="${inventory.medicineName}"></option>
+    </select><br/>
+    <label>Medicine Dosage:</label>
+    <input type="number" th:field="*{medicineDosage}" required/><br/>
+    <label>Number of Days:</label>
+    <input type="number" th:field="*{numberOfDays}" required/><br/>
+    <button type="submit">Save</button>
+</form>
+<div th:if="${error}">
+    <p th:text="${error}"></p>
+</div>
+</body>
+</html>
