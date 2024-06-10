@@ -43,14 +43,14 @@ public class CustomUserDetailsService implements UserDetailsService {
             return org.springframework.security.core.userdetails.User.builder()
                     .username(String.valueOf(patient.getPatientId()))
                     .password(patient.getPassword())
-                    .roles("ADMIN")
+                    .roles("PATIENT")
                     .build();
         } else if (employee != null && employee.getStatus() == 1) {
             System.out.println("Before employee");
             return org.springframework.security.core.userdetails.User.builder()
                     .username(String.valueOf(employee.getEmployeeId()))
                     .password(employee.getPassword())
-                    .roles("ADMIN")
+                    .roles(employee.getRole().toUpperCase())
                     .build();
         } else {
             System.out.println("Invalid");

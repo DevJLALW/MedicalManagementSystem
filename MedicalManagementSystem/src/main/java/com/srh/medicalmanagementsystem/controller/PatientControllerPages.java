@@ -1,10 +1,7 @@
 package com.srh.medicalmanagementsystem.controller;
 
-import com.srh.medicalmanagementsystem.entity.Patient;
-import com.srh.medicalmanagementsystem.entity.PatientDTO;
-import com.srh.medicalmanagementsystem.service.PatientService;
-import com.srh.medicalmanagementsystem.entity.MedicalRecord;
-import com.srh.medicalmanagementsystem.service.MedicalRecordService;
+import com.srh.medicalmanagementsystem.entity.*;
+import com.srh.medicalmanagementsystem.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,11 +19,17 @@ public class PatientControllerPages {
 
     private PatientService patientService;
     private MedicalRecordService medicalRecordService;
+    private PatientEventRecordService patientEventRecordService;
+    private EmployeeService employeeService;
+    private PaymentService paymentService;
 
     @Autowired
-    public PatientControllerPages(PatientService patientService, MedicalRecordService medicalRecordService) {
+    public PatientControllerPages(PatientService patientService, MedicalRecordService medicalRecordService, PatientEventRecordService patientEventRecordService, EmployeeService employeeService, PaymentService paymentService) {
         this.patientService = patientService;
         this.medicalRecordService = medicalRecordService;
+        this.patientEventRecordService=patientEventRecordService;
+        this.employeeService=employeeService;
+        this.paymentService=paymentService;
     }
 
     @GetMapping("/all")
@@ -97,8 +100,18 @@ public class PatientControllerPages {
     public String getPatientDetails(@PathVariable("patientId") int patientId, Model model) {
         Patient patient = patientService.findPatientById(patientId);
         List<MedicalRecord> medicalRecords = medicalRecordService.findMedicalRecordByPatientId(patientId);
+        List<PatientEventRecord> patientEventRecordList = patientEventRecordService.findPatientEventRecordByPatientId(patientId);
         model.addAttribute("patient", patient);
         model.addAttribute("medicalRecords", medicalRecords);
+        model.addAttribute("patientEventRecords", patientEventRecordList);
+        List<Employee> employeeDoctor =employeeService.searchEmployeesById(patient.getDoctorID());
+        model.addAttribute("doctorName",employeeDoctor.get(0).getFirstName()+" "+employeeDoctor.get(0).getLastName());
+        List<Employee> employeeNurse =employeeService.searchEmployeesById(patient.getNurseID());
+        model.addAttribute("nurseName",employeeNurse.get(0).getFirstName()+" "+employeeNurse.get(0).getLastName());
+
+        List<Payment> payments = paymentService.findPaymentsByPatientId((long) patientId);
+        model.addAttribute("payments", payments);
+
         return "patients/ShowPatientDetails";
     }
 

@@ -20,6 +20,16 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         System.out.println("EmployeeID: "+user.getUsername());
         request.getSession().setAttribute("employeeID", user.getUsername());
-        response.sendRedirect("/medicalmanagement/dashboard");
+
+        String role = authentication.getAuthorities().iterator().next().getAuthority();
+
+        System.out.println("Role "+role);
+
+        if (role.equals("ROLE_PATIENT")) {
+            response.sendRedirect("/patients/details/"+user.getUsername());
+        } else {
+            response.sendRedirect("/medicalmanagement/dashboard");
+        }
+       // response.sendRedirect("/medicalmanagement/dashboard");
     }
 }

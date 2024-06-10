@@ -9,4 +9,5 @@ public interface PaymentService {
     Payment getPaymentById(Long id);
     Payment savePayment(Payment payment);
     void deletePayment(Long id);
+    List<Payment> findPaymentsByPatientId(Long patientId);
 }
