@@ -10,7 +10,6 @@ CREATE TABLE Appointments (
     AppointmentDate INT,
     StartTime TIME,
     EndTime TIME,
-    Status INT,
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
     FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID)
 );
