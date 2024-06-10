@@ -71,7 +71,6 @@ public class PatientServiceImpl implements PatientService{
         patient.setDoctorID(patientDTO.getDoctorID());
         patient.setNurseID(patientDTO.getNurseID());
         patient.setRoomID(patientDTO.getRoomID());
-        patient.setRecordID(patientDTO.getRecordID());
         patient.setPassword(patientDTO.getPassword());
         patient.setEmployeeID(patientDTO.getEmployeeID());
 
@@ -93,8 +92,7 @@ public class PatientServiceImpl implements PatientService{
             existingPatient.setInsuranceID(patient.getInsuranceID());
             existingPatient.setDoctorID(patient.getDoctorID());
             existingPatient.setRoomID(patient.getRoomID());
-            existingPatient.setRecordID(patient.getRecordID());
-          //  existingPatient.setEmployeeID(patient.getEmployeeID());
+
 
         if (patient.getPassword() != null && !patient.getPassword().isEmpty()) {
             String encodedPassword = passwordEncoder.encode(patient.getPassword());

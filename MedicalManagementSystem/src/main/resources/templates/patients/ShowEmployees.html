@@ -10,6 +10,7 @@
 
 </head>
 <body>
+    <a class="btn btn-primary" href="/index" style="float: right; margin-right: 2px; margin-top: 2px;">Logout</a>
 <div class="container row mb-3">
     <h1 class="text-center my-4">Employees Information</h1>
     <form action="#" th:action="@{/employees/search}" method="get">
@@ -19,7 +20,7 @@
 </div>
 <a class="btn btn-primary" href="/employees/create">New Employee Entry</a>
 <button id="deleteButton" class="btn btn-danger" onclick="deleteSelectedEmployees()">Delete</button>
-<a class="btn btn-primary" style="float:right" href="/medicalmanagement/dashboard">Back</a>
+<a class="btn btn-primary" style="float:right; margin-right: 5px;" href="/medicalmanagement/dashboard">Back</a>
 <table class="table">
     <thead>
     <tr>
