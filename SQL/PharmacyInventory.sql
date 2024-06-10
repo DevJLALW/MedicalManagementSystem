@@ -1,0 +1,68 @@
+-- Create database
+CREATE DATABASE IF NOT EXISTS HospitalDB;
+USE HospitalDB;
+
+-- Create Table
+CREATE TABLE PharmacyInventory(
+    InventoryID INT AUTO_INCREMENT PRIMARY KEY,
+    MedicineName VARCHAR(255) NOT NULL,
+    MedicineDescription TEXT,
+    StockQuantity INT NOT NULL,
+    ExpiryDate DATE,
+    MedicinePrice DECIMAL(10, 2) NOT NULL,
+    EmployeeID INT NOT NULL,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    LastUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Insert records into Pharmacy Inventory table
+INSERT INTO PharmacyInventory (MedicineName, MedicineDescription, StockQuantity, ExpiryDate, MedicinePrice, EmployeeID) VALUES
+('Paracetamol', 'Pain reliever and a fever reducer', 100, '2025-12-31', 5.99, 1),
+('Ibuprofen', 'Nonsteroidal anti-inflammatory drug', 200, '2025-11-30', 7.49, 1),
+('Aspirin', 'Used to reduce pain, fever, or inflammation', 150, '2024-10-31', 3.99, 2),
+('Amoxicillin', 'Antibiotic used to treat bacterial infections', 120, '2024-09-30', 8.99, 3),
+('Azithromycin', 'Antibiotic used to treat various infections', 80, '2025-08-31', 12.99, 2),
+('Metformin', 'Used to treat type 2 diabetes', 300, '2025-07-31', 6.49, 4),
+('Lisinopril', 'Used to treat high blood pressure', 180, '2025-06-30', 4.99, 1),
+('Atorvastatin', 'Used to lower cholesterol', 220, '2025-05-31', 10.99, 5),
+('Omeprazole', 'Used to treat gastroesophageal reflux disease', 250, '2025-04-30', 8.49, 3),
+('Levothyroxine', 'Used to treat hypothyroidism', 210, '2025-03-31', 9.99, 4),
+('Amlodipine', 'Used to treat high blood pressure and angina', 130, '2025-02-28', 7.49, 5),
+('Simvastatin', 'Used to lower cholesterol and triglycerides', 140, '2025-01-31', 9.49, 1),
+('Hydrochlorothiazide', 'Used to treat high blood pressure and edema', 170, '2024-12-31', 5.49, 2),
+('Metoprolol', 'Used to treat high blood pressure and angina', 160, '2024-11-30', 6.99, 3),
+('Losartan', 'Used to treat high blood pressure', 150, '2024-10-31', 4.99, 4),
+('Gabapentin', 'Used to treat nerve pain and seizures', 200, '2024-09-30', 10.49, 5),
+('Sertraline', 'Used to treat depression and anxiety', 190, '2024-08-31', 11.99, 1),
+('Furosemide', 'Used to treat fluid retention and swelling', 180, '2024-07-31', 4.49, 2),
+('Zolpidem', 'Used to treat insomnia', 170, '2024-06-30', 12.49, 3),
+('Tramadol', 'Used to treat moderate to severe pain', 160, '2024-05-31', 13.99, 4),
+('Montelukast', 'Used to treat allergies and asthma', 150, '2024-04-30', 9.49, 5),
+('Clopidogrel', 'Used to prevent heart attacks and strokes', 140, '2024-03-31', 14.99, 1),
+('Prednisone', 'Used to treat inflammation and allergies', 130, '2024-02-29', 8.49, 2),
+('Escitalopram', 'Used to treat depression and anxiety', 120, '2024-01-31', 12.99, 3),
+('Citalopram', 'Used to treat depression', 110, '2023-12-31', 11.49, 4),
+('Alprazolam', 'Used to treat anxiety and panic disorders', 100, '2023-11-30', 13.49, 5),
+('Warfarin', 'Used to prevent blood clots', 90, '2023-10-31', 15.99, 1),
+('Meloxicam', 'Used to treat arthritis', 80, '2023-09-30', 10.99, 2),
+('Propranolol', 'Used to treat high blood pressure and anxiety', 70, '2023-08-31', 7.99, 3),
+('Cephalexin', 'Antibiotic used to treat bacterial infections', 60, '2023-07-31', 9.99, 4),
+('Trazodone', 'Used to treat depression and insomnia', 50, '2023-06-30', 11.99, 5),
+('Carvedilol', 'Used to treat high blood pressure and heart failure', 40, '2023-05-31', 8.99, 1),
+('Rosuvastatin', 'Used to lower cholesterol and triglycerides', 30, '2023-04-30', 13.99, 2),
+('Carbamazepine', 'Used to treat seizures and nerve pain', 20, '2023-03-31', 14.99, 3),
+('Albuterol', 'Used to treat asthma and COPD', 10, '2023-02-28', 12.49, 4),
+('Fluoxetine', 'Used to treat depression and anxiety', 5, '2023-01-31', 11.99, 5),
+('Ranitidine', 'Used to treat heartburn and ulcers', 150, '2025-12-31', 5.99, 1),
+('Naproxen', 'Nonsteroidal anti-inflammatory drug', 140, '2025-11-30', 7.49, 2),
+('Ciprofloxacin', 'Antibiotic used to treat bacterial infections', 130, '2025-10-31', 8.99, 3),
+('Lovastatin', 'Used to lower cholesterol and triglycerides', 120, '2025-09-30', 10.99, 4),
+('Diclofenac', 'Nonsteroidal anti-inflammatory drug', 110, '2025-08-31', 9.49, 5),
+('Cyclobenzaprine', 'Used to treat muscle spasms', 100, '2025-07-31', 11.99, 1),
+('Pantoprazole', 'Used to treat gastroesophageal reflux disease', 90, '2025-06-30', 8.49, 2),
+('Lorazepam', 'Used to treat anxiety disorders', 80, '2025-05-31', 12.99, 3),
+('Bupropion', 'Used to treat depression and smoking cessation', 70, '2025-04-30', 14.49, 4),
+('Tamsulosin', 'Used to treat enlarged prostate', 60, '2025-03-31', 7.99, 5),
+('Doxycycline', 'Antibiotic used to treat bacterial infections', 50, '2025-02-28', 9.99, 1),
+('Venlafaxine', 'Used to treat depression and anxiety', 40, '2025-01-31', 10.49, 2),
+('Sulfasalazine', 'Used to treat rheumatoid arthritis and ulcerative colitis', 30, '2024-12-31', 11.49, 3);
