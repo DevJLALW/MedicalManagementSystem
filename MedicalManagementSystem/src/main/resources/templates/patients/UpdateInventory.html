@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Inventory</title>
+</head>
+<body>
+<h1>Edit Inventory</h1>
+<form th:action="@{/inventories/{id}(id=${inventory.inventoryID})}" th:object="${inventory}" method="post">
+    <label>Medicine Name:</label>
+    <input type="text" th:field="*{medicineName}" /><br/>
+    <label>Medicine Description:</label>
+    <textarea th:field="*{medicineDescription}"></textarea><br/>
+    <label>Inventory Quantity:</label>
+    <input type="number" th:field="*{stockQuantity}" /><br/>
+    <label>Expiry Date:</label>
+    <input type="date" th:field="*{expiryDate}" /><br/>
+    <label>Medicine Price:</label>
+    <input type="number" step="0.01" th:field="*{medicinePrice}" /><br/>
+    <label>Employee ID:</label>
+    <input type="number" th:field="*{employeeID}" /><br/>
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>
