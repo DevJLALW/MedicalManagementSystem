@@ -44,6 +44,12 @@
                 <div class="row mb-3">
                     <button type="submit" onclick="getAppointmentsInfo()" class="btn btn-primary">Show Appointments</button>
                 </div>
+                <div class="row mb-3">
+                    <button type="submit" onclick="getInventoryInfo()" class="btn btn-primary">Show Inventories</button>
+                </div>
+                <div class="row mb-3">
+                    <button type="submit" onclick="getPrescriptionInfo()" class="btn btn-primary">Show Prescriptions</button>
+                </div>
 			</div>
 		</div>
 	</div>		
@@ -67,6 +73,11 @@
     function getAppointmentsInfo(){
         location.replace("/appointments/all")
     }
-
+    function getInventoryInfo(){
+        location.replace("/inventories")
+    }
+    function getPrescriptionInfo(){
+        location.replace("/prescriptions")
+    }
 </script>
 </html>

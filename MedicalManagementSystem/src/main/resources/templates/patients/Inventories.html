@@ -2,47 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Inventory List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body>
-<h1>Inventory List</h1>
-<form th:action="@{/inventories}" method="get">
-    <input type="text" name="keyword" placeholder="Search by medicine name" th:value="${keyword}" />
-    <button type="submit">Search</button>
-    <a href="/inventories">Clear</a>
-</form>
-<a href="/inventories/new">Add New Inventory</a>
-<table border="0">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Medicine Name</th>
-        <th>Medicine Description</th>
-        <th>Inventory Quantity</th>
-        <th>Expiry Date</th>
-        <th>Medicine Price</th>
-        <th>Employee ID</th>
-        <th>Created At</th>
-        <th>Last Updated</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="inventory : ${listInventories}">
-        <td th:text="${inventory.inventoryID}"></td>
-        <td th:text="${inventory.medicineName}"></td>
-        <td th:text="${inventory.medicineDescription}"></td>
-        <td th:text="${inventory.stockQuantity}"></td>
-        <td th:text="${inventory.expiryDate}"></td>
-        <td th:text="${inventory.medicinePrice}"></td>
-        <td th:text="${inventory.employeeID}"></td>
-        <td th:text="${inventory.createdAt}"></td>
-        <td th:text="${inventory.lastUpdated}"></td>
-        <td>
-            <a th:href="@{/inventories/update/{id}(id=${inventory.inventoryID})}">Edit</a>
-            <a th:href="@{/inventories/delete/{id}(id=${inventory.inventoryID})}">Delete</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-</body>
+    <body>
+        <a class="btn btn-primary" style="margin-right: 5px; float: right;" href="/index">Logout</a>
+        <br/>
+        <h1 class="text-center mb-4">Inventory List</h1>
+        <a class="btn btn-primary" style="margin-right: 5px; float: right;" href="/medicalmanagement/dashboard">Back</a>
+        <form th:action="@{/inventories}" method="get">
+            <input type="text" name="keyword" placeholder="Search by medicine name" th:value="${keyword}" />
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a class="btn btn-danger" href="/inventories">Clear</a>
+        </form>
+        <a href="/inventories/new" class="btn btn-danger" style="margin-bottom: 5px;">Add New Inventory</a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Medicine Name</th>
+                <th>Medicine Description</th>
+                <th>Inventory Quantity</th>
+                <th>Expiry Date</th>
+                <th>Medicine Price</th>
+                <th>Employee ID</th>
+                <th>Created At</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="inventory : ${listInventories}">
+                <td th:text="${inventory.inventoryID}"></td>
+                <td th:text="${inventory.medicineName}"></td>
+                <td th:text="${inventory.medicineDescription}"></td>
+                <td th:text="${inventory.stockQuantity}"></td>
+                <td th:text="${inventory.expiryDate}"></td>
+                <td th:text="${inventory.medicinePrice}"></td>
+                <td th:text="${inventory.employeeID}"></td>
+                <td th:text="${inventory.createdAt}"></td>
+                <td th:text="${inventory.lastUpdated}"></td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/inventories/update/{id}(id=${inventory.inventoryID})}">Edit</a>
+                    <a class="btn btn-danger" th:href="@{/inventories/delete/{id}(id=${inventory.inventoryID})}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </body>
 </html>
