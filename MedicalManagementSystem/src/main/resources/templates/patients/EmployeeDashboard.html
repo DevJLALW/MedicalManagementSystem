@@ -30,7 +30,7 @@
                     <button type="submit" onclick="getPatientInfo()" class="btn btn-primary">Show Patient Information</button>
                 </div>
                 <div class="row mb-3">
-                    <button type="submit" class="btn btn-primary">Doctor Assignment</button>
+                    <button type="submit" onclick="getDoctorInfo()" class="btn btn-primary">Doctor Assignment</button>
                 </div>
                 <div class="row mb-3">
                     <button type="submit" onclick="getEmployeeInfo()" class="btn btn-primary">Employee Information</button>
@@ -50,6 +50,9 @@
 	</div>		
 </body>
 <script>
+    function getDoctorInfo(){
+        location.replace("/employees/doctor-nurse-assignment/all")
+    }
     function getPatientInfo(){
         location.replace("/patients/all")
     }
