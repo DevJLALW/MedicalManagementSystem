@@ -13,7 +13,7 @@
         <br/> 
         <h1 class="text-center mb-4">Appointments</h1>
         <a class="btn btn-primary" style="margin-bottom: 5px;" th:href="@{/appointments/create}">Add New Appointment</a>
-        <a class="btn btn-primary" style="margin-bottom: 5px; margin-right: 5px; float:right;" href="medicalmanagement/dashboard">Back</a>
+        <a class="btn btn-primary" style="margin-bottom: 5px; margin-right: 5px; float:right;" href="appointments/dashboard">Back</a>
         <form th:action="@{/appointments/search}" method="get">
             <input type="text" id="patientId" name="patientId" placeholder="Search by Patient ID">
             <button type="submit">Search</button>
@@ -32,7 +32,7 @@
             </thead>
             <tbody>
             <tr th:each="appointment : ${appointments}">
-                <td><input class="select-row" type="checkbox" name="patientIds" th:value="${patient.patientId}" /></td>
+                <td><input class="select-row" type="checkbox" name="patientIds" th:value="${appointment.patientId}" /></td>
                 <td th:text="${appointment.appointmentId}"></td>
                 <td th:text="${appointment.patientId}"></td>
                 <td th:text="${appointment.doctorId}"></td>
