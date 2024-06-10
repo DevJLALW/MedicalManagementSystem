@@ -69,9 +69,9 @@ public class PatientDTO {
 
     @Column(name = "RoomID", nullable = true)
     private Integer roomID;
-
+/*
     @Column(name = "RecordID", nullable = true)
-    private Integer recordID;
+    private Integer recordID;*/
 
     @Column(name = "Timestamp", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
