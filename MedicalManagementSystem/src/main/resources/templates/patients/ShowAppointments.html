@@ -13,7 +13,7 @@
         <br/> 
         <h1 class="text-center mb-4">Appointments</h1>
         <a class="btn btn-primary" style="margin-bottom: 5px;" th:href="@{/appointments/create}">Add New Appointment</a>
-        <a class="btn btn-primary" style="margin-bottom: 5px; margin-right: 5px; float:right;" href="appointments/dashboard">Back</a>
+        <a class="btn btn-primary" style="margin-bottom: 5px; margin-right: 5px; float:right;" href="/medicalmanagement/dashboard">Back</a>
         <form th:action="@{/appointments/search}" method="get">
             <input type="text" id="patientId" name="patientId" placeholder="Search by Patient ID">
             <button type="submit">Search</button>
