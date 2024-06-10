@@ -35,7 +35,7 @@ public class PaymentController {
     @GetMapping("/patients/payments/add")
     public String showAddPaymentForm(Model model) {
         model.addAttribute("payment", new Payment());
-        return "/patients/Payments";
+        return "/patients/payments";
     }
 
     @PostMapping("/patients/payments")
