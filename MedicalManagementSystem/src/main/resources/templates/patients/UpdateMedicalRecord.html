@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mx-auto rounded border p-4 m-4">
-            <h2 class="text-center mb-5">Update MedicalRecord Details</h2>
+            <h2 class="text-center mb-5">Update Medical Record Details</h2>
             <form method="post" enctype="multipart/form-data" th:action="@{/medicalRecords/update/{medicalRecordId}(medicalRecordId=${medicalRecord.medicalRecordId})}" th:object="${medicalRecord}">
                 <div class="row mb-3">
                     <label class="col-sm-4 col-form-label">Medical Record ID</label>
@@ -65,6 +65,7 @@
 
                 <div>
                     <button type="submit" class="btn btn-primary">Update MedicalRecord</button>
+                    <a href="/medicalRecords/all" class="btn btn-primary">Back</a>
                 </div>
 
             </form>
