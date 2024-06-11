@@ -27,4 +27,5 @@ public interface EmployeeService {
     public List<Employee> searchNurseByName(String name);
 
     public List<Patient> getAllAssignedPatients(Integer doctorId);
+    public List<Employee> findNursesByDoctorId(int doctorId);
 }

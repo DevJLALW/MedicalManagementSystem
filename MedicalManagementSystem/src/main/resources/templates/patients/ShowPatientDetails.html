@@ -30,6 +30,7 @@
         <body>
             <a class="btn btn-primary" href="/patients/all" style="float: left; margin-left: 5px;">Back to Patients List</a>
             <a class="btn btn-primary" href="/login" style="float: right; margin-right: 5px;">Logout</a>
+            <a class="btn btn-primary" href="/appointments/create" style="float: right; margin-right: 5px;">Book Appointment</a>
             <h1 class="text-center my-4 margintop">Patient Details</h1>
             <h3 style="margin-left: 10px;">Patient Information</h3>
             <div class="container">
@@ -75,12 +76,12 @@
                         <td th:text="${patient.insuranceID}"></td>
                     </tr>
                     <tr>
-                        <th>Doctor ID</th>
-                        <td th:text="${patient.doctorID}"></td>
+                        <th>Doctor Name</th>
+                        <td th:text="${doctorName}"></td>
                     </tr>
                     <tr>
-                        <th>Nurse ID</th>
-                        <td th:text="${patient.nurseID}"></td>
+                        <th>Nurse Name</th>
+                        <td th:text="${nurseName}"></td>
                     </tr>
                     <tr>
                         <th>Room ID</th>
@@ -90,10 +91,10 @@
                         <th>Created Date</th>
                         <td th:text="${patient.timestamp}"></td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <th>Employee ID</th>
-                        <td th:text="${patient.employeeID}"></td>
-                    </tr>
+                        <td th:text="${patient.userID}"></td>
+                    </tr>-->
                 </table>
             </div>    
             <h3 style="margin-left: 10px; margin-top: 25px">Medical Record Information</h3>
@@ -124,5 +125,64 @@
                     </tr>
                 </tbody>
         </table>
-    </body>
+
+            <h4 style="margin-left: 10px; margin-top: 25px">Patient Event Record Information</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient ID</th>
+                    <th>Event date</th>
+                    <th>Event Type</th>
+                    <th>Details</th>
+                    <th>Assigned doctor ID</th>
+                    <th>Assigned nurse ID</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="record : ${patientEventRecords}">
+                    <td th:text="${record.eventId}"></td>
+                    <td th:text="${record.patientId}"></td>
+                    <td th:text="${record.eventDate}"></td>
+                    <td th:text="${record.eventType}"></td>
+                    <td th:text="${record.details}"></td>
+                    <td th:text="${record.assignedDoctorId}"></td>
+                    <td th:text="${record.assignedNurseId}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h4 style="margin-left: 10px; margin-top: 25px">Payment Details</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Payment Date</th>
+                    <th>Payment method</th>
+                    <th>Payment Details</th>
+                    <th>Doctor Fees</th>
+                    <th>Room Fees</th>
+                    <th>Pharmacy Cost</th>
+                    <th>Payment Status</th>
+                    <th>Total Amount</th>
+                    <th>Receipt</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="payment : ${payments}">
+                    <td th:text="${payment.paymentDate}"></td>
+                    <td th:text="${payment.paymentMethod}"></td>
+                    <td th:text="${payment.paymentDetails}"></td>
+                    <td th:text="${payment.doctorFees}"></td>
+                    <td th:text="${payment.roomService}"></td>
+                    <td th:text="${payment.pharmacyCost}"></td>
+                    <td th:text="${payment.paymentStatus}"></td>
+                    <td th:text="${payment.totalAmount}"></td>
+                    <td style="white-space:nowrap">
+                        <a class="btn btn-primary" th:href="@{/payments/receipt/{id}(id=${payment.paymentId})}" target="_blank">Download Receipt</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </body>
 </html>

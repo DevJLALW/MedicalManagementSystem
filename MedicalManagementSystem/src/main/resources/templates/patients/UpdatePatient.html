@@ -183,10 +183,9 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script th:inline="javascript">
-        /*<![CDATA[*/
+
 
         $(document).ready(function() {
-            // Function to load doctor list in the modal
             function loadDoctorList() {
                 var query = $('#doctorFilter').val();
                 $.ajax({
@@ -199,51 +198,56 @@
                             var row = '<tr>' +
                                 '<td>' + doctor.firstName + '</td>' +
                                 '<td>' + doctor.lastName + '</td>' +
-                                '<td>' + doctor.employeeId + '</td>' +  // Adjusted this line
-                                '<td><button type="button" class="btn btn-sm btn-primary select-doctor" data-id="' + doctor.employeeId + '" data-name="' + doctor.firstName + ' ' + doctor.lastName + '">Select</button></td>' +  // And this line
+                                '<td>' + doctor.employeeId + '</td>' +
+                                '<td><button type="button" class="btn btn-sm btn-primary select-doctor" data-id="' + doctor.employeeId + '" data-name="' + doctor.firstName + ' ' + doctor.lastName + '">Select</button></td>' +
                                 '</tr>';
                             $('#doctorTableBody').append(row);
                         });
                     },
                     error: function(xhr, status, error) {
-                        console.error('Error fetching doctors:', error); // Logging errors
+                        console.error('Error fetching doctors:', error);
                     }
                 });
             }
 
-            // Open doctor modal
             $('#openDoctorModal').click(function() {
                 $('#doctorModal').modal('show');
-                loadDoctorList(); // Load doctor list initially
+                loadDoctorList();
             });
 
-            // Filter doctors based on search input
             $('#doctorFilter').on('input', function() {
                 loadDoctorList();
             });
 
-            // Select doctor and set doctor ID and name in the text box
             $(document).on('click', '.select-doctor', function() {
                 var doctorID = $(this).data('id');
                 var doctorName = $(this).data('name');
                 $('#doctorID').val(doctorID);
-                $('#doctorSearch').val(doctorID);
+                $('#doctorSearch').val(doctorName);
                 $('#doctorModal').modal('hide');
             });
-        });
 
-        /*]]>*/
-    </script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
 
-        $(document).ready(function() {
+
+
+
+
+
+
+
             function loadNurseList() {
                 var query = $('#nurseFilter').val();
+                var doctorID = $('#doctorID').val();
+                var requestData = { 'query': query };
+
+                if (doctorID) {
+                    requestData['doctorId'] = doctorID;
+                }
+
                 $.ajax({
                     url: /*[[@{/employees/searchNurse}]]*/,
                     type: 'GET',
-                    data: { 'query': query },
+                    data: requestData,
                     success: function(data) {
                         $('#nurseTableBody').empty();
                         $.each(data, function(index, nurse) {
@@ -275,13 +279,12 @@
                 var nurseID = $(this).data('id');
                 var nurseName = $(this).data('name');
                 $('#nurseID').val(nurseID);
-                $('#NurseSearch').val(nurseID);
+                $('#NurseSearch').val(nurseName);
                 $('#nurseModal').modal('hide');
             });
         });
 
-        /*]]>*/
-    </script>
 
+    </script>
 </body>
 </html>

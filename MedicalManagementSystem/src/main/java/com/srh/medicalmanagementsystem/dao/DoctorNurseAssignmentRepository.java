@@ -2,6 +2,7 @@ package com.srh.medicalmanagementsystem.dao;
 
 import com.srh.medicalmanagementsystem.entity.DoctorNurseAssignment;
 import com.srh.medicalmanagementsystem.entity.DoctorNurseAssignmentDto;
+import com.srh.medicalmanagementsystem.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -39,4 +40,7 @@ public interface DoctorNurseAssignmentRepository extends JpaRepository <DoctorNu
                 "JOIN Employee d ON dna.doctorId = d.employeeId " +
                 "JOIN Employee n ON dna.nurseId = n.employeeId")
         List<DoctorNurseAssignmentDto> findAllAssignments();
+
+        @Query("SELECT e FROM Employee e WHERE e.employeeId IN (SELECT dna.nurseId FROM DoctorNurseAssignment dna WHERE dna.doctorId = :doctorId)")
+        List<Employee> findNursesByDoctorId(int doctorId);
 }
