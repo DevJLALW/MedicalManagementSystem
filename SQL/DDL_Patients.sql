@@ -13,7 +13,7 @@ CREATE TABLE `patients` (
   `NurseID` int DEFAULT NULL,
   `RoomID` int DEFAULT NULL,
   `Timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `EmployeeID` int DEFAULT NULL,
+  `UserID` int DEFAULT NULL,
   `Password` varchar(255) DEFAULT NULL,
   `Status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`PatientID`),
@@ -21,7 +21,7 @@ CREATE TABLE `patients` (
   KEY `FK_Patients_Nurse` (`NurseID`),
   KEY `FK_Patients_EmpID` (`EmployeeID`),
   CONSTRAINT `FK_Patients_Doctor` FOREIGN KEY (`DoctorID`) REFERENCES `employee` (`EmployeeID`),
-  CONSTRAINT `FK_Patients_EmpID` FOREIGN KEY (`EmployeeID`) REFERENCES `employee` (`EmployeeID`),
+  CONSTRAINT `FK_Patients_EmpID` FOREIGN KEY (`UserID`) REFERENCES `employee` (`EmployeeID`),
   CONSTRAINT `FK_Patients_Nurse` FOREIGN KEY (`NurseID`) REFERENCES `employee` (`EmployeeID`)
 )  AUTO_INCREMENT=100148;
 
