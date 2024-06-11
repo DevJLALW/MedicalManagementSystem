@@ -3,6 +3,7 @@ package com.srh.medicalmanagementsystem.service;
 import com.srh.medicalmanagementsystem.entity.Room;
 import com.srh.medicalmanagementsystem.dao.RoomRepository;
 
+import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -20,7 +21,7 @@ public class RoomService {
         return roomRepository.findAll();
     }
 
-    public Room findById(Long id) {
+    public Room findById(Integer id) {
         return roomRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Room not found with id " + id));
     }
@@ -32,7 +33,7 @@ public class RoomService {
     }
 
     @Transactional
-    public Room updateRoom(Long roomId, Room roomDetails) {
+    public Room updateRoom(Integer roomId, Room roomDetails) {
         Room existingRoom = findById(roomId);
 
         existingRoom.setPatientId(roomDetails.getPatientId());
@@ -50,7 +51,7 @@ public class RoomService {
         if (room.getRoomAdmissionStartDate() != null && room.getRoomAdmissionEndDate() != null) {
             long days = ChronoUnit.DAYS.between(room.getRoomAdmissionStartDate(), room.getRoomAdmissionEndDate());
             room.setNumberOfDays(days);
-            room.setTotalRoomCost(calculateTotalCost(room.getRoomType(), days));
+            room.setTotalRoomCost(BigDecimal.valueOf(calculateTotalCost(room.getRoomType(), days)));
         }
     }
 
@@ -75,5 +76,12 @@ public class RoomService {
                 break;
         }
         return costPerNight * numberOfDays;
+    }
+
+    public BigDecimal getRoomBillByPatientId(Integer patientID) {
+        List<Room> rooms = roomRepository.findByPatientId(patientID);
+        return rooms.stream()
+                .map(Room::getRoomBill)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
