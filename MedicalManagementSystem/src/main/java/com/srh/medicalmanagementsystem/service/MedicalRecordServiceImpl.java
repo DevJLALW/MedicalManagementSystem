@@ -31,6 +31,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService
 
     @Transactional
     public MedicalRecord saveMedicalRecord(MedicalRecord medicalRecord) {
+        medicalRecord.setStatus(1);
         return medicalRecordRepository.save(medicalRecord);
     }
 

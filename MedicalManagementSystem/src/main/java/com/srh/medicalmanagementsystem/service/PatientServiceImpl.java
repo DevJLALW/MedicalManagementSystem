@@ -1,6 +1,9 @@
 package com.srh.medicalmanagementsystem.service;
 
+import com.srh.medicalmanagementsystem.dao.MedicalRecordRepository;
+import com.srh.medicalmanagementsystem.dao.PatientEventRecordRepository;
 import com.srh.medicalmanagementsystem.dao.PatientRepository;
+import com.srh.medicalmanagementsystem.dao.PaymentRepository;
 import com.srh.medicalmanagementsystem.entity.Patient;
 import com.srh.medicalmanagementsystem.entity.PatientDTO;
 import jakarta.transaction.Transactional;
@@ -18,11 +21,17 @@ public class PatientServiceImpl implements PatientService{
 
     private PatientRepository patientRepository;
     private final PasswordEncoder passwordEncoder;
+    private MedicalRecordRepository medicalRecordRepository;
+    private PatientEventRecordRepository patientEventRecordRepository;
+    private PaymentRepository paymentRepository;
 
     @Autowired
-    public PatientServiceImpl(PatientRepository patientRepository, PasswordEncoder passwordEncoder){
+    public PatientServiceImpl(PatientRepository patientRepository, PasswordEncoder passwordEncoder,MedicalRecordRepository medicalRecordRepository, PatientEventRecordRepository patientEventRecordRepository,PaymentRepository paymentRepository){
         this.patientRepository = patientRepository;
         this.passwordEncoder = passwordEncoder;
+        this.medicalRecordRepository=medicalRecordRepository;
+        this.patientEventRecordRepository=patientEventRecordRepository;
+        this.paymentRepository=paymentRepository;
     }
 
     public Patient findPatientById(int patientId) {
@@ -113,6 +122,16 @@ public class PatientServiceImpl implements PatientService{
 
         public boolean deletePatients(List<Integer> patientIds) {
             int affectedRows = patientRepository.updateStatusToInactive(patientIds);
+            for (Integer patientId : patientIds) {
+                try {
+                    int affectedRecordRows = medicalRecordRepository.updateStatusToInactiveByPatientId(patientId);
+                    int affectedEventRecordRows = patientEventRecordRepository.updateStatusToInactiveInPERByPatientId(patientId);
+                    int affectedPaymentRows = paymentRepository.updateStatusToInactiveInPaymentByPatientId(Long.valueOf(patientId));
+                }
+                catch (Exception e){
+                    System.out.println("Error updating Inactive status: "+e);
+                }
+            }
             return affectedRows > 0;
 
         }

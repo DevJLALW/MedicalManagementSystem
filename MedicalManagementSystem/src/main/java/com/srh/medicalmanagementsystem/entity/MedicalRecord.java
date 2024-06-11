@@ -45,6 +45,10 @@ public class MedicalRecord {
  //   @NotEmpty(message = "Patient Id is mandatory")
     private Integer patientId;
 
+    @Column(name = "Status", nullable = false)
+    private int status;
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patientId", referencedColumnName = "PatientID", insertable = false, updatable = false)

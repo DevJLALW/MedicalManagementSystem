@@ -37,6 +37,8 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.POST,"/medicalRecords/delete").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST")
                 .requestMatchers("/patients/details/**").hasAnyAuthority("ROLE_PATIENT","ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST")
                 .requestMatchers("/patients/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST")
+                .requestMatchers("/patients/payments").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST")
+                .requestMatchers("/payments/receipt/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST")
                 .requestMatchers("/employees/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST")
                 .requestMatchers("/appointments/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST")
                 .requestMatchers("/appointments/update/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST")

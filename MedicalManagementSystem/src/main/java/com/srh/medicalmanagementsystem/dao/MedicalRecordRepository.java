@@ -2,7 +2,9 @@ package com.srh.medicalmanagementsystem.dao;
 
 import com.srh.medicalmanagementsystem.entity.MedicalRecord;
 import com.srh.medicalmanagementsystem.entity.MedicalRecord;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -29,4 +31,9 @@ public interface MedicalRecordRepository extends JpaRepository<MedicalRecord,Int
 
     @Query("SELECT m FROM MedicalRecord m WHERE m.patientId = :patientId")
     List<MedicalRecord> findMedicalRecordByPatientId(@Param("patientId") Integer patientId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE MedicalRecord mr SET mr.status = 0 WHERE mr.patientId = :patientId")
+    int updateStatusToInactiveByPatientId(@Param("patientId") Integer patientId);
 }

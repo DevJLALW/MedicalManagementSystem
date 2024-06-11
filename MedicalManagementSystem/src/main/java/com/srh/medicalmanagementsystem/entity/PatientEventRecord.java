@@ -38,6 +38,9 @@ public class PatientEventRecord {
     @Column(name = "AssignedNurseId", nullable = false)
     private Integer assignedNurseId;
 
+    @Column(name = "Status", nullable = false)
+    private int status;
+
 
     @ManyToOne
     @JoinColumn(name = "PatientId", referencedColumnName = "PatientID", insertable = false, updatable = false)

@@ -45,6 +45,9 @@ public class Payment {
     @Column(name = "TotalAmount")
     private Double totalAmount;
 
+    @Column(name = "Status", nullable = false)
+    private int status;
+
     @PrePersist
     @PreUpdate
     private void updateTotalAmount() {

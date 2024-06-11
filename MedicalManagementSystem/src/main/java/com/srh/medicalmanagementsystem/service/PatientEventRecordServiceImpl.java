@@ -35,7 +35,7 @@ public class PatientEventRecordServiceImpl implements PatientEventRecordService 
 
     @Transactional
     public PatientEventRecord savePatientEventRecord(PatientEventRecord patientEventRecord) {
-        // Ensure the EventDescriptions is managed by the persistence context
+        patientEventRecord.setStatus(1);
         return patientEventRecordRepository.save(patientEventRecord);
     }
 
