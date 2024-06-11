@@ -7,44 +7,64 @@
         <meta name="_csrf" th:content="${_csrf.token}"/>
         <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <style>
+			.card {
+				box-shadow: 0 0 5px 0 ;
+				background: inherit;
+				backdrop-filter: blur(10px);
+			}
+			.margintop{
+				margin-top: 10px;
+			}
+			label{
+				font-weight:bold;
+			}
+			td{
+				border: 1px solid black;
+			}
+			th{
+    			border: 1px solid black;
+			}    
+		</style>
     </head>
     <body>
-        <a class="btn btn-primary" style="float:right;margin-right: 5px; margin-top: 2px;" href="/index">Logout</a>
-        <br/> 
-        <h1 class="text-center mb-4">Appointments</h1>
-        <a class="btn btn-primary" style="margin-bottom: 5px;" th:href="@{/appointments/create}">Add New Appointment</a>
-        <a class="btn btn-primary" style="margin-bottom: 5px; margin-right: 5px; float:right;" href="/medicalmanagement/dashboard">Back</a>
-        <form th:action="@{/appointments/search}" method="get">
-            <input type="text" id="patientId" name="patientId" placeholder="Search by Patient ID">
-            <button type="submit">Search</button>
-        </form>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Patient ID</th>
-                <th>Doctor ID</th>
-                <th>Start Date and Time</th>
-                <th>End Date and Time</th>
-                <th>Appointment Status</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="appointment : ${appointments}">
-                <td><input class="select-row" type="checkbox" name="patientIds" th:value="${appointment.patientId}" /></td>
-                <td th:text="${appointment.appointmentId}"></td>
-                <td th:text="${appointment.patientId}"></td>
-                <td th:text="${appointment.doctorId}"></td>
-                <td th:text="${appointment.startDateTime}"></td>
-                <td th:text="${appointment.endDateTime}"></td>
-                <td th:text="${appointment.appointmentStatus}"></td>
-                <td>
-                    <a class="btn btn-primary" th:href="@{/appointments/update/{id}(id=${appointment.appointmentId})}">Edit</a>
-                    <a class="btn btn-primary" th:href="@{/appointments/delete/{id}(id=${appointment.appointmentId})}">Delete</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <a class="btn btn-primary" style="float:right; margin-right: 5px; margin-top: 2px;" href="/index">Logout</a>
+        <h1 class="text-center mb-4 margintop">Appointments</h1>
+        <div class="container">
+            <a class="btn btn-primary" style="margin-bottom: 5px;" th:href="@{/appointments/create}">Add New Appointment</a>
+            <a class="btn btn-primary" style="margin-bottom: 5px; float:right;" href="/medicalmanagement/dashboard">Back</a>
+            <form th:action="@{/appointments/search}" method="get">
+                <input type="text" id="patientId" name="patientId" placeholder="Search by Patient ID">
+                <button type="submit" style="background-color: #0D6EFD; color:white; margin-bottom: 10px;">Search</button>
+                <button id="reset" value="Reset" style="background-color: #DC3545; color:white;">Reset</button>
+            </form>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient ID</th>
+                    <th>Doctor ID</th>
+                    <th>Start Date and Time</th>
+                    <th>End Date and Time</th>
+                    <th>Appointment Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="appointment : ${appointments}">
+                    <td th:text="${appointment.appointmentId}"></td>
+                    <td th:text="${appointment.patientId}"></td>
+                    <td th:text="${appointment.doctorId}"></td>
+                    <td th:text="${appointment.startDateTime}"></td>
+                    <td th:text="${appointment.endDateTime}"></td>
+                    <td th:text="${appointment.appointmentStatus}"></td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{/appointments/update/{id}(id=${appointment.appointmentId})}">Edit</a>
+                        <a class="btn btn-primary" th:href="@{/appointments/delete/{id}(id=${appointment.appointmentId})}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>    
     </body>
 </html>
