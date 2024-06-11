@@ -27,7 +27,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Integer
           "JOIN Patient p ON a.patientId = p.patientId " +
           "JOIN Employee d ON a.doctorId = d.employeeId " +
           "WHERE a.appointmentId = :appointmentId")
-  AppointmentDto findById(@Param("appointmentId") Integer appointmentId);
+  AppointmentDto findAppointmentById(@Param("appointmentId") Integer appointmentId);
 
   @Query("SELECT new com.srh.medicalmanagementsystem.entity.AppointmentPatientEmployeeDto(" +
           "a.appointmentId, p.patientId, p.firstName, p.lastName, d.employeeId, d.firstName, d.lastName, a.date, a.startTime, a.endTime, a.appointmentStatus) " +

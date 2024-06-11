@@ -40,7 +40,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public AppointmentDto getAppointmentById(int appointmentId) {
-        return appointmentRepository.findById(appointmentId);
+        return appointmentRepository.findAppointmentById(appointmentId);
     }
 
     @Override
