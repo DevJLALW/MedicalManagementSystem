@@ -7,50 +7,62 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Rooms</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .card {
+            box-shadow: 0 0 5px 0 ;
+            background: inherit;
+            backdrop-filter: blur(10px);
+        }
+        .margintop{
+            margin-top: 10px;
+        }
+        label{
+            font-weight:bold;
+        }
+        td{
+            border: 1px solid black;
+        }
+        th{
+            border: 1px solid black;
+        }    
+    </style>
 </head>
-<style>
-    td{
-        border: 1px solid black;
-    }
-    th{
-        border: 1px solid black;
-    }
-</style>
 <body>
     <a class="btn btn-primary" href="/index" style="float: right; margin-right: 5px;">Logout</a>
-<h1 class="text-center my-4">Rooms</h1>
-<a class="btn btn-primary" href="/rooms/new" style="margin-left: 5px; margin-bottom: 10px;">Add New Room</a>
-<a class="btn btn-primary" href="/medicalmanagement/dashboard" style="float: right; margin-right: 5px;">Back</a>
-<table style="width: 80%; margin:0 auto; border: 1px solid black;">
-    <thead>
-    <tr style=" border: 1px solid black;">
-        <th>Room ID</th>
-        <th>Patient ID</th>
-        <th>Room Number</th>
-        <th>Room Type</th>
-        <th>Room Admission Start Date</th>
-        <th>Room Admission End Date</th>
-        <th>Number of Days</th>
-        <th>Total Room Cost</th>
-        <th>Edit</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="room : ${rooms}">
-        <td th:text="${room.id}"></td>
-        <td th:text="${room.patientId}"></td>
-        <td th:text="${room.roomNumber}"></td>
-        <td th:text="${room.roomType}"></td>
-        <td th:text="${room.roomAdmissionStartDate}"></td>
-        <td th:text="${room.roomAdmissionEndDate}"></td>
-        <td th:text="${room.numberOfDays}"></td>
-        <td th:text="${room.totalRoomCost}"></td>
-        <td>
-            <a class="btn btn-primary" th:href="@{/rooms/edit/{id}(id=${room.id})}">Edit</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
+    <h1 class="text-center my-4 margintop">Rooms</h1>
+    <div class="container"> 
+        <a class="btn btn-primary" href="/rooms/new" style="margin-bottom: 10px;">Add New Room</a>
+        <a class="btn btn-primary" href="/medicalmanagement/dashboard" style="float: right;">Back</a>   
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Room ID</th>
+                <th>Patient ID</th>
+                <th>Room Number</th>
+                <th>Room Type</th>
+                <th>Room Admission Start Date</th>
+                <th>Room Admission End Date</th>
+                <th>Number of Days</th>
+                <th>Total Room Cost</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="room : ${rooms}">
+                <td th:text="${room.id}"></td>
+                <td th:text="${room.patientId}"></td>
+                <td th:text="${room.roomNumber}"></td>
+                <td th:text="${room.roomType}"></td>
+                <td th:text="${room.roomAdmissionStartDate}"></td>
+                <td th:text="${room.roomAdmissionEndDate}"></td>
+                <td th:text="${room.numberOfDays}"></td>
+                <td th:text="${room.totalRoomCost}"></td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/rooms/edit/{id}(id=${room.id})}">Edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

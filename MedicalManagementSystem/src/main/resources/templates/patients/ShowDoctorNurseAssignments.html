@@ -1,99 +1,117 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Doctor Nurse Assignments Information</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Doctor Nurse Assignments Information</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+        <style>
+			.card {
+				box-shadow: 0 0 5px 0 ;
+				background: inherit;
+				backdrop-filter: blur(10px);
+			}
+			.margintop{
+				margin-top: 10px;
+			}
+			label{
+				font-weight:bold;
+			}
+			td{
+				border: 1px solid black;
+			}
+			th{
+    			border: 1px solid black;
+			}    
+		</style>
+    </head>
 
-</head>
-<body>
-    <a class="btn btn-primary" style="float:right;margin-right: 5px; margin-top: 2px;" href="/index">Logout</a>
-        <br/> 
-<div class="container row mb-3">
-    <h1 class="text-center my-4">Doctor Nurse Assignment</h1>
-    <form action="#" th:action="@{/employees/doctor-nurse-assignment/search}" method="get">
-        <input id="search" type="text" name="keyword" placeholder="Search using first name, last name or employee id">
-        <button id="button">Search</button>
-    </form>
-</div>
-<a class="btn btn-primary" href="/employees/doctor-nurse-assignment/create">New Doctor-Nurse Assignment</a>
-<button id="deleteButton" class="btn btn-danger" onclick="deleteSelectedDoctorNurseAssignments()">Delete</button>
-<a class="btn btn-primary" style="float:right; margin-right: 5px; margin-bottom: 5px;" href="/medicalmanagement/dashboard">Back</a>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Select</th>
-        <th>Doctor ID</th>
-        <th>Doctor - First Name</th>
-        <th>Doctor - Last Name</th>
-        <th>Nurse ID</th>
-        <th>Nurse - First Name</th>
-        <th>Nurse - Last Name</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="assignment :${assignmentsList}">
-        <td><input class="select-row" type="checkbox" name="assignmentIds" th:value="${assignment.assignmentId}" /></td>
-        <td th:text="${assignment.doctorId}"></td>
-        <td th:text="${assignment.doctorFirstName}"></td>
-        <td th:text="${assignment.doctorLastName}"></td>
-        <td th:text="${assignment.nurseId}"></td>
-        <td th:text="${assignment.nurseFirstName}"></td>
-        <td th:text="${assignment.nurseLastName}"></td>
-        <td style="white-space:nowrap">
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <body>
+        <a class="btn btn-primary" style="float:right;margin-right: 5px; margin-top: 2px;" href="/index">Logout</a> 
+        <h1 class="text-center my-4 margintop">Doctor Nurse Assignment</h1>
+        <div class="container"> 
+            <form action="#" th:action="@{/employees/doctor-nurse-assignment/search}" method="get">
+                <input id="search" type="text" name="keyword" placeholder="Search using first name, last name or employee id">
+                <button id="button" style="background-color: #0D6EFD; color:white; margin-bottom: 5px;">Search</button>
+                <button id="reset" value="Reset" style="background-color: #DC3545; color:white; margin-bottom: 5px;">Reset</button>
+            </form>
+            <a class="btn btn-primary" style="margin-bottom: 5px;" href="/employees/doctor-nurse-assignment/create">New Doctor-Nurse Assignment</a>
+            <button id="deleteButton" style="margin-bottom: 5px;" class="btn btn-danger" onclick="deleteSelectedDoctorNurseAssignments()">Delete</button>
+            <a class="btn btn-primary" style="float:right; margin-right: 5px; margin-bottom: 5px;" href="/medicalmanagement/dashboard">Back</a>
+            <table class="table">
+            <thead>
+            <tr>
+                <th>Select</th>
+                <th>Doctor ID</th>
+                <th>Doctor - First Name</th>
+                <th>Doctor - Last Name</th>
+                <th>Nurse ID</th>
+                <th>Nurse - First Name</th>
+                <th>Nurse - Last Name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="assignment :${assignmentsList}">
+                <td><input class="select-row" type="checkbox" name="assignmentIds" th:value="${assignment.assignmentId}" /></td>
+                <td th:text="${assignment.doctorId}"></td>
+                <td th:text="${assignment.doctorFirstName}"></td>
+                <td th:text="${assignment.doctorLastName}"></td>
+                <td th:text="${assignment.nurseId}"></td>
+                <td th:text="${assignment.nurseFirstName}"></td>
+                <td th:text="${assignment.nurseLastName}"></td>
+                <td><a class="btn btn-primary btn-sm" th:href="">Edit</a></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </body>    
 
+    <script>
+        function deleteSelectedDoctorNurseAssignments() {
+        const checkboxes = document.querySelectorAll('input[name="assignmentIds"]:checked');
+        const ids = Array.from(checkboxes).map(cb => cb.value);
 
-<script>
-    function deleteSelectedDoctorNurseAssignments() {
-       const checkboxes = document.querySelectorAll('input[name="assignmentIds"]:checked');
-       const ids = Array.from(checkboxes).map(cb => cb.value);
+        if (ids.length === 0) {
+            alert('No doctor-nurse assignment selected for deletion.');
+            return;
+        }
 
-       if (ids.length === 0) {
-           alert('No doctor-nurse assignment selected for deletion.');
-           return;
-       }
+        if (!confirm('Are you sure you want to delete the selected doctor-nurse assignment?')) {
+            return;
+        }
 
-       if (!confirm('Are you sure you want to delete the selected doctor-nurse assignment?')) {
-           return;
-       }
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/employees/doctor-nurse-assignment/delete';
 
-       const form = document.createElement('form');
-       form.method = 'POST';
-       form.action = '/employees/doctor-nurse-assignment/delete';
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+            const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
-       const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+        ids.forEach(id => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'assignmentIds';
+            input.value = id;
+            form.appendChild(input);
+        });
 
-       ids.forEach(id => {
-           const input = document.createElement('input');
-           input.type = 'hidden';
-           input.name = 'assignmentIds';
-           input.value = id;
-           form.appendChild(input);
-       });
+        const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = '_csrf';
+            csrfInput.value = csrfToken;
+            form.appendChild(csrfInput);
 
-       const csrfInput = document.createElement('input');
-        csrfInput.type = 'hidden';
-        csrfInput.name = '_csrf';
-        csrfInput.value = csrfToken;
-        form.appendChild(csrfInput);
-
-       document.body.appendChild(form);
-	   const methodInput = document.createElement('input');
-        methodInput.type = 'hidden';
-        methodInput.name = '_method';
-        methodInput.value = 'DELETE';
-        form.appendChild(methodInput);
-       form.submit();
-   }
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
+        document.body.appendChild(form);
+        const methodInput = document.createElement('input');
+            methodInput.type = 'hidden';
+            methodInput.name = '_method';
+            methodInput.value = 'DELETE';
+            form.appendChild(methodInput);
+        form.submit();
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </html>
