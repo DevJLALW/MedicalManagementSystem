@@ -7,6 +7,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.Timer;
 
 
 @Entity
@@ -27,24 +28,20 @@ public class Appointment {
     @NotNull(message = "DoctorID is mandatory")
     private Integer doctorId;
 
-    @Column(name= "StartDateTime")
-    @Temporal(TemporalType.TIMESTAMP)
-   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date startDateTime;
+    @Column(name= "Date")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date;
 
-    @Column(name= "EndDateTime")
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date endDateTime;
+    @Column(name= "StartTime")
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
+    private Date startTime;
 
-   /* @Column(name = "AppointmentStatus", nullable = false)
-    @NotEmpty(message = "AppointmentStatus is mandatory")
-    private boolean appointmentStatus;*/
-
-    @Column(name = "AppointmentStatus", nullable = false)
-    @NotEmpty(message = "AppointmentStatus is mandatory")
-    private String appointmentStatus;
-
+    @Column(name= "EndTime")
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
+    private Date endTime;
 
 
 

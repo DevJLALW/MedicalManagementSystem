@@ -2,10 +2,13 @@ package com.srh.medicalmanagementsystem.service;
 
 import com.srh.medicalmanagementsystem.dao.AppointmentRepository;
 import com.srh.medicalmanagementsystem.entity.Appointment;
+import com.srh.medicalmanagementsystem.entity.AppointmentDto;
 import com.srh.medicalmanagementsystem.entity.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,56 +20,83 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    private static final List<String> AVAILABLE_SLOTS = Arrays.asList(
+    private static final List<String> ALL_SLOTS = Arrays.asList(
             "10:00-11:00", "11:00-12:00", "12:00-13:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00"
     );
 
-    @Override
-    public List<Appointment> getAllAppointments() {
-        return appointmentRepository.findAll();
+    public static Date getCurrentDate() {
+        // Get the current date
+        LocalDate localDate = LocalDate.now();
+
+        // Convert LocalDate to Date
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
     @Override
-    public Appointment getAppointmentById(int appointmentId) {
-        return appointmentRepository.findById(appointmentId).orElse(null);
+    public List<AppointmentDto> getAllAppointments() {
+
+        return appointmentRepository.findAllAppointments();
     }
 
     @Override
-    public boolean isSlotAvailable(int doctorId, Date startDateTime, Date endDateTime) {
-        List<Appointment> appointments = appointmentRepository.findByDoctorIdAndStartDateTimeBetween(doctorId, startDateTime, endDateTime);
+    public AppointmentDto getAppointmentById(int appointmentId) {
+        return appointmentRepository.findById(appointmentId);
+    }
+
+    @Override
+    public boolean isSlotAvailable(int doctorId, Date date, Date startTime) {
+        List<Appointment> appointments = appointmentRepository.getAppointmentsAssignedForDoctorSlot(doctorId, date, startTime);
         return appointments.isEmpty();
     }
 
     @Override
-    public Appointment saveAppointment(Appointment appointment) {
-        if (isSlotAvailable(appointment.getDoctorId(), appointment.getStartDateTime(), appointment.getEndDateTime())) {
+    public Appointment saveAppointment(AppointmentDto appointmentDetails) {
+        if ( isSlotAvailable(appointmentDetails.getDoctorId(), appointmentDetails.getDate(), appointmentDetails.getStartTime())) {
+            Appointment appointment = new Appointment();
+            appointment.setDoctorId(appointmentDetails.getDoctorId());
+            appointment.setPatientId(appointmentDetails.getPatientId());
+            appointment.setDate(appointmentDetails.getDate());
+            appointment.setStartTime(appointmentDetails.getStartTime());
+            appointment.setEndTime(appointmentDetails.getEndTime());
             return appointmentRepository.save(appointment);
-        } else {
+        }else {
             throw new IllegalArgumentException("Slot is already booked.");
         }
     }
 
     @Override
-    public Appointment updateAppointment(int appointmentId, Appointment updatedAppointment) {
+    public Appointment updateAppointment(int appointmentId, AppointmentDto updatedAppointment) {
         if (appointmentRepository.existsById(appointmentId)) {
             updatedAppointment.setAppointmentId(appointmentId);
-            return appointmentRepository.save(updatedAppointment);
+            if ( isSlotAvailable(updatedAppointment.getDoctorId(), updatedAppointment.getDate(), updatedAppointment.getStartTime())) {
+                Appointment appointment = new Appointment();
+                appointment.setAppointmentId(updatedAppointment.getAppointmentId());
+                appointment.setDoctorId(updatedAppointment.getDoctorId());
+                appointment.setPatientId(updatedAppointment.getPatientId());
+                appointment.setDate(updatedAppointment.getDate());
+                appointment.setStartTime(updatedAppointment.getStartTime());
+                appointment.setEndTime(updatedAppointment.getEndTime());
+                return appointmentRepository.save(appointment);
+            }else {
+                throw new IllegalArgumentException("Slot is already booked.");
+            }
         }
         return null;
     }
 
     @Override
     public void deleteAppointment(int appointmentId) {
+
         appointmentRepository.deleteById(appointmentId);
     }
 
     @Override
-    public List<String> getAvailableSlots() {
-        return AVAILABLE_SLOTS;
+    public List<String> getAllSlots() {
+        return ALL_SLOTS;
     }
 
     @Override
-    public boolean isSlotAvailableForDate(int doctorId, String slot, Date date) {
+    public boolean isSlotAvailableForDate(int doctorId, Date date, String slot) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
 
@@ -79,13 +109,30 @@ public class AppointmentServiceImpl implements AppointmentService {
         calendar.set(Calendar.MINUTE, Integer.parseInt(times[1].split(":")[1]));
         Date slotEnd = calendar.getTime();
 
-        return isSlotAvailable(doctorId, slotStart, slotEnd);
+        return isSlotAvailable(doctorId, date, slotStart);
     }
 
 
     @Override
-    public List<Appointment> getAppointmentsByPatientId(Integer patientId) {
-        return appointmentRepository.findByPatientId(patientId);
+    public List<AppointmentDto> getAppointmentsByPatientId(Integer patientId) {
+        return appointmentRepository.findAllByPatientId(patientId, getCurrentDate());
+    }
+
+    @Override
+    public List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId) {
+        return appointmentRepository.findAllByDoctorId(doctorId, getCurrentDate());
+    }
+
+    @Override
+    public List<AppointmentDto> getAppointmentsByPatientIdAndDate(Integer patientId, Date date) {
+
+        return appointmentRepository.findByPatientIdAndDate(patientId, date);
+    }
+
+    @Override
+    public List<AppointmentDto> getAppointmentsByDoctorIdAndDate(Integer doctorId, Date date) {
+
+        return appointmentRepository.findByDoctorIdAndDate(doctorId, date);
     }
 
 }

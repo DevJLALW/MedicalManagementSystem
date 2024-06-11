@@ -67,7 +67,7 @@ public class SpecializationControllerPages {
             @PathVariable("doctorId") Integer doctorId,
             @ModelAttribute("specialization") DoctorSpecializationDto specialization
     ) {
-        specializationService.updateSpecialization(doctorId);
+        specializationService.updateSpecialization(doctorId, specialization);
         return "redirect:/employees/doctors-specialization/all";
     }
 

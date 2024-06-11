@@ -16,6 +16,6 @@ public interface SpecializationService{
 
     public List<DoctorSpecializationDto> findSpecializationByKeyword(String keyword);
 
-    public Specialization updateSpecialization (Integer doctorId);
+    public Specialization updateSpecialization (Integer doctorId, DoctorSpecializationDto specializationDto);
 
 }

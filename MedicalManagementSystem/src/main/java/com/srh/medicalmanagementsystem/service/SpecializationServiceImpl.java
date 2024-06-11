@@ -62,10 +62,10 @@ public class SpecializationServiceImpl implements SpecializationService{
     }
 
     @Override
-    public Specialization updateSpecialization(Integer doctorId) {
+    public Specialization updateSpecialization(Integer doctorId, DoctorSpecializationDto specializationDto) {
         Specialization specialization = specializationRepository.findById(doctorId)
                 .orElseThrow(() -> new NoSuchElementException("Doctor not found with id " + doctorId));
-        specialization.setSpecializationName(specialization.getSpecializationName());
+        specialization.setSpecializationName(specializationDto.getSpecializationName());
         return specializationRepository.save(specialization);
     }
 }

@@ -1,27 +1,35 @@
 package com.srh.medicalmanagementsystem.service;
 
 import com.srh.medicalmanagementsystem.entity.Appointment;
+import com.srh.medicalmanagementsystem.entity.AppointmentDto;
 
 import java.util.Date;
 import java.util.List;
 
 public interface AppointmentService {
 
-    List<Appointment> getAllAppointments();
+    List<AppointmentDto> getAllAppointments();
 
-    Appointment getAppointmentById(int appointmentId);
+    AppointmentDto getAppointmentById(int appointmentId);
 
-    boolean isSlotAvailable(int doctorId, Date startDateTime, Date endDateTime);
+    boolean isSlotAvailable(int doctorId, Date date, Date startTime);
 
-    Appointment saveAppointment(Appointment appointment);
+    Appointment saveAppointment(AppointmentDto appointment);
 
-    Appointment updateAppointment(int appointmentId, Appointment updatedAppointment);
+    Appointment updateAppointment(int appointmentId, AppointmentDto updatedAppointment);
 
     void deleteAppointment(int appointmentId);
 
-    List<String> getAvailableSlots();
 
-    boolean isSlotAvailableForDate(int doctorId, String slot, Date date);
+    boolean isSlotAvailableForDate(int doctorId, Date date, String slot);
 
-    List<Appointment> getAppointmentsByPatientId(Integer patientId);
+    List<AppointmentDto> getAppointmentsByPatientId(Integer patientId);
+
+    List<AppointmentDto> getAppointmentsByDoctorId(Integer doctorId);
+
+    List<AppointmentDto> getAppointmentsByPatientIdAndDate(Integer patientId, Date date);
+
+    List<AppointmentDto> getAppointmentsByDoctorIdAndDate(Integer doctorId, Date date);
+
+    List<String> getAllSlots();
 }
