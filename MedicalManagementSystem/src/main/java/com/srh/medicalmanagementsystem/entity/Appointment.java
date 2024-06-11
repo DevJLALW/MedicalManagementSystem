@@ -11,7 +11,7 @@ import java.util.Timer;
 
 
 @Entity
-@Table(name = "Appointment")
+@Table(name = "Appointments")
 @Data
 public class Appointment {
 

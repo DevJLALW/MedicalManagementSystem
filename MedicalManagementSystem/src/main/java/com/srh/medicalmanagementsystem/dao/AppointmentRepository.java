@@ -11,56 +11,55 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public interface AppointmentRepository extends JpaRepository<Appointment,Integer> {
 
-  @Query("SELECT new com.srh.medicalmanagementsystem.entity.AppointmentPatientEmployeeDto(" +
-          "a.appointmentId, p.patientId, p.firstName, p.lastName, d.employeeId, d.firstName, d.lastName, a.date, a.startTime, a.endTime, a.appointmentStatus) " +
+  @Query("SELECT new com.srh.medicalmanagementsystem.entity.AppointmentDto(" +
+          "a.appointmentId, p.patientId, p.firstName, p.lastName, d.employeeId, d.firstName, d.lastName, a.date, a.startTime, a.endTime) " +
           "FROM Appointment a " +
           "JOIN Patient p ON a.patientId = p.patientId " +
           "JOIN Employee d ON a.doctorId = d.employeeId ")
   List<AppointmentDto> findAllAppointments();
 
-  @Query("SELECT new com.srh.medicalmanagementsystem.entity.AppointmentPatientEmployeeDto(" +
-          "a.appointmentId, p.patientId, p.firstName, p.lastName, d.employeeId, d.firstName, d.lastName, a.date, a.startTime, a.endTime, a.appointmentStatus) " +
+  @Query("SELECT new com.srh.medicalmanagementsystem.entity.AppointmentDto(" +
+          "a.appointmentId, p.patientId, p.firstName, p.lastName, d.employeeId, d.firstName, d.lastName, a.date, a.startTime, a.endTime) " +
           "FROM Appointment a " +
           "JOIN Patient p ON a.patientId = p.patientId " +
           "JOIN Employee d ON a.doctorId = d.employeeId " +
           "WHERE a.appointmentId = :appointmentId")
   AppointmentDto findAppointmentById(@Param("appointmentId") Integer appointmentId);
 
-  @Query("SELECT new com.srh.medicalmanagementsystem.entity.AppointmentPatientEmployeeDto(" +
-          "a.appointmentId, p.patientId, p.firstName, p.lastName, d.employeeId, d.firstName, d.lastName, a.date, a.startTime, a.endTime, a.appointmentStatus) " +
+  @Query("SELECT new com.srh.medicalmanagementsystem.entity.AppointmentDto(" +
+          "a.appointmentId, p.patientId, p.firstName, p.lastName, d.employeeId, d.firstName, d.lastName, a.date, a.startTime, a.endTime) " +
           "FROM Appointment a " +
           "JOIN Patient p ON a.patientId = p.patientId " +
           "JOIN Employee d ON a.doctorId = d.employeeId " +
-          "WHERE a.patientId = :patientId AND a.appointmentDate >= :date")
+          "WHERE a.patientId = :patientId AND a.date >= :date")
   List<AppointmentDto> findAllByPatientId(@Param("patientId") Integer patientId, @Param("date") Date date);
 
-  @Query("SELECT new com.srh.medicalmanagementsystem.entity.AppointmentPatientEmployeeDto(" +
-          "a.appointmentId, p.patientId, p.firstName, p.lastName, d.employeeId, d.firstName, d.lastName, a.date, a.startTime, a.endTime, a.appointmentStatus) " +
+  @Query("SELECT new com.srh.medicalmanagementsystem.entity.AppointmentDto(" +
+          "a.appointmentId, p.patientId, p.firstName, p.lastName, d.employeeId, d.firstName, d.lastName, a.date, a.startTime, a.endTime) " +
           "FROM Appointment a " +
           "JOIN Patient p ON a.patientId = p.patientId " +
           "JOIN Employee d ON a.doctorId = d.employeeId " +
-          "WHERE a.doctorId = :doctorId AND a.appointmentDate >= :date")
+          "WHERE a.doctorId = :doctorId AND a.date >= :date")
   List<AppointmentDto> findAllByDoctorId(@Param("doctorId") Integer doctorId, @Param("date") Date date);
 
   @Query("SELECT new com.srh.medicalmanagementsystem.entity.AppointmentDto(" +
-          "a.appointmentId, d.employeeId, p.patientId, a.appointmentDate, a.startTime, a.endTime, a.appointmentStatus, " +
+          "a.appointmentId, d.employeeId, p.patientId, a.date, a.startTime, a.endTime, " +
           "d.firstName, d.lastName, p.firstName, p.lastName) " +
           "FROM Appointment a " +
-          "JOIN Patient p ON a.patient.patientId = p.patientId " +
-          "JOIN Employee d ON a.doctor.employeeId = d.employeeId " +
-          "WHERE d.employeeId = :doctorId AND a.appointmentDate = :date")
+          "JOIN Patient p ON a.patientId = p.patientId " +
+          "JOIN Employee d ON a.doctorId = d.employeeId " +
+          "WHERE d.employeeId = :doctorId AND a.date = :date")
   List<AppointmentDto> findByDoctorIdAndDate(@Param("doctorId") Integer doctorId, @Param("date") Date date);
 
   @Query("SELECT new com.srh.medicalmanagementsystem.entity.AppointmentDto(" +
-          "a.appointmentId, d.employeeId, p.patientId, a.appointmentDate, a.startTime, a.endTime, a.appointmentStatus, " +
+          "a.appointmentId, d.employeeId, p.patientId, a.date, a.startTime, a.endTime, " +
           "d.firstName, d.lastName, p.firstName, p.lastName) " +
           "FROM Appointment a " +
-          "JOIN Patient p ON a.patient.patientId = p.patientId " +
-          "JOIN Employee d ON a.doctor.employeeId = d.employeeId " +
-          "WHERE a.patientId = :patientId AND a.appointmentDate = :date")
+          "JOIN Patient p ON a.patientId = p.patientId " +
+          "JOIN Employee d ON a.doctorId = d.employeeId " +
+          "WHERE a.patientId = :patientId AND a.date = :date")
   List<AppointmentDto> findByPatientIdAndDate(@Param("patientId") Integer patientId, @Param("date") Date date);
 
   @Query("SELECT a FROM Appointment a WHERE " +
