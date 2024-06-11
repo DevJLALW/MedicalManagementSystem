@@ -28,7 +28,7 @@ public class Appointment {
     @NotNull(message = "DoctorID is mandatory")
     private Integer doctorId;
 
-    @Column(name= "Date")
+    @Column(name= "AppointmentDate")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
