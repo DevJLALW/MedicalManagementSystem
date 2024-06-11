@@ -70,8 +70,12 @@ public class EmployeeControllerPages {
     @PostMapping("/update/{employeeId}")
     public String updateEmployee(
             @PathVariable("employeeId") Integer employeeId,
-            @ModelAttribute("employee") Employee employee
+            @Valid  @ModelAttribute("employee") Employee employee,
+            BindingResult bindingResult
     ) {
+        if (bindingResult.hasErrors()) {
+            return "patients/UpdateEmployee";
+        }
         employeeService.updateEmployee(employeeId, employee);
         return "redirect:/employees/all";
     }
