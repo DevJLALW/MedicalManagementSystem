@@ -1,100 +1,100 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <title>Medical Records Information</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body>
-    <a class="btn btn-primary" href="/index" style="float: right; margin-right: 2px; margin-top: 2px;">Logout</a>
-    <br/>
-<div class="container row mb-3">
-    <h1 class="text-center my-4">Medical Records Information</h1>
-    <form action="#" th:action="@{/medicalRecords/search}" method="get">
-        <input id="search" type="text" name="keyword" placeholder="Search by Patient ID">
-        <button id="button">Search</button>
-    </form>
-</div>
-<a class="btn btn-primary" href="/medicalRecords/create">New Medical Record Entry</a>
-<button id="deleteButton" class="btn btn-danger" onclick="deleteSelectedMedicalRecord()">Delete</button>
-<a class="btn btn-primary" style="float:right; margin-right: 5px; margin-bottom: 5px;" href="/medicalmanagement/dashboard">Back</a>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Select</th>
-        <th>Medical Record ID</th>
-        <th>Diagnosis</th>
-        <th>Diagnosis Notes</th>
-        <th>Medical Result</th>
-        <th>Medications Prescribed</th>
-        <th>Date</th>
-        <th>Employee ID</th>
-        <th>Patient ID</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="medicalRecord :${medicalRecords}">
-        <td><input class="select-row" type="checkbox" name="medicalRecordId" th:value="${medicalRecord.medicalRecordId}" /></td>
-        <td th:text="${medicalRecord.medicalRecordId}"></td>
-        <td th:text="${medicalRecord.diagnosis}"></td>
-        <td th:text="${medicalRecord.diagnosisNotes}"></td>
-        <td th:text="${medicalRecord.medicalResult}"></td>
-        <td th:text="${medicalRecord.medicationsPrescribed}"></td>
-        <td th:text="${medicalRecord.date}"></td>
-        <td th:text="${medicalRecord.employeeId}"></td>
-        <td th:text="${medicalRecord.patientId}"></td>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+        <title>Medical Records Information</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="style.css" rel="stylesheet">
+    </head>
 
-        <td style="white-space:nowrap">
-            <a class="btn btn-primary btn-sm" th:href="@{/medicalRecords/update/{medicalRecordId}(medicalRecordId=${medicalRecord.medicalRecordId})}">Edit</a>
+    <body>
+        <a class="btn btn-primary" href="/index" style="float: right; margin-right: 5px; margin-top: 1px;">Logout</a>
+        <h1 class="text-center my-4 margintop">Medical Records Information</h1>
+        <div class="container">
+            <form action="#" th:action="@{/medicalRecords/search}" method="get">
+                <input id="search" type="text" name="keyword" placeholder="Search by Patient ID">
+                <button id="button" style="background-color: #0D6EFD; color:white; margin-bottom: 10px;">Search</button>
+                <button id="reset" value="Reset" style="background-color: #DC3545; color:white;">Reset</button>
+            </form>
+            <a class="btn btn-primary" style="margin-bottom: 5px;" href="/medicalRecords/create">New Medical Record Entry</a>
+            <button id="deleteButton" style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-danger" onclick="deleteSelectedMedicalRecord()">Delete</button>
+            <a class="btn btn-primary" style="float:right; margin-bottom: 5px;" href="/medicalmanagement/dashboard">Back</a>  
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Medical Record ID</th>
+                    <th>Diagnosis</th>
+                    <th>Diagnosis Notes</th>
+                    <th>Medical Result</th>
+                    <th>Medications Prescribed</th>
+                    <th>Date</th>
+                    <th>Employee ID</th>
+                    <th>Patient ID</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="medicalRecord :${medicalRecords}">
+                    <td><input class="select-row" type="checkbox" name="medicalRecordId" th:value="${medicalRecord.medicalRecordId}" /></td>
+                    <td th:text="${medicalRecord.medicalRecordId}"></td>
+                    <td th:text="${medicalRecord.diagnosis}"></td>
+                    <td th:text="${medicalRecord.diagnosisNotes}"></td>
+                    <td th:text="${medicalRecord.medicalResult}"></td>
+                    <td th:text="${medicalRecord.medicationsPrescribed}"></td>
+                    <td th:text="${medicalRecord.date}"></td>
+                    <td th:text="${medicalRecord.employeeId}"></td>
+                    <td th:text="${medicalRecord.patientId}"></td>
 
-        </td>
-    </tr>
-    </tbody>
-</table>
+                    <td style="white-space:nowrap">
+                        <a class="btn btn-primary btn-sm" th:href="@{/medicalRecords/update/{medicalRecordId}(medicalRecordId=${medicalRecord.medicalRecordId})}">Edit</a>
 
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script>
-    function deleteSelectedMedicalRecord() {
-       const checkboxes = document.querySelectorAll('input[name="medicalRecordId"]:checked');
-       const ids = Array.from(checkboxes).map(cb => cb.value);
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        function deleteSelectedMedicalRecord() {
+        const checkboxes = document.querySelectorAll('input[name="medicalRecordId"]:checked');
+        const ids = Array.from(checkboxes).map(cb => cb.value);
 
-       if (ids.length === 0) {
-           alert('No records selected for deletion.');
-           return;
-       }
+        if (ids.length === 0) {
+            alert('No records selected for deletion.');
+            return;
+        }
 
-       if (!confirm('Are you sure you want to delete the selected record?')) {
-           return;
-       }
+        if (!confirm('Are you sure you want to delete the selected record?')) {
+            return;
+        }
 
-       const form = document.createElement('form');
-       form.method = 'POST';
-       form.action = '/medicalRecords/delete';
-       form.style.display = 'none';
-       const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
-       ids.forEach(id => {
-           const input = document.createElement('input');
-           input.type = 'hidden';
-           input.name = 'medicalRecordId';
-           input.value = id;
-           form.appendChild(input);
-       });
-       const csrfInput = document.createElement('input');
-        csrfInput.type = 'hidden';
-        csrfInput.name = '_csrf';
-        csrfInput.value = csrfToken;
-        form.appendChild(csrfInput);
-       document.body.appendChild(form);
-       form.submit();
-   }
-    function getMedicalInfo(){
-        location.replace("/medicalRecords/all")}
-</script>
-</body>
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/medicalRecords/delete';
+        form.style.display = 'none';
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+            const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+        ids.forEach(id => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'medicalRecordId';
+            input.value = id;
+            form.appendChild(input);
+        });
+        const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = '_csrf';
+            csrfInput.value = csrfToken;
+            form.appendChild(csrfInput);
+        document.body.appendChild(form);
+        form.submit();
+    }
+        function getMedicalInfo(){
+            location.replace("/medicalRecords/all")}
+    </script>
 </html>
