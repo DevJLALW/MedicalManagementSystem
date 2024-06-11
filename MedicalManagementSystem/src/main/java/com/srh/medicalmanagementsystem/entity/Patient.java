@@ -12,6 +12,7 @@ import jakarta.validation.constraints.*;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Patients")
@@ -93,6 +94,15 @@ public class Patient {
 
     @Column(name = "Status", nullable = false)
     private int status;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<MedicalRecord> medicalRecords;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<PatientEventRecord> eventRecords;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<Payment> payments;
 
     @PrePersist
     protected void onCreate() {

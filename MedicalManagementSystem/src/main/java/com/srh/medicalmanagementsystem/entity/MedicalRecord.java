@@ -45,6 +45,11 @@ public class MedicalRecord {
  //   @NotEmpty(message = "Patient Id is mandatory")
     private Integer patientId;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patientId", referencedColumnName = "PatientID", insertable = false, updatable = false)
+    private Patient patient;
+
     /*public int getRecordId() {
         return medicalRecordId;
     }

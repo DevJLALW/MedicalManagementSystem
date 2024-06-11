@@ -18,18 +18,12 @@ import java.util.List;
 public class PatientControllerPages {
 
     private PatientService patientService;
-    private MedicalRecordService medicalRecordService;
-    private PatientEventRecordService patientEventRecordService;
-    //private EmployeeService employeeService;
-    private PaymentService paymentService;
+
 
     @Autowired
-    public PatientControllerPages(PatientService patientService, MedicalRecordService medicalRecordService, PatientEventRecordService patientEventRecordService,  PaymentService paymentService) {
+    public PatientControllerPages(PatientService patientService) {
         this.patientService = patientService;
-        this.medicalRecordService = medicalRecordService;
-        this.patientEventRecordService=patientEventRecordService;
-       // this.employeeService=employeeService;
-        this.paymentService=paymentService;
+
     }
 
     @GetMapping("/all")
@@ -100,8 +94,10 @@ public class PatientControllerPages {
     public String getPatientDetails(@PathVariable("patientId") int patientId, Model model) {
         Patient patient = patientService.findPatientById(patientId);
 
-        List<MedicalRecord> medicalRecords = medicalRecordService.findMedicalRecordByPatientId(patientId);
-        List<PatientEventRecord> patientEventRecordList = patientEventRecordService.findPatientEventRecordByPatientId(patientId);
+        List<MedicalRecord> medicalRecords = patient.getMedicalRecords();
+        //List<MedicalRecord> medicalRecords = medicalRecordService.findMedicalRecordByPatientId(patientId);
+        List<PatientEventRecord> patientEventRecordList = patient.getEventRecords();
+        List<Payment> payments = patient.getPayments();
 
         model.addAttribute("patient", patient);
         model.addAttribute("medicalRecords", medicalRecords);
@@ -119,7 +115,7 @@ public class PatientControllerPages {
             model.addAttribute("nurseName", "N/A");
         }
 
-        List<Payment> payments = paymentService.findPaymentsByPatientId((long) patientId);
+       // List<Payment> payments = paymentService.findPaymentsByPatientId((long) patientId);
         model.addAttribute("payments", payments);
 
         return "patients/ShowPatientDetails";

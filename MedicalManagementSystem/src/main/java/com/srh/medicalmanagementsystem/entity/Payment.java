@@ -69,4 +69,8 @@ public class Payment {
     public Long getPaymentId() {
         return paymentId;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "PatientID", referencedColumnName = "PatientID", insertable = false, updatable = false)
+    private Patient patient;
 }
