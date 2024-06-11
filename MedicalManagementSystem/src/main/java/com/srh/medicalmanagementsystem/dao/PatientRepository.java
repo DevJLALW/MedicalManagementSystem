@@ -31,4 +31,8 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
        @Transactional
        @Query("UPDATE Patient p SET p.password = :password WHERE p.patientId = :patientId")
        int updatePatientPassword(@Param("patientId") Integer patientId, @Param("password") String password);
+
+       @Query("SELECT p FROM Patient p LEFT JOIN FETCH p.doctor d LEFT JOIN FETCH p.nurse n LEFT JOIN FETCH p.user WHERE p.patientId = :patientId")
+       Patient findByIdWithRelations(@Param("patientId") int patientId);
+
 }

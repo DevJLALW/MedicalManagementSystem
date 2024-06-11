@@ -20,15 +20,15 @@ public class PatientControllerPages {
     private PatientService patientService;
     private MedicalRecordService medicalRecordService;
     private PatientEventRecordService patientEventRecordService;
-    private EmployeeService employeeService;
+    //private EmployeeService employeeService;
     private PaymentService paymentService;
 
     @Autowired
-    public PatientControllerPages(PatientService patientService, MedicalRecordService medicalRecordService, PatientEventRecordService patientEventRecordService, EmployeeService employeeService, PaymentService paymentService) {
+    public PatientControllerPages(PatientService patientService, MedicalRecordService medicalRecordService, PatientEventRecordService patientEventRecordService,  PaymentService paymentService) {
         this.patientService = patientService;
         this.medicalRecordService = medicalRecordService;
         this.patientEventRecordService=patientEventRecordService;
-        this.employeeService=employeeService;
+       // this.employeeService=employeeService;
         this.paymentService=paymentService;
     }
 
@@ -62,7 +62,7 @@ public class PatientControllerPages {
             System.out.println("Null employeeID");
         }
         Integer employeeIDInt = Integer.parseInt(employeeID);
-        patientdto.setEmployeeID(employeeIDInt);
+        patientdto.setUserID(employeeIDInt);
         patientService.savePatient(patientdto);
         return "redirect:/patients/all";
     }
@@ -99,15 +99,25 @@ public class PatientControllerPages {
     @GetMapping("/details/{patientId}")
     public String getPatientDetails(@PathVariable("patientId") int patientId, Model model) {
         Patient patient = patientService.findPatientById(patientId);
+
         List<MedicalRecord> medicalRecords = medicalRecordService.findMedicalRecordByPatientId(patientId);
         List<PatientEventRecord> patientEventRecordList = patientEventRecordService.findPatientEventRecordByPatientId(patientId);
+
         model.addAttribute("patient", patient);
         model.addAttribute("medicalRecords", medicalRecords);
         model.addAttribute("patientEventRecords", patientEventRecordList);
-        List<Employee> employeeDoctor =employeeService.searchEmployeesById(patient.getDoctorID());
-        model.addAttribute("doctorName",employeeDoctor.get(0).getFirstName()+" "+employeeDoctor.get(0).getLastName());
-        List<Employee> employeeNurse =employeeService.searchEmployeesById(patient.getNurseID());
-        model.addAttribute("nurseName",employeeNurse.get(0).getFirstName()+" "+employeeNurse.get(0).getLastName());
+
+        if (patient.getDoctor() != null) {
+            model.addAttribute("doctorName", patient.getDoctor().getFirstName() + " " + patient.getDoctor().getLastName());
+        } else {
+            model.addAttribute("doctorName", "N/A");
+        }
+
+        if (patient.getNurse() != null) {
+            model.addAttribute("nurseName", patient.getNurse().getFirstName() + " " + patient.getNurse().getLastName());
+        } else {
+            model.addAttribute("nurseName", "N/A");
+        }
 
         List<Payment> payments = paymentService.findPaymentsByPatientId((long) patientId);
         model.addAttribute("payments", payments);

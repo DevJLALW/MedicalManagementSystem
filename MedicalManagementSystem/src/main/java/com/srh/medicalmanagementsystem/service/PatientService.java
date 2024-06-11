@@ -21,4 +21,5 @@ public interface PatientService {
 
     public List<Patient> searchPatients(String keyword);
     public void updatePassword(Integer patientId, String newPassword);
+    public Patient findPatientById(int patientId);
 }

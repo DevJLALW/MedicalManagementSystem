@@ -64,21 +64,30 @@ public class PatientDTO {
     @Column(name = "DoctorID", nullable = true)
     private Integer doctorID;
 
+    @ManyToOne
+    @JoinColumn(name = "DoctorID", referencedColumnName = "EmployeeID", insertable = false, updatable = false)
+    private Employee doctor;
+
     @Column(name = "NurseID", nullable = true)
     private Integer nurseID;
 
+    @ManyToOne
+    @JoinColumn(name = "NurseID", referencedColumnName = "EmployeeID", insertable = false, updatable = false)
+    private Employee nurse;
+
     @Column(name = "RoomID", nullable = true)
     private Integer roomID;
-/*
-    @Column(name = "RecordID", nullable = true)
-    private Integer recordID;*/
 
     @Column(name = "Timestamp", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp timestamp;
 
-    @Column(name = "EmployeeID", nullable = false)
-    private Integer employeeID;
+    @Column(name = "UserID", nullable = true)
+    private Integer userID;
+
+    @ManyToOne
+    @JoinColumn(name = "UserID", referencedColumnName = "EmployeeID", insertable = false, updatable = false)
+    private Employee user;
 
     @Column(name = "Password", nullable = true)
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$", message = "Password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, one digit, and one special character")

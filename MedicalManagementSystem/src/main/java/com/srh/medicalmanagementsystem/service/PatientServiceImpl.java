@@ -24,9 +24,17 @@ public class PatientServiceImpl implements PatientService{
         this.patientRepository = patientRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
+    public Patient findPatientById(int patientId) {
+
+        Patient patient = patientRepository.findByIdWithRelations(patientId);
+
+        return patient;
+    }
+
     @Override
     public List<Patient> getAllPatients() {
-       // List<Patient> patients = patientRepository.findAll();
+
         List<Patient> patients = patientRepository.findAllActivePatients();
         patients.sort(Comparator.comparing(Patient::getPatientId).reversed());
         return patients;
@@ -50,7 +58,7 @@ public class PatientServiceImpl implements PatientService{
             patient.setPassword(encodedPassword);
             System.out.println("Check if password is encoded");
         }
-        patient.setEmployeeID(patientDTO.getEmployeeID());
+        patient.setUserID(patientDTO.getUserID());
         patient.setStatus(1);
         return patientRepository.save(patient);
     }
@@ -72,7 +80,7 @@ public class PatientServiceImpl implements PatientService{
         patient.setNurseID(patientDTO.getNurseID());
         patient.setRoomID(patientDTO.getRoomID());
         patient.setPassword(patientDTO.getPassword());
-        patient.setEmployeeID(patientDTO.getEmployeeID());
+        patient.setUserID(patientDTO.getUserID());
 
         return patient;
     }
