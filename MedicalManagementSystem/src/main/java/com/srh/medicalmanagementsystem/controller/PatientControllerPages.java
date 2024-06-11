@@ -56,8 +56,12 @@ public class PatientControllerPages {
             System.out.println("Null employeeID");
         }
         Integer employeeIDInt = Integer.parseInt(employeeID);
-        patientdto.setUserID(employeeIDInt);
-        patientService.savePatient(patientdto);
+        /*Employee loggedInUser=new Employee();
+        loggedInUser.setEmployeeId(employeeIDInt);
+        patientdto.setUser(loggedInUser);
+        System.out.println("Controller "+patientdto.getUser().getEmployeeId());
+        patientdto.getUser().getEmployeeId();*/
+        patientService.savePatient(patientdto, employeeIDInt);
         return "redirect:/patients/all";
     }
 

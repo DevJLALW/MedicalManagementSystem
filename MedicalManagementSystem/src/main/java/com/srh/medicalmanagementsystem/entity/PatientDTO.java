@@ -3,6 +3,7 @@ package com.srh.medicalmanagementsystem.entity;
 import com.srh.medicalmanagementsystem.validation.PastOrPresentDate;
 import com.srh.medicalmanagementsystem.validation.ValidEmail;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -62,18 +63,18 @@ public class PatientDTO {
     @Column(name = "InsuranceID", nullable = true)
     private String insuranceID;
 
-    @Column(name = "DoctorID", nullable = true)
-    private Integer doctorID;
+    /*@Column(name = "DoctorID", nullable = true)
+    private Integer doctorID;*/
 
     @ManyToOne
-    @JoinColumn(name = "DoctorID", referencedColumnName = "EmployeeID", insertable = false, updatable = false)
+    @JoinColumn(name = "DoctorID", referencedColumnName = "EmployeeID")
     private Employee doctor;
 
-    @Column(name = "NurseID", nullable = true)
-    private Integer nurseID;
+   /* @Column(name = "NurseID", nullable = true)
+    private Integer nurseID;*/
 
     @ManyToOne
-    @JoinColumn(name = "NurseID", referencedColumnName = "EmployeeID", insertable = false, updatable = false)
+    @JoinColumn(name = "NurseID", referencedColumnName = "EmployeeID")
     private Employee nurse;
 
     @Column(name = "RoomID", nullable = true)
@@ -83,15 +84,15 @@ public class PatientDTO {
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp timestamp;
 
-    @Column(name = "UserID", nullable = true)
-    private Integer userID;
+    /*@Column(name = "UserID", nullable = true)
+    private Integer userID;*/
 
     @ManyToOne
-    @JoinColumn(name = "UserID", referencedColumnName = "EmployeeID", insertable = false, updatable = false)
+    @JoinColumn(name = "UserID", referencedColumnName = "EmployeeID")
     private Employee user;
 
     @Column(name = "Password", nullable = true)
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$", message = "Password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, one digit, and one special character")
+    @Pattern(regexp = "^$|^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$", message = "Password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, one digit, and one special character")
     private String password;
 
     @Column(name = "Status", nullable = false)

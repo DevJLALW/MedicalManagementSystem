@@ -61,18 +61,18 @@ public class Patient {
     @Column(name = "InsuranceID", nullable = true)
     private String insuranceID;
 
-    @Column(name = "DoctorID", nullable = true)
-    private Integer doctorID;
+    /*@Column(name = "DoctorID", nullable = true)
+    private Integer doctorID;*/
 
     @ManyToOne
-    @JoinColumn(name = "DoctorID", referencedColumnName = "EmployeeID", insertable = false, updatable = false)
+    @JoinColumn(name = "DoctorID", referencedColumnName = "EmployeeID")
     private Employee doctor;
 
-    @Column(name = "NurseID", nullable = true)
+    /*@Column(name = "NurseID", nullable = true)
     private Integer nurseID;
-
+*/
     @ManyToOne
-    @JoinColumn(name = "NurseID", referencedColumnName = "EmployeeID", insertable = false, updatable = false)
+    @JoinColumn(name = "NurseID", referencedColumnName = "EmployeeID")
     private Employee nurse;
 
     @Column(name = "RoomID", nullable = true)
@@ -82,11 +82,11 @@ public class Patient {
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp timestamp;
 
-    @Column(name = "UserID", nullable = true)
-    private Integer userID;
+    /*@Column(name = "UserID", nullable = true)
+    private Integer userID;*/
 
     @ManyToOne
-    @JoinColumn(name = "UserID", referencedColumnName = "EmployeeID", insertable = false, updatable = false)
+    @JoinColumn(name = "UserID", referencedColumnName = "EmployeeID")
     private Employee user;
 
     @Column(name = "Password", nullable = true)

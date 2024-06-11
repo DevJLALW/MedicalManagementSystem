@@ -89,9 +89,9 @@
         <div class="row mb-3">
             <label class="col-sm-4 col-form-label">DoctorID</label>
             <div class="col-sm-8">
-                <input type="text" id="doctorSearch" th:field="*{doctorID}"  class="form-control" placeholder="Search Doctor">
+                <input type="text" id="doctorSearch" th:field="*{doctor.employeeId}"  class="form-control" placeholder="Search Doctor">
                 <button type="button" id="openDoctorModal" class="btn btn-primary">Select Doctor</button>
-                <input type="hidden" id="doctorID"  th:field="*{doctorID}">
+                <input type="hidden" id="doctorID"  th:field="*{doctor.employeeId}">
             </div>
         </div>
         <div class="modal fade" id="doctorModal" tabindex="-1" aria-labelledby="doctorModalLabel" aria-hidden="true">
@@ -126,9 +126,9 @@
         <div class="row mb-3">
             <label class="col-sm-4 col-form-label">NurseID</label>
             <div class="col-sm-8">
-                <input type="text" id="NurseSearch" class="form-control" th:field="*{nurseID}" placeholder="Search Nurse">
+                <input type="text" id="NurseSearch" class="form-control" th:field="*{nurse.employeeId}" placeholder="Search Nurse">
                 <button type="button" id="openNurseModal" class="btn btn-primary">Select Nurse</button>
-                <input type="hidden" id="nurseID" th:field="*{nurseID}">
+                <input type="hidden" id="nurseID" th:field="*{nurse.employeeId}">
             </div>
         </div>
         <div class="modal fade" id="nurseModal" tabindex="-1" aria-labelledby="nurseModalLabel" aria-hidden="true">
@@ -275,7 +275,7 @@
                 var nurseID = $(this).data('id');
                 var nurseName = $(this).data('name');
                 $('#nurseID').val(nurseID);
-                $('#NurseSearch').val(nurseName);
+                $('#NurseSearch').val(nurseID);
                 $('#nurseModal').modal('hide');
             });
         });

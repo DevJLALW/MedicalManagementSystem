@@ -4,6 +4,7 @@ import com.srh.medicalmanagementsystem.dao.MedicalRecordRepository;
 import com.srh.medicalmanagementsystem.dao.PatientEventRecordRepository;
 import com.srh.medicalmanagementsystem.dao.PatientRepository;
 import com.srh.medicalmanagementsystem.dao.PaymentRepository;
+import com.srh.medicalmanagementsystem.entity.Employee;
 import com.srh.medicalmanagementsystem.entity.Patient;
 import com.srh.medicalmanagementsystem.entity.PatientDTO;
 import jakarta.transaction.Transactional;
@@ -58,16 +59,23 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Transactional
-    public Patient savePatient(PatientDTO patientDTO) {
+    public Patient savePatient(PatientDTO patientDTO, Integer loggedUser) {
         Patient patient = convertToEntity(patientDTO);
-        System.out.println("patient.getPassword(): "+patient.getPassword());
+
+       // System.out.println("patient.getPassword(): "+patient.getPassword());
 
         if (patient.getPassword() != null && !patient.getPassword().isEmpty()) {
             String encodedPassword = passwordEncoder.encode(patient.getPassword());
             patient.setPassword(encodedPassword);
-            System.out.println("Check if password is encoded");
+
         }
-        patient.setUserID(patientDTO.getUserID());
+
+
+        Employee loggedInUser = new Employee();
+        loggedInUser.setEmployeeId(loggedUser);
+        patient.setUser(loggedInUser);
+        System.out.println("get employee ID " + patient.getUser().getEmployeeId());
+
         patient.setStatus(1);
         return patientRepository.save(patient);
     }
@@ -85,11 +93,11 @@ public class PatientServiceImpl implements PatientService{
         patient.setAddress(patientDTO.getAddress());
         patient.setMedicalHistory(patientDTO.getMedicalHistory());
         patient.setInsuranceID(patientDTO.getInsuranceID());
-        patient.setDoctorID(patientDTO.getDoctorID());
-        patient.setNurseID(patientDTO.getNurseID());
+        patient.setDoctor(patientDTO.getDoctor());
+        patient.setNurse(patientDTO.getNurse());
         patient.setRoomID(patientDTO.getRoomID());
         patient.setPassword(patientDTO.getPassword());
-        patient.setUserID(patientDTO.getUserID());
+
 
         return patient;
     }
@@ -107,7 +115,8 @@ public class PatientServiceImpl implements PatientService{
             existingPatient.setAddress(patient.getAddress());
             existingPatient.setMedicalHistory(patient.getMedicalHistory());
             existingPatient.setInsuranceID(patient.getInsuranceID());
-            existingPatient.setDoctorID(patient.getDoctorID());
+            existingPatient.setDoctor(patient.getDoctor());
+            existingPatient.setNurse(patient.getNurse());
             existingPatient.setRoomID(patient.getRoomID());
 
 

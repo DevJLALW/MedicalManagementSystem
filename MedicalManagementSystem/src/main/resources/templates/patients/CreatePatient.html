@@ -68,12 +68,6 @@
                 <input type="text" th:field="*{address}" class="form-control" />
             </div>
         </div>
-        <!--<div class="row mb-3">
-            <label class="col-sm-4 col-form-label">Medical History</label>
-            <div class="col-sm-8">
-                <input type="text" th:field="*{medicalHistory}" class="form-control" />
-            </div>
-        </div>-->
         <div class="row mb-3">
             <label class="col-sm-4 col-form-label">Insurance ID</label>
             <div class="col-sm-8">
@@ -85,7 +79,7 @@
             <div class="col-sm-8">
                 <input type="text" id="doctorSearch" class="form-control" placeholder="Search Doctor">
                 <button type="button" id="openDoctorModal" class="btn btn-primary">Select Doctor</button>
-                <input type="hidden" id="doctorID"  th:field="*{doctorID}">
+                <input type="hidden" id="doctorID"  th:field="*{doctor.employeeId}">
             </div>
         </div>
         <div class="modal fade" id="doctorModal" tabindex="-1" aria-labelledby="doctorModalLabel" aria-hidden="true">
@@ -122,7 +116,7 @@
             <div class="col-sm-8">
                 <input type="text" id="NurseSearch" class="form-control" placeholder="Search Nurse">
                 <button type="button" id="openNurseModal" class="btn btn-primary">Select Nurse</button>
-                <input type="hidden" id="nurseID" th:field="*{nurseID}">
+                <input type="hidden" id="nurseID" th:field="*{nurse.employeeId}">
             </div>
         </div>
         <div class="modal fade" id="nurseModal" tabindex="-1" aria-labelledby="nurseModalLabel" aria-hidden="true">
