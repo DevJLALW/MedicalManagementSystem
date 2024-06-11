@@ -9,7 +9,6 @@ import lombok.Data;
 public class Specialization {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer doctorId;
 
     @Column(name = "SpecializationName", nullable = false)
