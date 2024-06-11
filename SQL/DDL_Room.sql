@@ -7,10 +7,10 @@ DROP TABLE IF EXISTS Room;
 CREATE TABLE Room (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     PatientID BIGINT,
-    RoomNumber VARCHAR(255) UNIQUE NOT NULL,
+    RoomNumber VARCHAR(255) NOT NULL,
     RoomType VARCHAR(255) NOT NULL,
     RoomAdmissionStartDate DATE,
     RoomAdmissionEndDate DATE,
     NumberOfDays BIGINT,
-    TotalRoomCost FLOAT
+    RoomBill  DECIMAL(10, 2) NOT NULL
 );
