@@ -36,7 +36,6 @@
                                 <label class="col-sm-4 col-form-label">Doctor ID <span class="text-danger">*</span></label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="doctorId" th:field="*{doctorId}">
-                                        <option value="0">select option</option>
                                         <option th:each="doctor : ${doctors}" th:value="${doctor.employeeId}" th:text="${doctor.employeeId + ' ' + doctor.firstName + ' ' + doctor.lastName}"></option>
                                     </select>
                                     <!--<input type="text" th:field="*{doctorId}" class="form-control" />

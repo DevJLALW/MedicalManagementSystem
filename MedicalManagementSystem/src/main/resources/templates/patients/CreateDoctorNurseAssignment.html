@@ -39,9 +39,7 @@
                                     <option value="0">select option</option>
                                     <option th:each="doctor : ${doctors}" th:value="${doctor.employeeId}" th:text="${doctor.employeeId + ' ' + doctor.firstName + ' ' + doctor.lastName}"></option>
                                 </select>
-                                <!--<input type="text" th:field="*{doctorId}" class="form-control" />
-                                <div th:if="${#fields.hasErrors('doctorId')}" th:errors="*{doctorId}" style="color:red">Doctor Id error</div>
-                        -->   </div>
+                                </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Nurse ID<span class="text-danger">*</span></label>
@@ -50,9 +48,7 @@
                                     <option value="0">select option</option>
                                 <option th:each="nurse : ${nurses}" th:value="${nurse.employeeId}" th:text="${nurse.employeeId + ' ' + nurse.firstName + ' ' + nurse.lastName}"></option>
                                 </select>
-                            <!-- <input type="text" th:field="*{nurseId}" class="form-control" />
-                                <div th:if="${#fields.hasErrors('nurseId')}" th:errors="*{nurseId}" style="color:red">Nurse Id error</div>
-                        --> </div>
+                             </div>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary">Create Doctor Nurse Assignment</button>

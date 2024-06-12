@@ -103,7 +103,6 @@ public class AppointmentController {
                 String[] times = slot.split("-");
                 SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
-                // Changed this part for correct parsing of time
                 java.util.Date startTimeUtilFormat = timeFormat.parse(times[0]);
                 java.util.Date endTimeUtilFormat = timeFormat.parse(times[1]);
 

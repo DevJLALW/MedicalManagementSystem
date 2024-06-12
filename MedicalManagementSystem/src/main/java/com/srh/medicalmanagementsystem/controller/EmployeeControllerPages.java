@@ -49,6 +49,21 @@ public class EmployeeControllerPages {
         return "patients/ShowPatientsOfDoctor";
     }
 
+    @GetMapping("/assignedPatients/search")
+    public String searchAssignedPatients(Model model, HttpServletRequest request, @RequestParam("keyword") String keyword) {
+        List<Patient> patients;
+        Integer employeeId = Integer.parseInt( (String) request.getSession().getAttribute("employeeID"));
+        try {
+            Integer patientId = Integer.parseInt(keyword);
+            patients = employeeService.seachAssignedPatientsByPatientId(employeeId, patientId);
+        } catch (NumberFormatException e) {
+            patients =  employeeService.seachAssignedPatientsByKeyword(employeeId, keyword);
+        }
+        model.addAttribute("patients", patients);
+
+        return "patients/ShowPatientsOfDoctor";
+    }
+
     @GetMapping("/create")
     public String showCreateEmployeePage(Model model) {
         model.addAttribute("employee", new Employee());
@@ -98,17 +113,6 @@ public class EmployeeControllerPages {
 
         return "redirect:/employees/all";
     }
-//
-//    @GetMapping("/search")
-//    public String searchEmployees(
-//            @RequestParam("keyword") String keyword,
-//            Model model
-//    ) {
-//        List<Employee> employeeList =employeeService.searchEmployees(keyword);
-//        model.addAttribute("employees", employeeList);
-//
-//        return "patients/ShowEmployees";
-//    }
 
     @GetMapping("/search")
     public String searchEmployees(
@@ -117,14 +121,11 @@ public class EmployeeControllerPages {
     ) {
         List<Employee> employeeList;
         try {
-            // Attempt to parse the keyword as an integer
             Integer employeeId = Integer.parseInt(keyword);
             employeeList = employeeService.searchEmployeesById(employeeId);
         } catch (NumberFormatException e) {
-            // If parsing fails, treat it as a string keyword
             employeeList =  employeeService.searchEmployeesByKeyword(keyword);
         }
-//        List<Employee> employeeList =employeeService.searchEmployees(employeeId);
         model.addAttribute("employees", employeeList);
 
         return "patients/ShowEmployees";

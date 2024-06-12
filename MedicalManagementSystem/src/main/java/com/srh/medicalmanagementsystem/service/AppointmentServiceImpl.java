@@ -27,7 +27,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     public static java.sql.Date getCurrentDate() {
         LocalDate localDate = LocalDate.now();
 
-        // Convert LocalDate to java.sql.Date
         return Date.valueOf(localDate);
     }
 

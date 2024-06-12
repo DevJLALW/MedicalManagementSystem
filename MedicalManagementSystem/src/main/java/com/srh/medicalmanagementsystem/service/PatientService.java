@@ -20,6 +20,8 @@ public interface PatientService {
     public Patient findPatientById(Integer patientId);
 
     public List<Patient> searchPatients(String keyword);
+
     public void updatePassword(Integer patientId, String newPassword);
+
     public Patient findPatientById(int patientId);
 }

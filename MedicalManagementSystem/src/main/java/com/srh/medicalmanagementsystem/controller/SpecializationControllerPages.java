@@ -86,11 +86,9 @@ public class SpecializationControllerPages {
     ) {
         List<DoctorSpecializationDto> specializationsList;
         try {
-            // Attempt to parse the keyword as an integer
             Integer doctorId = Integer.parseInt(keyword);
             specializationsList = specializationService.findSpecializationByDoctorId(doctorId);
         } catch (NumberFormatException e) {
-            // If parsing fails, treat it as a string keyword
             specializationsList =specializationService.findSpecializationByKeyword(keyword);
         }
         model.addAttribute("specializationsList", specializationsList);

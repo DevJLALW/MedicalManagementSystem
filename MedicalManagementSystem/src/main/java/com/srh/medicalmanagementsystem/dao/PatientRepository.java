@@ -22,6 +22,12 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
        @Query("SELECT p FROM Patient p WHERE  p.doctor.employeeId = :employeeId OR p.nurse.employeeId = :employeeId")
        List<Patient> findPatientsByEmployeeId(@Param("employeeId") Integer employeeId);
 
+       @Query("SELECT p FROM Patient p WHERE (p.doctor.employeeId = :employeeId OR p.nurse.employeeId = :employeeId) AND p.patientId = :patientId")
+       List<Patient> findPatientByEmployeeIdAndPatientId(@Param("employeeId") Integer employeeId, @Param("patientId") Integer patientId);
+
+       @Query("SELECT p FROM Patient p WHERE (p.doctor.employeeId = :employeeId OR p.nurse.employeeId = :employeeId) AND (p.firstName LIKE %:keyword% OR p.lastName LIKE %:keyword% OR p.email LIKE %:keyword%)")
+       List<Patient> findPatientByEmployeeIdAndPatientKeyword(@Param("employeeId") Integer employeeId, @Param("keyword") String keyword);
+
        @Modifying
        @Transactional
        @Query("UPDATE Patient p SET p.status = 0 WHERE p.patientId IN :patientIds")

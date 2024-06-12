@@ -22,6 +22,10 @@ public interface EmployeeService {
 
     public List<Employee> searchEmployeesById(Integer employeeId);
 
+    public List<Patient> seachAssignedPatientsByKeyword(Integer employeeId, String keyword);
+
+    public List<Patient> seachAssignedPatientsByPatientId(Integer employeeId, Integer patientId);
+
     public  List<Employee> getRoleSpecificEmployees(String keyword);
 
     public List<Employee> searchDoctorsByName(String name);
@@ -29,5 +33,6 @@ public interface EmployeeService {
     public List<Employee> searchNurseByName(String name);
 
     public List<Patient> getAllAssignedPatients(Integer doctorId);
+
     public List<Employee> findNursesByDoctorId(int doctorId);
 }

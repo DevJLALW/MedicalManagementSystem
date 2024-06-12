@@ -66,11 +66,9 @@ public class DoctorNurseAssignmentControllerPages {
     ) {
         List<DoctorNurseAssignmentDto> assignmentsList;
         try {
-            // Attempt to parse the keyword as an integer
             Integer employeeId = Integer.parseInt(keyword);
             assignmentsList =doctorNurseAssignmentService.findAssignmentsByIds(employeeId);
         } catch (NumberFormatException e) {
-            // If parsing fails, treat it as a string keyword
             assignmentsList =doctorNurseAssignmentService.findAssignmentsByName(keyword);
         }
         model.addAttribute("assignmentsList", assignmentsList);

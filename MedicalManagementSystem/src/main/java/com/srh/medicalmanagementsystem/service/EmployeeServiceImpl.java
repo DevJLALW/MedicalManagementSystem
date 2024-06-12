@@ -61,11 +61,12 @@ public class EmployeeServiceImpl implements EmployeeService{
     public Employee updateEmployee(int employeeId, Employee employeeDetails) {
         Employee existingEmployee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new NoSuchElementException("Employee not found with id " + employeeId));
+        String encoderPassword = passwordEncoder.encode(employeeDetails.getPassword());
         existingEmployee.setFirstName(employeeDetails.getFirstName());
         existingEmployee.setLastName(employeeDetails.getLastName());
         existingEmployee.setContactNumber(employeeDetails.getContactNumber());
         existingEmployee.setEmail(employeeDetails.getEmail());
-        existingEmployee.setPassword(employeeDetails.getPassword());
+        existingEmployee.setPassword(encoderPassword);
         existingEmployee.setRole(employeeDetails.getRole());
         existingEmployee.setStatus(employeeDetails.getStatus());
         return employeeRepository.save(existingEmployee);
@@ -101,6 +102,16 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public List<Employee> searchEmployeesById(Integer employeeId) {
         return employeeRepository.searchEmployeesById(employeeId);
+    }
+
+    @Override
+    public List<Patient> seachAssignedPatientsByKeyword(Integer employeeId, String keyword) {
+        return patientRepository.findPatientByEmployeeIdAndPatientKeyword(employeeId, keyword);
+    }
+
+    @Override
+    public List<Patient> seachAssignedPatientsByPatientId(Integer employeeId, Integer patientId) {
+        return patientRepository.findPatientByEmployeeIdAndPatientId(employeeId, patientId);
     }
 
     @Override

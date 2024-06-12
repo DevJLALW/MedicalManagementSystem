@@ -62,8 +62,6 @@ public class PatientServiceImpl implements PatientService{
     public Patient savePatient(PatientDTO patientDTO, Integer loggedUser) {
         Patient patient = convertToEntity(patientDTO);
 
-       // System.out.println("patient.getPassword(): "+patient.getPassword());
-
         if (patient.getPassword() != null && !patient.getPassword().isEmpty()) {
             String encodedPassword = passwordEncoder.encode(patient.getPassword());
             patient.setPassword(encodedPassword);

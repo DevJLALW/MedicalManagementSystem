@@ -61,16 +61,11 @@ public class Patient {
     @Column(name = "InsuranceID", nullable = true)
     private String insuranceID;
 
-    /*@Column(name = "DoctorID", nullable = true)
-    private Integer doctorID;*/
 
     @ManyToOne
     @JoinColumn(name = "DoctorID", referencedColumnName = "EmployeeID")
     private Employee doctor;
 
-    /*@Column(name = "NurseID", nullable = true)
-    private Integer nurseID;
-*/
     @ManyToOne
     @JoinColumn(name = "NurseID", referencedColumnName = "EmployeeID")
     private Employee nurse;
@@ -81,9 +76,6 @@ public class Patient {
     @Column(name = "Timestamp", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp timestamp;
-
-    /*@Column(name = "UserID", nullable = true)
-    private Integer userID;*/
 
     @ManyToOne
     @JoinColumn(name = "UserID", referencedColumnName = "EmployeeID")
