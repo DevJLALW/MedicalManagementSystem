@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Payment</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-5">Add Payment</h1>
+    <form th:action="@{/payments/add}" th:object="${payment}" method="post">
+        <div class="card mx-auto p-4" style="max-width: 600px;">
+            <div class="mb-3">
+                <label class="form-label" for="patientID">Patient ID</label>
+                <input class="form-control" type="number" id="patientID" th:field="*{patientId}" oninput="fetchBills()" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="paymentDate">Payment Date</label>
+                <input class="form-control" type="date" id="paymentDate" th:field="*{paymentDate}" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="doctorFees">Doctor Fees</label>
+                <input class="form-control" type="number" step="0.01" id="doctorFees" th:field="*{doctorFees}" oninput="updateTotalAmount()">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="pharmacyBill">Pharmacy Bill</label>
+                <input class="form-control" type="number" step="0.01" id="pharmacyBill" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="roomBill">Room Bill</label>
+                <input class="form-control" type="number" step="0.01" id="roomBill" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="paymentMethod">Payment Method</label>
+                <select class="form-control" id="paymentMethod" th:field="*{paymentMethod}">
+                    <option value="CASH">Cash</option>
+                    <option value="DEBIT_CREDIT">Debit/Credit</option>
+                    <option value="BANK_TRANSFER">Bank Transfer</option>
+                    <option value="INSURANCE">Insurance</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="paymentDetails">Payment Details</label>
+                <input class="form-control" type="text" id="paymentDetails" th:field="*{paymentDetails}" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="paymentStatus">Payment Status</label>
+                <select class="form-control" id="paymentStatus" th:field="*{paymentStatus}">
+                    <option value="PAID">Paid</option>
+                    <option value="UNPAID">Unpaid</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="totalAmount">Total Amount</label>
+                <input class="form-control" type="number" step="0.01" id="totalAmount" th:field="*{totalAmount}" readonly />
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a href="/payments" class="btn btn-secondary">Back to Payments List</a>
+                <button class="btn btn-primary" type="submit">Save Payment</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function fetchBills() {
+        var patientID = document.getElementById("patientID").value;
+        if (patientID) {
+            fetch(`/pharmacy-bill/${patientID}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("pharmacyBill").value = data;
+                    updateTotalAmount();
+                })
+                .catch(error => console.error('Error fetching pharmacy bill:', error));
+
+            fetch(`/room-bill/${patientID}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("roomBill").value = data;
+                    updateTotalAmount();
+                })
+                .catch(error => console.error('Error fetching room bill:', error));
+        }
+    }
+
+    function updateTotalAmount() {
+        var doctorFees = parseFloat(document.getElementById("doctorFees").value) || 0;
+        var pharmacyBill = parseFloat(document.getElementById("pharmacyBill").value) || 0;
+        var roomBill = parseFloat(document.getElementById("roomBill").value) || 0;
+        var totalAmount = doctorFees + pharmacyBill + roomBill;
+        document.getElementById("totalAmount").value = totalAmount.toFixed(2);
+    }
+
+    document.getElementById("doctorFees").addEventListener("input", updateTotalAmount);
+</script>
+</body>
+</html>
