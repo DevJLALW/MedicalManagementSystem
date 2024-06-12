@@ -2,7 +2,7 @@ CREATE DATABASE hospitaldb;
 
 USE hospitaldb;
 
--------------------------------
+
 CREATE TABLE Employee (
     EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
     FirstName VARCHAR(255) NOT NULL,
@@ -12,14 +12,16 @@ CREATE TABLE Employee (
     Password VARCHAR(255),
     Role VARCHAR(255) NOT NULL,
     Status INT NOT NULL
-);
--------------------------------
+) AUTO_INCREMENT=1001;
+
+
 CREATE TABLE Specialization (
     DoctorID INT PRIMARY KEY,
     SpecializationName VARCHAR(255),
     FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID)
 );
----------------------------------
+
+
 CREATE TABLE DoctorNurseAssignment (
     AssignmentID INT AUTO_INCREMENT PRIMARY KEY,
     DoctorID INT NOT NULL,
@@ -32,7 +34,6 @@ ALTER TABLE DoctorNurseAssignment
 ADD CONSTRAINT fk_DoctorID FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID),
 ADD CONSTRAINT fk_NurseID FOREIGN KEY (NurseID) REFERENCES Employee(EmployeeID);
 
------------------------------------
 
 CREATE TABLE Patients (
     PatientID INT AUTO_INCREMENT PRIMARY KEY,
@@ -55,10 +56,8 @@ CREATE TABLE Patients (
     FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID),
     FOREIGN KEY (NurseID) REFERENCES Employee(EmployeeID),
     FOREIGN KEY (UserID) REFERENCES Employee(EmployeeID)
-);
+) AUTO_INCREMENT=100101;
 
-
------------------------------------
 
 CREATE TABLE MedicalRecord (
     MedicalRecordID INT AUTO_INCREMENT PRIMARY KEY,
@@ -74,7 +73,6 @@ CREATE TABLE MedicalRecord (
     FOREIGN KEY (PatientID) REFERENCES patients(patientID)
 );
 
------------------------------------
 
 CREATE TABLE PatientEventRecord (
     EventId INT AUTO_INCREMENT PRIMARY KEY,
@@ -88,7 +86,6 @@ CREATE TABLE PatientEventRecord (
     FOREIGN KEY (PatientId) REFERENCES Patients(PatientID)
 );
 
------------------------------------
 
 CREATE TABLE Payment (
     PaymentID BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -105,7 +102,6 @@ CREATE TABLE Payment (
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
 );
 
------------------------------------
 
 CREATE TABLE Room (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -119,7 +115,7 @@ CREATE TABLE Room (
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
 );
 
------------------------------------
+
 CREATE TABLE Appointments (
     AppointmentID INT AUTO_INCREMENT PRIMARY KEY,
     PatientID INT NOT NULL,
@@ -130,7 +126,7 @@ CREATE TABLE Appointments (
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
     FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID)
 );
------------------------------------
+
 
 CREATE TABLE PharmacyInventory (
     InventoryID INT AUTO_INCREMENT PRIMARY KEY,
@@ -143,7 +139,8 @@ CREATE TABLE PharmacyInventory (
     CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     LastUpdated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
------------------------------------
+
+
 CREATE TABLE PharmacyStock (
     itemId INT AUTO_INCREMENT PRIMARY KEY,
     itemName VARCHAR(255) NOT NULL,
@@ -154,7 +151,7 @@ CREATE TABLE PharmacyStock (
     employeeId INT NOT NULL
 );
 
------------------------------------
+
 CREATE TABLE PharmacyPrescriptions (
     PrescriptionID INT AUTO_INCREMENT PRIMARY KEY,
     PatientID INT NOT NULL,
@@ -169,4 +166,4 @@ CREATE TABLE PharmacyPrescriptions (
     FOREIGN KEY (DoctorID) REFERENCES employee(EmployeeID),
     FOREIGN KEY (InventoryID) REFERENCES PharmacyInventory(InventoryID)
 );
------------------------------------
+
