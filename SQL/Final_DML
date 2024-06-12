@@ -1,1 +1,95 @@
+use hospitaldb;
+
+--------------------------------------------------------------------------------------------
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1001, 'Michael', 'Johnson', '+1234567892', 'michael.johnson@example.com', 'doctor', 1);
+
+-- Inserting another doctor
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1002, 'Emily', 'Brown', '+1234567893', 'emily.brown@example.com', 'doctor', 1);
+
+
+-- Inserting an admin
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1003, 'John', 'Doe', '+1234567890', 'john.doe@example.com', 'admin', 1);
+
+-- Inserting a receptionist
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1004, 'Alice', 'Smith', '+1234567891', 'alice.smith@example.com', 'receptionist', 1);
+
+-- Inserting a nurse
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1005, 'Emma', 'Davis', '+1234567894', 'emma.davis@example.com', 'nurse', 1);
+
+-- Inserting another nurse
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1006, 'Matthew', 'Wilson', '+1234567895', 'matthew.wilson@example.com', 'nurse', 1);
+
+-- Inserting another nurse
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1007, 'Olivia', 'Martinez', '+1234567896', 'olivia.martinez@example.com', 'nurse', 1);
+
+--------------------------------------------------------------------------------------------
+
+-- Inserting a specialization for DoctorID 1001
+INSERT INTO Specialization (DoctorID, SpecializationName)
+VALUES (1001, 'Cardiology');
+
+-- Inserting a specialization for DoctorID 1002
+INSERT INTO Specialization (DoctorID, SpecializationName)
+VALUES (1002, 'Orthopedics');
+
+-- Inserting a specialization for DoctorID 1003
+INSERT INTO Specialization (DoctorID, SpecializationName)
+VALUES (1003, 'Neurology');
+
+--------------------------------------------------------------------------------------------
+
+-- Inserting doctor-nurse assignments
+INSERT INTO DoctorNurseAssignment (DoctorID, NurseID)
+VALUES (1001, 1005);  -- Michael Johnson and Emma Davis
+
+INSERT INTO DoctorNurseAssignment (DoctorID, NurseID)
+VALUES (1001, 1006);  -- Michael Johnson and Matthew Wilson
+
+INSERT INTO DoctorNurseAssignment (DoctorID, NurseID)
+VALUES (1002, 1007);  -- Emily Brown and Olivia Martinez
+
+INSERT INTO DoctorNurseAssignment (DoctorID, NurseID)
+VALUES (1002, 1006);  -- Emily Brown and Matthew Wilson
+
+INSERT INTO DoctorNurseAssignment (DoctorID, NurseID)
+VALUES (1002, 1005);  -- Emily Brown and Emma Davis
+
+--------------------------------------------------------------------------------------------
+
+-- Inserting patient data with null password and starting patient IDs from 100101
+INSERT INTO Patients (PatientID, FirstName, LastName, DOB, Gender, ContactNumber, Email, Address, MedicalHistory, InsuranceID, DoctorID, NurseID, RoomID, UserID, Password, Status)
+VALUES (100101, 'Emma', 'Smith', '1990-05-15', 'Female', '+1234567890', 'emma.smith@example.com', '123 Main St, City', 'None', 'INS123', 1001, 1005, 101, 1004, NULL, 1);
+
+INSERT INTO Patients (PatientID, FirstName, LastName, DOB, Gender, ContactNumber, Email, Address, MedicalHistory, InsuranceID, DoctorID, NurseID, RoomID, UserID, Password, Status)
+VALUES (100102, 'Sophia', 'Johnson', '1985-10-25', 'Female', '+1987654321', 'sophia.johnson@example.com', '456 Elm St, Town', 'Allergies', 'INS456', 1002, 1006, 102, 1005, NULL, 1);
+
+INSERT INTO Patients (PatientID, FirstName, LastName, DOB, Gender, ContactNumber, Email, Address, MedicalHistory, InsuranceID, DoctorID, NurseID, RoomID, UserID, Password, Status)
+VALUES (100103, 'Liam', 'Williams', '1978-03-12', 'Male', '+1122334455', 'liam.williams@example.com', '789 Oak St, Village', 'Diabetes', 'INS789', 1001, 1005, 103, 1004, NULL, 1);
+
+INSERT INTO Patients (PatientID, FirstName, LastName, DOB, Gender, ContactNumber, Email, Address, MedicalHistory, InsuranceID, DoctorID, NurseID, RoomID, UserID, Password, Status)
+VALUES (100104, 'Olivia', 'Brown', '1982-07-20', 'Female', '+3322114455', 'olivia.brown@example.com', '234 Pine St, Countryside', 'None', 'INS101', 1002, 1007, 104, 1005, NULL, 1);
+
+INSERT INTO Patients (PatientID, FirstName, LastName, DOB, Gender, ContactNumber, Email, Address, MedicalHistory, InsuranceID, DoctorID, NurseID, RoomID, UserID, Password, Status)
+VALUES (100105, 'William', 'Martinez', '1995-12-30', 'Male', '+9988776655', 'william.martinez@example.com', '567 Maple St, Suburb', 'Asthma', 'INS202', 1002, 1006, 105, 1004, NULL, 1);
+
+INSERT INTO Patients (PatientID, FirstName, LastName, DOB, Gender, ContactNumber, Email, Address, MedicalHistory, InsuranceID, DoctorID, NurseID, RoomID, UserID, Password, Status)
+VALUES (100106, 'James', 'Wilson', '1973-08-18', 'Male', '+1122334455', 'james.wilson@example.com', '890 Oak St, City', 'Hypertension', 'INS303', 1001, 1007, 106, 1005, NULL, 1);
+
+INSERT INTO Patients (PatientID, FirstName, LastName, DOB, Gender, ContactNumber, Email, Address, MedicalHistory, InsuranceID, DoctorID, NurseID, RoomID, UserID, Password, Status)
+VALUES (100107, 'Charlotte', 'Taylor', '1988-04-05', 'Female', '+9988776655', 'charlotte.taylor@example.com', '123 Maple St, Town', 'None', 'INS404', 1002, 1005, 107, 1004, NULL, 1);
+
+INSERT INTO Patients (PatientID, FirstName, LastName, DOB, Gender, ContactNumber, Email, Address, MedicalHistory, InsuranceID, DoctorID, NurseID, RoomID, UserID, Password, Status)
+VALUES (100108, 'Oliver', 'Harris', '1976-09-22', 'Male', '+3322114455', 'oliver.harris@example.com', '456 Pine St, Village', 'Arthritis', 'INS505', 1001, 1006, 108, 1005, NULL, 1);
+
+INSERT INTO Patients (PatientID, FirstName, LastName, DOB, Gender, ContactNumber, Email, Address, MedicalHistory, InsuranceID, DoctorID, NurseID, RoomID, UserID, Password, Status)
+VALUES (100109, 'Ava', 'Garcia', '1980-11-10', 'Female', '+1234567890', 'ava.garcia@example.com', '789 Elm St, Countryside', 'High Cholesterol', 'INS606', 1001, 1005, 109, 1004, NULL, 1);
+
+--------------------------------------------------------------------------------------------
 
