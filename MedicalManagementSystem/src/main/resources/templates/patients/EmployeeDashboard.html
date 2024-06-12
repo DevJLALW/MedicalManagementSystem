@@ -31,66 +31,105 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 mx-auto rounded card p-4 m-4">
-                    <h1 class="text-center mb-5 margintop">Navigation Center</h1>
-                    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_DOCTOR'') or hasRole(''ROLE_NURSE'') or hasRole(''ROLE_RECEPTIONIST'')')}">
-                        <div class="row mb-3">
-                        <button type="submit" onclick="getPatientInfo()" class="btn btn-primary">Show Patient Information</button>
-                    </div>
-                    <div class="row mb-3">
-                        <button type="submit" onclick="getDoctorInfo()" class="btn btn-primary">Doctor Assignment</button>
-                    </div>
-                    <div class="row mb-3">
-                        <button type="submit" onclick="getEmployeeInfo()" class="btn btn-primary">Employee Information</button>
-                    </div>
-                    <div class="row mb-3">
-                        <button type="submit" onclick="getRoomsInfo()" class="btn btn-primary">Show Rooms</button>
-                    </div>
-                    <div class="row mb-3">
-                        <button type="submit" onclick="getMedicalRecordsInfo()" class="btn btn-primary">Show Medical Records</button>
-                    </div>
-                    <div class="row mb-3">
-                        <button type="submit" onclick="getAppointmentsInfo()" class="btn btn-primary">Show Appointments</button>
-                    </div>
-                    </div>
-                    <div th:if="${#authorization.expression('hasRole(''ROLE_PHARMACIST'')')}">
-                        <div class="row mb-3">
-                        <button type="submit" onclick="getInventoryInfo()" class="btn btn-primary">Show Inventories</button>
-                    </div>
-                    </div>
-                    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_DOCTOR'') or hasRole(''ROLE_NURSE'') or hasRole(''ROLE_PHARMACIST'')')}">
-                    <div class="row mb-3">
-                        <button type="submit" onclick="getPrescriptionInfo()" class="btn btn-primary">Show Prescriptions</button>
-                    </div>
-                    </div>
+            <h1 class="text-center mb-5 margintop">Navigation Center</h1>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_DOCTOR'') or hasRole(''ROLE_NURSE'') or hasRole(''ROLE_RECEPTIONIST'')')}">
+                <div class="row mb-3">
+                    <button type="submit" onclick="getPatientInfo()" class="btn btn-primary">Show Patient Information</button>
+                </div>
+                <div class="row mb-3">
+                    <button type="submit" onclick="getDoctorInfo()" class="btn btn-primary">Doctor Assignment</button>
                 </div>
             </div>
+
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <div class="row mb-3">
+                    <button type="submit" onclick="getEmployeeInfo()" class="btn btn-primary">Employee Information</button>
+                </div>
+            </div>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_RECEPTIONIST'') or hasRole(''ROLE_DOCTOR'')')}">
+                <div class="row mb-3">
+                    <button type="submit" onclick="getDoctorSpecialization()" class="btn btn-primary">Doctor Specialization</button>
+                </div>
+            </div>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_RECEPTIONIST'')')}">
+                <div class="row mb-3">
+                    <button type="submit" onclick="getRoomsInfo()" class="btn btn-primary">Show Rooms</button>
+                </div>
+            </div>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_DOCTOR'')')}">
+
+                <div class="row mb-3">
+                    <button type="submit" onclick="getMedicalRecordsInfo()" class="btn btn-primary">Show Medical Records</button>
+                </div>
+            </div>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_DOCTOR'') or hasRole(''ROLE_NURSE'')   or hasRole(''ROLE_RECEPTIONIST'')')}">
+
+                <div class="row mb-3">
+                    <button type="submit" onclick="getEventRecordsInfo()" class="btn btn-primary">Show Event Records</button>
+                </div>
+            </div>
+
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_DOCTOR'')  or hasRole(''ROLE_RECEPTIONIST'')')}">
+                <div class="row mb-3">
+                    <button type="submit" onclick="getAppointmentsInfo()" class="btn btn-primary">Show Appointments</button>
+                </div>
+                </div>
+
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_RECEPTIONIST'')')}">
+
+                <div class="row mb-3">
+                    <button type="submit" onclick="getPaymentInfo()" class="btn btn-primary">Show Payments</button>
+                </div>
+            </div>
+
+            <div th:if="${#authorization.expression('hasRole(''ROLE_PHARMACIST'')')}">
+                <div class="row mb-3">
+                    <button type="submit" onclick="getInventoryInfo()" class="btn btn-primary">Show Inventories</button>
+                </div>
+            </div>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_DOCTOR'') or hasRole(''ROLE_PHARMACIST'')')}">
+                <div class="row mb-3">
+                    <button type="submit" onclick="getPrescriptionInfo()" class="btn btn-primary">Show Prescriptions</button>
+                </div>
+            </div>
+        </div>
+    </div>
         </div>		
     </body>
 
     <script>
         function getDoctorInfo(){
-            location.replace("/employees/doctor-nurse-assignment/all")
-        }
-        function getPatientInfo(){
-            location.replace("/patients/all")
-        }
-        function getEmployeeInfo(){
-            location.replace("/employees/all")
-        }
-        function getRoomsInfo(){
-            location.replace("/rooms")
-        }
-        function getMedicalRecordsInfo(){
-            location.replace("/medicalRecords/all")
-        }
-        function getAppointmentsInfo(){
-            location.replace("/appointments/all")
-        }
-        function getInventoryInfo(){
-            location.replace("/inventories")
-        }
-        function getPrescriptionInfo(){
-            location.replace("/prescriptions")
-        }
+        location.replace("/employees/doctor-nurse-assignment/all")
+    }
+    function getEventRecordsInfo(){
+        location.replace("/patientEventRecord/all")
+    }
+    function getDoctorSpecialization(){
+        location.replace("/employees/doctors-specialization/all")
+    }
+    function getPatientInfo(){
+        location.replace("/patients/all")
+    }
+    function getEmployeeInfo(){
+        location.replace("/employees/all")
+    }
+    function getRoomsInfo(){
+        location.replace("/rooms")
+    }
+    function getMedicalRecordsInfo(){
+        location.replace("/medicalRecords/all")
+    }
+    function getAppointmentsInfo(){
+        location.replace("/appointments/all")
+    }
+    function getInventoryInfo(){
+        location.replace("/inventories")
+    }
+    function getPrescriptionInfo(){
+        location.replace("/prescriptions")
+    }
+    function getPaymentInfo(){
+        location.replace("/patients/payments")
+    }
     </script>
 </html>
