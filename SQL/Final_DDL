@@ -88,18 +88,16 @@ CREATE TABLE PatientEventRecord (
 
 
 CREATE TABLE Payment (
-    PaymentID BIGINT AUTO_INCREMENT PRIMARY KEY,
-    PatientID INT,  -- Changed from BIGINT to INT
-    PaymentDate DATE,
-    PaymentMethod VARCHAR(255),
-    PaymentDetails TEXT,
-    DoctorFees DECIMAL(10, 2),
-    RoomService DECIMAL(10, 2),
-    PharmacyCost DECIMAL(10, 2),
-    PaymentStatus VARCHAR(255),
-    TotalAmount DECIMAL(10, 2),
-    Status INT NOT NULL,
-    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
+  PaymentID bigint NOT NULL AUTO_INCREMENT,
+  PatientID bigint NOT NULL,
+  PaymentDate date NOT NULL,
+  PaymentMethod varchar(255) NOT NULL,
+  PaymentDetails varchar(255) DEFAULT NULL,
+  DoctorFees double DEFAULT NULL,
+  PaymentStatus varchar(255) NOT NULL,
+  TotalAmount float NOT NULL,
+  Status tinyint(1) DEFAULT NULL,
+  PRIMARY KEY(PaymentID)
 );
 
 
@@ -140,16 +138,6 @@ CREATE TABLE PharmacyInventory (
     LastUpdated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-
-CREATE TABLE PharmacyStock (
-    itemId INT AUTO_INCREMENT PRIMARY KEY,
-    itemName VARCHAR(255) NOT NULL,
-    itemCost INT NOT NULL,
-    expiryDate INT NOT NULL,
-    totalCount INT NOT NULL,
-    leftCount INT NOT NULL,
-    employeeId INT NOT NULL
-);
 
 
 CREATE TABLE PharmacyPrescriptions (
