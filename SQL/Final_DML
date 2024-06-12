@@ -2,36 +2,36 @@ use hospitaldb;
 
 --------------------------------------------------------------------------------------------
 INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
-VALUES (1001, 'Michael', 'Johnson', '+1234567892', 'michael.johnson@example.com', 'doctor', 1);
+VALUES (1001, 'Michael', 'Johnson', '+1234567892', 'michael.johnson@example.com', 'Doctor', 1);
 
 -- Inserting another doctor
 INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
-VALUES (1002, 'Emily', 'Brown', '+1234567893', 'emily.brown@example.com', 'doctor', 1);
+VALUES (1002, 'Emily', 'Brown', '+1234567893', 'emily.brown@example.com', 'Doctor', 1);
 
 
 -- Inserting an admin
 INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
-VALUES (1003, 'John', 'Doe', '+1234567890', 'john.doe@example.com', 'admin', 1);
+VALUES (1003, 'John', 'Doe', '+1234567890', 'john.doe@example.com', 'Admin', 1);
 
 -- Inserting a receptionist
 INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
-VALUES (1004, 'Alice', 'Smith', '+1234567891', 'alice.smith@example.com', 'receptionist', 1);
+VALUES (1004, 'Alice', 'Smith', '+1234567891', 'alice.smith@example.com', 'Receptionist', 1);
 
 -- Inserting a nurse
 INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
-VALUES (1005, 'Emma', 'Davis', '+1234567894', 'emma.davis@example.com', 'nurse', 1);
+VALUES (1005, 'Emma', 'Davis', '+1234567894', 'emma.davis@example.com', 'Nurse', 1);
 
 -- Inserting another nurse
 INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
-VALUES (1006, 'Matthew', 'Wilson', '+1234567895', 'matthew.wilson@example.com', 'nurse', 1);
+VALUES (1006, 'Matthew', 'Wilson', '+1234567895', 'matthew.wilson@example.com', 'Nurse', 1);
 
 -- Inserting another nurse
 INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
-VALUES (1007, 'Olivia', 'Martinez', '+1234567896', 'olivia.martinez@example.com', 'nurse', 1);
+VALUES (1007, 'Olivia', 'Martinez', '+1234567896', 'olivia.martinez@example.com', 'Nurse', 1);
 
 -- Inserting a pharmacist
 INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
-VALUES (1008, 'David', 'Miller', '+1234567897', 'david.miller@example.com', 'pharmacist', 1);
+VALUES (1008, 'David', 'Miller', '+1234567897', 'david.miller@example.com', 'Pharmacist', 1);
 
 
 --------------------------------------------------------------------------------------------
