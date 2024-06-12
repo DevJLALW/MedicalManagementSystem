@@ -30,17 +30,17 @@ public class Appointment {
 
     @Column(name= "AppointmentDate")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date date;
 
     @Column(name= "StartTime")
     @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "HH:mm")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private Time startTime;
 
     @Column(name= "EndTime")
     @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "HH:mm")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private Time endTime;
 
     @ManyToOne(fetch = FetchType.EAGER)

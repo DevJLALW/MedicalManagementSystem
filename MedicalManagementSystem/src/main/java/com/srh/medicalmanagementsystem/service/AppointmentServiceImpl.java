@@ -1,17 +1,17 @@
 package com.srh.medicalmanagementsystem.service;
 
+
 import com.srh.medicalmanagementsystem.dao.AppointmentRepository;
 import com.srh.medicalmanagementsystem.entity.Appointment;
 import com.srh.medicalmanagementsystem.entity.AppointmentDto;
-import com.srh.medicalmanagementsystem.entity.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -24,12 +24,11 @@ public class AppointmentServiceImpl implements AppointmentService {
             "10:00-11:00", "11:00-12:00", "12:00-13:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00"
     );
 
-    public static Date getCurrentDate() {
-        // Get the current date
+    public static java.sql.Date getCurrentDate() {
         LocalDate localDate = LocalDate.now();
 
-        // Convert LocalDate to Date
-        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        // Convert LocalDate to java.sql.Date
+        return Date.valueOf(localDate);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public boolean isSlotAvailable(int doctorId, Date date, Date startTime) {
+    public boolean isSlotAvailable(int doctorId, Date date, Time startTime) {
         List<Appointment> appointments = appointmentRepository.getAppointmentsAssignedForDoctorSlot(doctorId, date, startTime);
         return appointments.isEmpty();
     }
@@ -103,11 +102,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         String[] times = slot.split("-");
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(times[0].split(":")[0]));
         calendar.set(Calendar.MINUTE, Integer.parseInt(times[0].split(":")[1]));
-        Date slotStart = calendar.getTime();
+        Time slotStart = new Time(calendar.getTimeInMillis());
 
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(times[1].split(":")[0]));
         calendar.set(Calendar.MINUTE, Integer.parseInt(times[1].split(":")[1]));
-        Date slotEnd = calendar.getTime();
+        Time slotEnd = new Time(calendar.getTimeInMillis());
 
         return isSlotAvailable(doctorId, date, slotStart);
     }

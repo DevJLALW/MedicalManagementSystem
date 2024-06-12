@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +67,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Integer
           "a.doctorId = :doctorId AND " +
           "a.date = :date AND " +
           "a.startTime = :startTime")
-  List<Appointment> getAppointmentsAssignedForDoctorSlot(@Param("doctorId") Integer doctorId, @Param("date") Date date, @Param("startTime") Date startTime);
+  List<Appointment> getAppointmentsAssignedForDoctorSlot(@Param("doctorId") Integer doctorId, @Param("date") Date date, @Param("startTime") Time startTime);
 
 }

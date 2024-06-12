@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -56,7 +56,7 @@ public class AppointmentController {
     @GetMapping("/{id}/viewDateWiseAppointments/")
     public String getDateWiseAppointments(@PathVariable("id") int id, @RequestParam("date") String date, Model model) throws ParseException {
         List<AppointmentDto> appointments;
-        Date dateFormat = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        Date dateFormat = Date.valueOf(date);
         if (id/100000 > 0) {
             appointments = appointmentService.getAppointmentsByPatientIdAndDate(id, dateFormat);
         }
@@ -81,8 +81,7 @@ public class AppointmentController {
     @PostMapping("/create")
     public String createAppointment(
             @Valid @ModelAttribute("appointment") AppointmentDto appointment,
-            @RequestParam("slot") String slot,
-            @RequestParam("date") String dateString,
+            @ModelAttribute("slot") String slot,
             BindingResult bindingResult,
             Model model
     ) {
@@ -92,13 +91,13 @@ public class AppointmentController {
         }
 
         try {
-            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
-            if (appointmentService.isSlotAvailableForDate(appointment.getDoctorId(), date, slot)) {
-                String[] times = slot.split("/");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+            if (appointmentService.isSlotAvailableForDate(appointment.getDoctorId(), appointment.getDate(), slot)) {
+                String[] times = slot.split("-");
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
-                java.util.Date startTimeUtilFormat = dateFormat.parse(dateString + " " + times[0]);
-                java.util.Date endTimeUtilFormat = dateFormat.parse(dateString + " " + times[1]);
+                // Changed this part for correct parsing of time
+                java.util.Date startTimeUtilFormat = timeFormat.parse(times[0]);
+                java.util.Date endTimeUtilFormat = timeFormat.parse(times[1]);
 
                 java.sql.Time startTime = new java.sql.Time(startTimeUtilFormat.getTime());
                 java.sql.Time endTime = new java.sql.Time(endTimeUtilFormat.getTime());
@@ -106,23 +105,27 @@ public class AppointmentController {
                 appointment.setStartTime(startTime);
                 appointment.setEndTime(endTime);
 
+                System.out.println(appointment.getDate());
                 appointmentService.saveAppointment(appointment);
                 return "redirect:/appointments/all";
             } else {
                 model.addAttribute("error", "Slot is already booked.");
             }
         } catch (ParseException e) {
-            model.addAttribute("error", "Invalid date format.");
+            model.addAttribute("error", "Invalid time format.");
         }
 
         model.addAttribute("allSlots", appointmentService.getAllSlots());
         return "patients/CreateAppointment";
     }
 
+
     @GetMapping("/update/{id}")
     public String showUpdateAppointmentForm(@PathVariable("id") int id, Model model) {
         AppointmentDto appointment = appointmentService.getAppointmentById(id);
         model.addAttribute("appointment", appointment);
+        model.addAttribute("patients", patientService.getAllPatients());
+        model.addAttribute("doctors", employeeService.getRoleSpecificEmployees("Doctor"));
         model.addAttribute("allSlots", appointmentService.getAllSlots());
         return "patients/UpdateAppointment";
     }
@@ -131,8 +134,8 @@ public class AppointmentController {
     public String updateAppointment(
             @PathVariable("id") int id,
             @Valid @ModelAttribute("appointment") AppointmentDto appointment,
+
             @RequestParam("slot") String slot,
-            @RequestParam("date") String dateString,
             BindingResult bindingResult,
             Model model
     ) {
@@ -142,31 +145,33 @@ public class AppointmentController {
             return "patients/UpdateAppointment";
         }
 
-        try {
-            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
-            if (appointmentService.isSlotAvailableForDate(appointment.getDoctorId(), date, slot)) {
-                String[] times = slot.split("/");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
-                java.util.Date startTimeUtilFormat = dateFormat.parse(dateString + " " + times[0]);
-                java.util.Date endTimeUtilFormat = dateFormat.parse(dateString + " " + times[1]);
+        try {
+            if (appointmentService.isSlotAvailableForDate(appointment.getDoctorId(), appointment.getDate(), slot)) {
+                String[] times = slot.split("-");
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
+                java.util.Date startTimeUtilFormat = timeFormat.parse(times[0]);
+                java.util.Date endTimeUtilFormat = timeFormat.parse(times[1]);
 
                 java.sql.Time startTime = new java.sql.Time(startTimeUtilFormat.getTime());
                 java.sql.Time endTime = new java.sql.Time(endTimeUtilFormat.getTime());
 
                 appointment.setStartTime(startTime);
                 appointment.setEndTime(endTime);
-                appointmentService.updateAppointment(id,appointment);
-                return "redirect:/appointments/all";
+
+                appointmentService.updateAppointment(id, appointment);
+                model.addAttribute("appointments", appointmentService.getAllAppointments());
+                return "patients/ShowAppointments";
             } else {
                 model.addAttribute("error", "Slot is already booked.");
             }
         } catch (ParseException e) {
-            model.addAttribute("error", "Invalid date format.");
+            model.addAttribute("error", "Invalid time format.");
         }
 
         model.addAttribute("allSlots", appointmentService.getAllSlots());
-        return "patients/ShowAppointments";
+        return "patients/UpdateAppointment";
     }
 
 

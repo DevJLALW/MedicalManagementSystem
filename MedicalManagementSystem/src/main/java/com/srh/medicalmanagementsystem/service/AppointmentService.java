@@ -3,7 +3,8 @@ package com.srh.medicalmanagementsystem.service;
 import com.srh.medicalmanagementsystem.entity.Appointment;
 import com.srh.medicalmanagementsystem.entity.AppointmentDto;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 public interface AppointmentService {
@@ -12,7 +13,7 @@ public interface AppointmentService {
 
     AppointmentDto getAppointmentById(int appointmentId);
 
-    boolean isSlotAvailable(int doctorId, Date date, Date startTime);
+    boolean isSlotAvailable(int doctorId, Date date, Time startTime);
 
     Appointment saveAppointment(AppointmentDto appointment);
 
