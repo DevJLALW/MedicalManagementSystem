@@ -29,10 +29,11 @@ public class MedicalRecordServiceTests {
 
     @Test
     void testFindMedicalRecordByPatientId() {
-        List<MedicalRecord> records = medicalRecordService.findMedicalRecordByPatientId(202);
+        List<MedicalRecord> records = medicalRecordService.findMedicalRecordByPatientId(100109);
         assertEquals(1, records.size());
-        assertEquals("Hypertension", records.get(0).getDiagnosis());
+        assertEquals("Heartburn", records.get(0).getDiagnosis());
     }
+
 
     @Test
     void testFindAllMedicalRecords() {
@@ -48,8 +49,8 @@ public class MedicalRecordServiceTests {
         newRecord.setMedicalResult("Managed with inhaler");
         newRecord.setMedicationsPrescribed("Inhaler");
         newRecord.setDate(java.sql.Date.valueOf(LocalDate.now()));
-        newRecord.setEmployeeId(104);
-        newRecord.setPatientId(204);
+        newRecord.setEmployeeId(1001);
+        newRecord.setPatientId(100104);
 
         MedicalRecord savedRecord = medicalRecordService.saveMedicalRecord(newRecord);
         assertNotNull(savedRecord);
@@ -58,7 +59,7 @@ public class MedicalRecordServiceTests {
 
     @Test
     void testUpdateMedicalRecord() {
-        List<MedicalRecord> records = medicalRecordService.findMedicalRecordByPatientId(202);
+        List<MedicalRecord> records = medicalRecordService.findMedicalRecordByPatientId(100101);
         assertFalse(records.isEmpty());
         MedicalRecord record = records.get(0);
         record.setDiagnosis("Severe Hypertension");
