@@ -16,7 +16,8 @@ CREATE TABLE Employee (
 -------------------------------
 CREATE TABLE Specialization (
     DoctorID INT PRIMARY KEY,
-    SpecializationName VARCHAR(255) NOT NULL
+    SpecializationName VARCHAR(255),
+    FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID)
 );
 ---------------------------------
 CREATE TABLE DoctorNurseAssignment (
