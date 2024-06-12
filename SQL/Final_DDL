@@ -120,3 +120,14 @@ CREATE TABLE Room (
 );
 
 -----------------------------------
+CREATE TABLE Appointments (
+    AppointmentID INT AUTO_INCREMENT PRIMARY KEY,
+    PatientID INT NOT NULL,
+    DoctorID INT NOT NULL,
+    AppointmentDate DATE,
+    StartTime TIME,
+    EndTime TIME,
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+    FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID)
+);
+-----------------------------------
