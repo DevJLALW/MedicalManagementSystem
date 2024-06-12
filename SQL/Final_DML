@@ -123,17 +123,35 @@ VALUES ('Heartburn', 'Acid reflux', 'Improving', 'Antacids', '2024-06-03', 1001,
 
 --------------------------------------------------------------------------------------------
 
-CREATE TABLE PatientEventRecord (
-    EventId INT AUTO_INCREMENT PRIMARY KEY,
-    PatientId INT NOT NULL,
-    EventDate DATE,
-    EventType VARCHAR(255) NOT NULL,
-    Details TEXT NOT NULL,
-    AssignedDoctorId INT NOT NULL,
-    AssignedNurseId INT NOT NULL,
-    Status INT NOT NULL,
-    FOREIGN KEY (PatientId) REFERENCES Patients(PatientID)
-);
+-- Inserting patient event records
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100101, '2024-06-12', 'Appointment', 'Routine checkup', 1001, 1005, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100102, '2024-06-12', 'Prescription', 'Antibiotics prescribed', 1002, 1006, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100103, '2024-06-12', 'Test', 'Blood sugar test', 1001, 1005, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100104, '2024-06-12', 'Consultation', 'General consultation', 1002, 1007, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100105, '2024-06-12', 'Test', 'Lung function test', 1002, 1006, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100106, '2024-06-12', 'Appointment', 'Follow-up appointment', 1001, 1007, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100107, '2024-06-12', 'Prescription', 'Pain medication prescribed', 1002, 1005, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100108, '2024-06-12', 'Consultation', 'Arthritis assessment', 1001, 1006, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100109, '2024-06-12', 'Test', 'Cholesterol level test', 1001, 1005, 1);
 
 --------------------------------------------------------------------------------------------
+
+
 
