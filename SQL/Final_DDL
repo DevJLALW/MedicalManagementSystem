@@ -60,5 +60,24 @@ CREATE TABLE Patients (
 
 -----------------------------------
 
+CREATE TABLE MedicalRecord (
+    MedicalRecordID INT AUTO_INCREMENT PRIMARY KEY,
+    Diagnosis VARCHAR(255) NOT NULL,
+    DiagnosisNotes TEXT NOT NULL,
+    MedicalResult TEXT NOT NULL,
+    MedicationsPrescribed TEXT NOT NULL,
+    Date DATE,
+    EmployeeID INT NOT NULL,
+    PatientID INT NOT NULL,
+    Status INT NOT NULL,
+    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
+    FOREIGN KEY (PatientID) REFERENCES patients(patientID)
+);
+
+-----------------------------------
+
+
+
+
 
 
