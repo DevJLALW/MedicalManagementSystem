@@ -17,6 +17,7 @@ File-> settings->plugin->search 'lombok' ->Install
 
 5. Update application.properties file with username and password of SQL data source:
 https://github.com/DevJLALW/MedicalManagementSystem/blob/main/MedicalManagementSystem/src/main/resources/application.properties
+
 spring.datasource.username=MYSQL_USERNAME
 spring.datasource.password=MYSQL_PASSWORD
 
