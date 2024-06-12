@@ -72,10 +72,12 @@
                         <th>Address</th>
                         <td th:text="${patient.address}"></td>
                     </tr>
+                    <div th:if="${!#authorization.expression('hasRole(''ROLE_RECEPTIONIST'')')}">
                     <tr>
                         <th>Medical History</th>
                         <td th:text="${patient.medicalHistory}"></td>
                     </tr>
+                    </div>
                     <tr>
                         <th>Insurance ID</th>
                         <td th:text="${patient.insuranceID}"></td>
@@ -93,7 +95,9 @@
                         <td th:text="${patient.timestamp}"></td>
                     </tr>
                 </table>
-            </div>    
+            </div>
+
+        <div th:if="${!#authorization.expression('hasRole(''ROLE_RECEPTIONIST'')')}">
             <h3 style="margin-left: 10px; margin-top: 25px">Medical Record Information</h3>
             <table class="table" style="width: 50%; margin:0 auto;">
                 <thead>
@@ -122,7 +126,7 @@
                     </tr>
                 </tbody>
         </table>
-
+        </div>
             <h4 style="margin-left: 10px; margin-top: 25px">Patient Event Record Information</h4>
             <table class="table">
                 <thead>
