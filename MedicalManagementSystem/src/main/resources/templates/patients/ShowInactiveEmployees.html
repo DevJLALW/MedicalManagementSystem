@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Employees Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <style>
+        .card {
+            box-shadow: 0 0 5px 0 ;
+            background: inherit;
+            backdrop-filter: blur(10px);
+        }
+        .margintop{
+            margin-top: 10px;
+        }
+        label{
+            font-weight:bold;
+        }
+        td{
+            border: 1px solid black;
+        }
+        th{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<a class="btn btn-primary" href="/index" style="float: right; margin-right: 2px; margin-top: 2px;">Logout</a>
+<h1 class="text-center my-4 margintop">Inactive Employees Information</h1>
+<div class="container">
+    <!--<form action="#" th:action="@{/Employees/search}" method="get">
+        <input id="search" type="text" name="keyword" placeholder="Search using first name, last name, role or employee id">
+        <button id="button" style="background-color: #0D6EFD; color:white; margin-bottom: 10px;">Search</button>
+        <button id="reset" value="Reset" style="background-color: #DC3545; color:white;">Reset</button>
+    </form>
+    <a class="btn btn-primary" style="margin-bottom: 5px;" href="/employees/create">New Employee Entry</a>
+    <button id="deleteButton" style="margin-bottom: 5px;" class="btn btn-danger" onclick="deleteSelectedEmployees()">Delete</button>-->
+    <a class="btn btn-primary" style="float:right; margin-bottom: 5px;" href="/medicalmanagement/dashboard">Back</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Select</th>
+            <th>EmployeeID</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>ContactNumber</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee :${employees}">
+            <td><input class="select-row" type="checkbox" name="employeeIds" th:value="${employee.employeeId}" /></td>
+            <td th:text="${employee.employeeId}"></td>
+            <td th:text="${employee.firstName}"></td>
+            <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.contactNumber}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.role}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!--
+
+<script>
+    function deleteSelectedEmployees() {
+       const checkboxes = document.querySelectorAll('input[name="employeeIds"]:checked');
+       const ids = Array.from(checkboxes).map(cb => cb.value);
+
+       if (ids.length === 0) {
+           alert('No employee selected for deletion.');
+           return;
+       }
+
+       if (!confirm('Are you sure you want to delete the selected employees?')) {
+           return;
+       }
+
+       const form = document.createElement('form');
+       form.method = 'POST';
+       form.action = '/employees/delete';
+
+       const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+       ids.forEach(id => {
+           const input = document.createElement('input');
+           input.type = 'hidden';
+           input.name = 'employeeIds';
+           input.value = id;
+           form.appendChild(input);
+       });
+
+       const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_csrf';
+        csrfInput.value = csrfToken;
+        form.appendChild(csrfInput);
+
+       document.body.appendChild(form);
+	   const methodInput = document.createElement('input');
+        methodInput.type = 'hidden';
+        methodInput.name = '_method';
+        methodInput.value = 'DELETE';
+        form.appendChild(methodInput);
+       form.submit();
+   }
+</script>-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

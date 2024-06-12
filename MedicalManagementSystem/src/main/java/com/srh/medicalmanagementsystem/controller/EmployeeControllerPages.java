@@ -29,6 +29,14 @@ public class EmployeeControllerPages {
         return "patients/ShowEmployees";
     }
 
+    @GetMapping("/allInactive")
+    public String getAllInactiveEmployeesPage(Model model) {
+        List<Employee> employeeList= employeeService.getAllInactiveEmployees();
+        model.addAttribute("employees",employeeList);
+
+        return "patients/ShowInactiveEmployees";
+    }
+
     @GetMapping("/{employeeId}/assignedPatients")
     public String getAllAssignedPatients(@PathVariable("employeeId") Integer employeeId, Model model) {
         List<Patient> patients= employeeService.getAllAssignedPatients(employeeId);
@@ -117,4 +125,5 @@ public class EmployeeControllerPages {
 
         return "patients/ShowEmployees";
     }
+
 }

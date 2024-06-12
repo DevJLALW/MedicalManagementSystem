@@ -33,10 +33,18 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public List<Employee> getAllEmployees() {
-        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employees = employeeRepository.findAllActiveEmployees();
         employees.sort(Comparator.comparing(Employee::getStatus).reversed());
         return employees;
     }
+
+    @Override
+    public List<Employee> getAllInactiveEmployees() {
+        List<Employee> employees = employeeRepository.findAllInactiveEmployees();
+        employees.sort(Comparator.comparing(Employee::getStatus).reversed());
+        return employees;
+    }
+
 
     @Transactional
     public Employee saveEmployee(Employee employee) {
