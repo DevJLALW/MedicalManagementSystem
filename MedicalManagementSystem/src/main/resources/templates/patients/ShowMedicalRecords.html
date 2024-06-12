@@ -52,6 +52,7 @@
                     <th>Date</th>
                     <th>Employee ID</th>
                     <th>Patient ID</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -66,6 +67,7 @@
                     <td th:text="${medicalRecord.date}"></td>
                     <td th:text="${medicalRecord.employeeId}"></td>
                     <td th:text="${medicalRecord.patientId}"></td>
+                    <td th:text="${medicalRecord.status}"></td>
 
                     <td style="white-space:nowrap">
                         <a class="btn btn-primary btn-sm" th:href="@{/medicalRecords/update/{medicalRecordId}(medicalRecordId=${medicalRecord.medicalRecordId})}">Edit</a>

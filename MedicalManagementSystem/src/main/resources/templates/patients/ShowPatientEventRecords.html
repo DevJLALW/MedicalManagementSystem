@@ -43,6 +43,7 @@
                     <th>Details</th>
                     <th>Assigned doctor ID</th>
                     <th>Assigned nurse ID</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -55,6 +56,7 @@
                     <td th:text="${record.details}"></td>
                     <td th:text="${record.assignedDoctorId}"></td>
                     <td th:text="${record.assignedNurseId}"></td>
+                    <td th:text="${record.status}"></td>
                     <td>
                         <a class="btn btn-primary" th:href="@{/patientEventRecord/update/{eventId}(eventId=${record.eventId})}">Edit</a>
                         <form th:action="@{/patientEventRecord/delete}" method="post" style="display:inline;">
