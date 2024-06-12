@@ -1,6 +1,7 @@
 package com.srh.medicalmanagementsystem.service;
 
 import com.srh.medicalmanagementsystem.entity.Payment;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
@@ -9,7 +10,6 @@ import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 @Service
@@ -22,7 +22,7 @@ public class PdfService {
         Context context = new Context(Locale.ENGLISH);
         context.setVariable("payment", payment);
 
-        String htmlContent = templateEngine.process("PaymentReceipt", context);
+        String htmlContent = templateEngine.process("/patients/paymentReceipt", context);
 
         try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
             PdfRendererBuilder builder = new PdfRendererBuilder();

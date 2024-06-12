@@ -32,6 +32,7 @@ public class PaymentServiceImpl implements PaymentService {
     public void deletePayment(Long id) {
         paymentRepository.deleteById(id);
     }
+
     @Override
     public List<Payment> findPaymentsByPatientId(Long patientId) {
         return paymentRepository.findPaymentsByPatientId(patientId);
