@@ -165,8 +165,6 @@
                     <th>Payment method</th>
                     <th>Payment Details</th>
                     <th>Doctor Fees</th>
-                    <th>Room Fees</th>
-                    <th>Pharmacy Cost</th>
                     <th>Payment Status</th>
                     <th>Total Amount</th>
                     <th>Receipt</th>
@@ -178,8 +176,6 @@
                     <td th:text="${payment.paymentMethod}"></td>
                     <td th:text="${payment.paymentDetails}"></td>
                     <td th:text="${payment.doctorFees}"></td>
-                    <td th:text="${payment.roomService}"></td>
-                    <td th:text="${payment.pharmacyCost}"></td>
                     <td th:text="${payment.paymentStatus}"></td>
                     <td th:text="${payment.totalAmount}"></td>
                     <td style="white-space:nowrap">
@@ -199,7 +195,7 @@
                     <th>Medicine Price</th>
                     <th>Dosage</th>
                     <th>Number of Days</th>
-                    <th>Total Bill</th>
+                    <th>Pharmacy Bill</th>
                     <th>Created At</th>
                 </tr>
                 </thead>
@@ -211,7 +207,7 @@
                     <td th:text="${prescription.medicinePrice}"></td>
                     <td th:text="${prescription.medicineDosage}"></td>
                     <td th:text="${prescription.numberOfDays}"></td>
-                    <td th:text="${prescription.totalBill}"></td>
+                    <td th:text="${prescription.pharmacyBill}"></td>
                     <td th:text="${prescription.createdAt}"></td>
 
                 </tr>
