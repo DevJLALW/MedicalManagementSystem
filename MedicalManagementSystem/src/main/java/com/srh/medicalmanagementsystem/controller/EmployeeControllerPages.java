@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import java.util.List;
 
 @Controller
@@ -37,9 +39,11 @@ public class EmployeeControllerPages {
         return "patients/ShowInactiveEmployees";
     }
 
-    @GetMapping("/{employeeId}/assignedPatients")
-    public String getAllAssignedPatients(@PathVariable("employeeId") Integer employeeId, Model model) {
-        List<Patient> patients= employeeService.getAllAssignedPatients(employeeId);
+    @GetMapping("/assignedPatients")
+    public String getAllAssignedPatients(Model model, HttpServletRequest request) {
+        String employeeId = (String) request.getSession().getAttribute("employeeID");
+
+        List<Patient> patients= employeeService.getAllAssignedPatients(Integer.parseInt(employeeId));
         model.addAttribute("patients",patients);
 
         return "patients/ShowPatientsOfDoctor";
