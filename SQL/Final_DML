@@ -93,3 +93,32 @@ VALUES (100109, 'Ava', 'Garcia', '1980-11-10', 'Female', '+1234567890', 'ava.gar
 
 --------------------------------------------------------------------------------------------
 
+-- Inserting medical records for patients
+INSERT INTO MedicalRecord (Diagnosis, DiagnosisNotes, MedicalResult, MedicationsPrescribed, Date, EmployeeID, PatientID, Status)
+VALUES ('Flu', 'Mild symptoms', 'Recovered', 'Ibuprofen', '2024-06-10', 1001, 100101, 1);
+
+INSERT INTO MedicalRecord (Diagnosis, DiagnosisNotes, MedicalResult, MedicationsPrescribed, Date, EmployeeID, PatientID, Status)
+VALUES ('Fractured Arm', 'X-ray confirmed', 'Under observation', 'Painkillers', '2024-06-11', 1002, 100102, 1);
+
+INSERT INTO MedicalRecord (Diagnosis, DiagnosisNotes, MedicalResult, MedicationsPrescribed, Date, EmployeeID, PatientID, Status)
+VALUES ('Migraine', 'Severe headache', 'Recovering', 'Paracetamol', '2024-06-09', 1001, 100103, 1);
+
+INSERT INTO MedicalRecord (Diagnosis, DiagnosisNotes, MedicalResult, MedicationsPrescribed, Date, EmployeeID, PatientID, Status)
+VALUES ('Allergic Reaction', 'Hives observed', 'Stable', 'Antihistamines', '2024-06-08', 1002, 100104, 1);
+
+INSERT INTO MedicalRecord (Diagnosis, DiagnosisNotes, MedicalResult, MedicationsPrescribed, Date, EmployeeID, PatientID, Status)
+VALUES ('Asthma Attack', 'Shortness of breath', 'Recovered', 'Inhaler', '2024-06-07', 1002, 100105, 1);
+
+INSERT INTO MedicalRecord (Diagnosis, DiagnosisNotes, MedicalResult, MedicationsPrescribed, Date, EmployeeID, PatientID, Status)
+VALUES ('High Blood Pressure', 'Hypertension', 'Stable', 'Blood Pressure Medication', '2024-06-06', 1001, 100106, 1);
+
+INSERT INTO MedicalRecord (Diagnosis, DiagnosisNotes, MedicalResult, MedicationsPrescribed, Date, EmployeeID, PatientID, Status)
+VALUES ('Common Cold', 'Sore throat, runny nose', 'Recovering', 'Rest and fluids', '2024-06-05', 1002, 100107, 1);
+
+INSERT INTO MedicalRecord (Diagnosis, DiagnosisNotes, MedicalResult, MedicationsPrescribed, Date, EmployeeID, PatientID, Status)
+VALUES ('Arthritis', 'Joint pain', 'Under treatment', 'Pain relievers', '2024-06-04', 1001, 100108, 1);
+
+INSERT INTO MedicalRecord (Diagnosis, DiagnosisNotes, MedicalResult, MedicationsPrescribed, Date, EmployeeID, PatientID, Status)
+VALUES ('Heartburn', 'Acid reflux', 'Improving', 'Antacids', '2024-06-03', 1001, 100109, 1);
+
+--------------------------------------------------------------------------------------------
