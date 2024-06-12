@@ -30,4 +30,8 @@ public interface SpecializationRepository extends JpaRepository<Specialization, 
             "FROM Specialization s " +
             "JOIN Employee d ON s.doctorId = d.employeeId ")
     List<DoctorSpecializationDto> findAllDoctorsSpecializations();
+
+
+    @Query("SELECT s FROM Specialization s WHERE s.doctorId IN :ids")
+   List<Specialization> findByDoctorIdIn(@Param("ids") List<Integer> ids);
 }

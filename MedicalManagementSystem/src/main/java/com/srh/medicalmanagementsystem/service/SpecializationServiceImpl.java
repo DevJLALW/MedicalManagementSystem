@@ -68,4 +68,9 @@ public class SpecializationServiceImpl implements SpecializationService{
         specialization.setSpecializationName(specializationDto.getSpecializationName());
         return specializationRepository.save(specialization);
     }
+
+    @Override
+    public List<Specialization> findByDoctorIds(List<Integer> ids){
+        return specializationRepository.findByDoctorIdIn(ids);
+    }
 }

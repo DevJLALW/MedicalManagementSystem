@@ -96,6 +96,7 @@
                             <tr>
                                 <th scope="col">First Name</th>
                                 <th scope="col">Last Name</th>
+                                <th scope="col">Doctor Specialization</th>
                                 <th scope="col">Doctor ID</th>
                                 <th scope="col">Select</th>
                             </tr>
@@ -191,9 +192,11 @@
                     success: function(data) {
                         $('#doctorTableBody').empty();
                         $.each(data, function(index, doctor) {
+
                             var row = '<tr>' +
                                 '<td>' + doctor.firstName + '</td>' +
                                 '<td>' + doctor.lastName + '</td>' +
+                                '<td>' + doctor.specialization.specializationName + '</td>' +
                                 '<td>' + doctor.employeeId + '</td>' +
                                 '<td><button type="button" class="btn btn-sm btn-primary select-doctor" data-id="' + doctor.employeeId + '" data-name="' + doctor.firstName + ' ' + doctor.lastName + '">Select</button></td>' +
                                 '</tr>';

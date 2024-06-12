@@ -18,4 +18,6 @@ public interface SpecializationService{
 
     public Specialization updateSpecialization (Integer doctorId, DoctorSpecializationDto specializationDto);
 
+    public List<Specialization> findByDoctorIds(List<Integer> ids);
+
 }

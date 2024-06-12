@@ -43,6 +43,14 @@ public class PharmacyPrescription {
     @JoinColumn(name = "patientId", referencedColumnName = "PatientID", insertable = false, updatable = false)
     private Patient patient;
 
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
     public int getPrescriptionID() {
         return prescriptionID;
     }

@@ -42,4 +42,7 @@ public class Employee {
     @Column(name = "Status", nullable = false)
     private Integer status;
 
+    @Transient
+    private Specialization specialization;
+
 }
