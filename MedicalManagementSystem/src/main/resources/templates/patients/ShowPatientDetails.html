@@ -223,9 +223,9 @@
                     <th>ID</th>
                     <th>Patient ID</th>
                     <th>Doctor ID</th>
-                    <th>Start Date and Time</th>
-                    <th>End Date and Time</th>
-                    <th>Appointment Status</th>
+                    <th>Appointment Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -234,9 +234,9 @@
                     <td th:text="${appointment.appointmentId}"></td>
                     <td th:text="${appointment.patientId}"></td>
                     <td th:text="${appointment.doctorId}"></td>
-                    <td th:text="${appointment.startDateTime}"></td>
-                    <td th:text="${appointment.endDateTime}"></td>
-                    <td th:text="${appointment.appointmentStatus}"></td>
+                    <td th:text="${appointment.date}"></td>
+                    <td th:text="${appointment.startTime}"></td>
+                    <td th:text="${appointment.endTime}"></td>
                     <td>
                         <a class="btn btn-primary" th:href="@{/appointments/update/{id}(id=${appointment.appointmentId})}">Edit</a>
                         <a class="btn btn-primary" th:href="@{/appointments/delete/{id}(id=${appointment.appointmentId})}">Delete</a>

@@ -56,6 +56,11 @@
                     <button type="submit" onclick="getRoomsInfo()" class="btn btn-primary">Show Rooms</button>
                 </div>
             </div>
+                    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                        <div class="row mb-3">
+                            <button type="submit" onclick="getInactivePatients()" class="btn btn-primary">Show Inactive Patients</button>
+                        </div>
+                    </div>
             <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_DOCTOR'')')}">
 
                 <div class="row mb-3">
@@ -100,6 +105,9 @@
     <script>
         function getDoctorInfo(){
         location.replace("/employees/doctor-nurse-assignment/all")
+    }
+    function getInactivePatients(){
+        location.replace("/patients/inactive")
     }
     function getEventRecordsInfo(){
         location.replace("/patientEventRecord/all")
