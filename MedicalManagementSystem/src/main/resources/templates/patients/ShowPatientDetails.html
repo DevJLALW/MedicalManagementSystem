@@ -184,5 +184,59 @@
                 </tbody>
             </table>
 
+            <h4 style="margin-left: 10px; margin-top: 25px">Prescriptions</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Prescription ID</th>
+                    <th>Patient ID</th>
+                    <th>Medicine</th>
+                    <th>Medicine Price</th>
+                    <th>Dosage</th>
+                    <th>Number of Days</th>
+                    <th>Total Bill</th>
+                    <th>Created At</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prescription : ${pharmacyPrescriptionRecords}">
+                    <td th:text="${prescription.prescriptionID}"></td>
+                    <td th:text="${prescription.patientID}"></td>
+                    <td th:text="${prescription.inventory.medicineName}"></td>
+                    <td th:text="${prescription.medicinePrice}"></td>
+                    <td th:text="${prescription.medicineDosage}"></td>
+                    <td th:text="${prescription.numberOfDays}"></td>
+                    <td th:text="${prescription.totalBill}"></td>
+                    <td th:text="${prescription.createdAt}"></td>
+
+                </tr>
+                </tbody>
+            </table>
+
+            <h4 style="margin-left: 10px; margin-top: 25px">Appointments</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient ID</th>
+                    <th>Doctor ID</th>
+                    <th>Start Date and Time</th>
+                    <th>End Date and Time</th>
+                    <th>Appointment Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="appointment : ${appointmentRecords}">
+                    <td th:text="${appointment.appointmentId}"></td>
+                    <td th:text="${appointment.patientId}"></td>
+                    <td th:text="${appointment.doctorId}"></td>
+                    <td th:text="${appointment.startDateTime}"></td>
+                    <td th:text="${appointment.endDateTime}"></td>
+                    <td th:text="${appointment.appointmentStatus}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+
         </body>
 </html>

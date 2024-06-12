@@ -43,6 +43,10 @@ public class Appointment {
     @DateTimeFormat(pattern = "HH:mm")
     private Date endTime;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "patientId", referencedColumnName = "PatientID", insertable = false, updatable = false)
+    private Patient patient;
+
 
 
 }

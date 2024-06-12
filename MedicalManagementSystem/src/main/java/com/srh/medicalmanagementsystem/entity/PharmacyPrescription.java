@@ -38,6 +38,10 @@ public class PharmacyPrescription {
     @Column(name = "CreatedAt", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "patientId", referencedColumnName = "PatientID", insertable = false, updatable = false)
+    private Patient patient;
+
     public int getPrescriptionID() {
         return prescriptionID;
     }

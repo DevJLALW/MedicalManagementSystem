@@ -31,7 +31,9 @@
         <a class="btn btn-primary" style="margin-right: 5px; margin-top: 5px; float: right;" href="/index">Logout</a>
         <h1 class="text-center mb-4 margintop">Prescription List</h1>
         <div class="container">
+            <div th:if="${#authorization.expression('hasRole(''ROLE_DOCTOR'')')}">
             <a href="/prescriptions/new" class="btn btn-primary" style="margin-bottom: 10px;">Add New Prescription</a>
+            </div>
         <a class="btn btn-primary" style="float: right;" href="/medicalmanagement/dashboard">Back</a>    
             <table class="table">
                 <thead>
@@ -44,7 +46,10 @@
                     <th>Number of Days</th>
                     <th>Total Bill</th>
                     <th>Created At</th>
+                    <div th:if="${#authorization.expression('hasRole(''ROLE_DOCTOR'')')}">
                     <th>Action</th>
+                    </div>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -57,9 +62,11 @@
                     <td th:text="${prescription.numberOfDays}"></td>
                     <td th:text="${prescription.totalBill}"></td>
                     <td th:text="${prescription.createdAt}"></td>
+                    <div th:if="${#authorization.expression('hasRole(''ROLE_DOCTOR'')')}">
                     <td>
                         <a class="btn btn-danger" th:href="@{/prescriptions/delete/{id}(id=${prescription.prescriptionID})}">Delete</a>
                     </td>
+                    </div>
                 </tr>
                 </tbody>
             </table>

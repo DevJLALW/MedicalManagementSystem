@@ -102,10 +102,14 @@ public class PatientControllerPages {
         //List<MedicalRecord> medicalRecords = medicalRecordService.findMedicalRecordByPatientId(patientId);
         List<PatientEventRecord> patientEventRecordList = patient.getEventRecords();
         List<Payment> payments = patient.getPayments();
+        List<PharmacyPrescription> pharmacyPrescription = patient.getPharmacyPrescription();
+        List<Appointment> appointmentDto = patient.getAppointmentDto();
 
         model.addAttribute("patient", patient);
         model.addAttribute("medicalRecords", medicalRecords);
         model.addAttribute("patientEventRecords", patientEventRecordList);
+        model.addAttribute("pharmacyPrescriptionRecords", pharmacyPrescription);
+        model.addAttribute("appointmentRecords", appointmentDto);
 
         if (patient.getDoctor() != null) {
             model.addAttribute("doctorName", patient.getDoctor().getFirstName() + " " + patient.getDoctor().getLastName());

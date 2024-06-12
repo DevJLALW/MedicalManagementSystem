@@ -19,8 +19,9 @@ public class AppointmentDto {
     private Date date;
     private Date startTime;
     private Date endTime;
+    private Patient patient;
 
-    public AppointmentDto(Integer appointmentId, Integer patientId, String patientFirstName, String patientLastName, Integer doctorId, String doctorFirstName, String doctorLastName, Date date, Date startTime, Date endTime) {
+    public AppointmentDto(Integer appointmentId, Integer patientId, String patientFirstName, String patientLastName, Integer doctorId, String doctorFirstName, String doctorLastName, Date date, Date startTime, Date endTime, Patient patient) {
         this.appointmentId = appointmentId;
         this.patientId = patientId;
         this.patientFirstName = patientFirstName;
@@ -31,6 +32,7 @@ public class AppointmentDto {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.patient=patient;
     }
 
     public AppointmentDto() {}
@@ -115,4 +117,11 @@ public class AppointmentDto {
         this.endTime = endTime;
     }
 
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
 }

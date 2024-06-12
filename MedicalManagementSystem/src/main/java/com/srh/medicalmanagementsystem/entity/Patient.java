@@ -104,6 +104,12 @@ public class Patient {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Payment> payments;
 
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<PharmacyPrescription> pharmacyPrescription;
+
+    @OneToMany(mappedBy = "patient")
+    private List<Appointment> appointmentDto;
+
     @PrePersist
     protected void onCreate() {
         this.timestamp = Timestamp.from(Instant.now());
