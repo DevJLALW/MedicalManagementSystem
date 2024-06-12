@@ -154,33 +154,13 @@ VALUES (100109, '2024-06-12', 'Test', 'Cholesterol level test', 1001, 1005, 1);
 
 --------------------------------------------------------------------------------------------
 -- Inserting payment data
-INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
-VALUES (100101, '2024-06-12', 'CASH', 'Doctor consultation fees', 50.00, NULL, NULL, 'PAID', 1);
-
-INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
-VALUES (100102, '2024-06-12', 'DEBIT_CREDIT', 'Doctor consultation fees and room service', 50.00, 25.00, NULL, 'PAID', 1);
-
-INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
-VALUES (100103, '2024-06-12', 'BANK_TRANSFER', 'Doctor consultation fees, room service, and pharmacy cost', 50.00, 25.00, 20.00, 'PAID', 1);
-
-INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
-VALUES (100104, '2024-06-12', 'CASH', 'Doctor consultation fees', 50.00, NULL, NULL, 'UNPAID', 1);
-
-INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
-VALUES (100105, '2024-06-12', 'DEBIT_CREDIT', 'Doctor consultation fees and room service', 50.00, 25.00, NULL, 'UNPAID', 1);
-
-INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
-VALUES (100106, '2024-06-12', 'BANK_TRANSFER', 'Doctor consultation fees, room service, and pharmacy cost', 50.00, 25.00, 20.00, 'UNPAID', 1);
-
-INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
-VALUES (100107, '2024-06-12', 'CASH', 'Doctor consultation fees', 50.00, NULL, NULL, 'PAID', 1);
-
-INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
-VALUES (100108, '2024-06-12', 'DEBIT_CREDIT', 'Doctor consultation fees and room service', 50.00, 25.00, NULL, 'PAID', 1);
-
-INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
-VALUES (100109, '2024-06-12', 'BANK_TRANSFER', 'Doctor consultation fees, room service, and pharmacy cost', 50.00, 25.00, 20.00, 'PAID', 1);
-
+INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, PaymentStatus, TotalAmount, Status)
+VALUES
+  (1, '2024-06-01', 'CASH', 'Paid in cash at reception', 150.00, 'PAID', 150.00, 1),
+  (2, '2024-06-05', 'DEBIT_CREDIT', 'Paid using MasterCard', 200.00, 'PAID', 200.00, 1),
+  (3, '2024-06-10', 'INSURANCE', 'Covered by ABC Insurance', 10.00, 'PAID', 250.00, 0),
+  (4, '2024-06-12', 'CASH', 'Paid in cash at reception', 180.00, 'PAID', 180.00, 1),
+  (5, '2024-06-15', 'BANK_TRANSFER', 'Paid via bank transfer', 220.00, 'PAID', 220.00, 1);
 
 --------------------------------------------------------------------------------------------
 
