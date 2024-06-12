@@ -110,6 +110,9 @@ public class Patient {
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointmentDto;
 
+    @OneToMany(mappedBy = "patient")
+    private List<Room> rooms;
+
     @PrePersist
     protected void onCreate() {
         this.timestamp = Timestamp.from(Instant.now());
