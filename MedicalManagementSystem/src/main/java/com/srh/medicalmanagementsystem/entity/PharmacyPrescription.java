@@ -1,6 +1,7 @@
 package com.srh.medicalmanagementsystem.entity;
 
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -32,8 +33,8 @@ public class PharmacyPrescription {
     @Column(name = "NumberOfDays", nullable = false)
     private int numberOfDays;
 
-    @Column(name = "TotalBill", nullable = false)
-    private BigDecimal totalBill;
+    @Column(name = "PharmacyBill", nullable = false)
+    private BigDecimal pharmacyBill;
 
     @Column(name = "CreatedAt", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -98,12 +99,12 @@ public class PharmacyPrescription {
         this.numberOfDays = numberOfDays;
     }
 
-    public BigDecimal getTotalBill() {
-        return totalBill;
+    public BigDecimal getPharmacyBill() {
+        return pharmacyBill;
     }
 
-    public void setTotalBill(BigDecimal totalBill) {
-        this.totalBill = totalBill;
+    public void setPharmacyBill(BigDecimal pharmacyBill) {
+        this.pharmacyBill = pharmacyBill;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -114,5 +115,7 @@ public class PharmacyPrescription {
         this.createdAt = createdAt;
     }
 
+    public BigDecimal getTotalBill() {
+        return pharmacyBill;
+    }
 }
-

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Prescription List</title>
+</head>
+<body>
+<h1>Prescription List</h1>
+
+<!-- Search Form -->
+<form action="/prescriptions/search" method="get">
+    <input type="text" name="patientID" placeholder="Search by Patient ID">
+    <button type="submit">Search</button>
+</form>
+
+<a href="/prescriptions/new">Add New Prescription</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Prescription ID</th>
+        <th>Patient ID</th>
+        <th>Medicine</th>
+        <th>Medicine Price</th>
+        <th>Dosage</th>
+        <th>Number of Days</th>
+        <th>Pharmacy Bill</th>
+        <th>Created At</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="prescription : ${listPrescriptions}">
+        <td th:text="${prescription.prescriptionID}"></td>
+        <td th:text="${prescription.patientID}"></td>
+        <td th:text="${prescription.inventory.medicineName}"></td>
+        <td th:text="${prescription.medicinePrice}"></td>
+        <td th:text="${prescription.medicineDosage}"></td>
+        <td th:text="${prescription.numberOfDays}"></td>
+        <td th:text="${prescription.totalBill}"></td>
+        <td th:text="${prescription.createdAt}"></td>
+        <td>
+            <a th:href="@{/prescriptions/delete/{id}(id=${prescription.prescriptionID})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
