@@ -30,9 +30,19 @@ public class EmployeeController {
     }
 
     @GetMapping("/searchNurse")
-    public ResponseEntity<List<Employee>> searchNurse(@RequestParam("query") String query) {
-        List<Employee> nurses = employeeService.searchNurseByName(query);
+    public ResponseEntity<List<Employee>> searchNurse(@RequestParam("query") String query, @RequestParam(value = "doctorId", required = false) Integer doctorId) {
+        List<Employee> nurses = null;
+
+        if (doctorId != null) {
+            nurses = employeeService.findNursesByDoctorId(doctorId);
+        }
+
+        if (nurses == null || nurses.isEmpty()) {
+            nurses = employeeService.searchNurseByName(query);
+        }
+
         System.out.println(nurses);
         return ResponseEntity.ok(nurses);
     }
+
 }

@@ -179,7 +179,7 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script th:inline="javascript">
-        /*<![CDATA[*/
+
 
         $(document).ready(function() {
             function loadDoctorList() {
@@ -222,21 +222,28 @@
                 $('#doctorSearch').val(doctorName);
                 $('#doctorModal').modal('hide');
             });
-        });
 
-        /*]]>*/
-    </script>
 
-    <script th:inline="javascript">
-        /*<![CDATA[*/
 
-        $(document).ready(function() {
+
+
+
+
+
+
             function loadNurseList() {
                 var query = $('#nurseFilter').val();
+                var doctorID = $('#doctorID').val();
+                var requestData = { 'query': query };
+
+                if (doctorID) {
+                    requestData['doctorId'] = doctorID;
+                }
+
                 $.ajax({
                     url: /*[[@{/employees/searchNurse}]]*/,
                     type: 'GET',
-                    data: { 'query': query },
+                    data: requestData,
                     success: function(data) {
                         $('#nurseTableBody').empty();
                         $.each(data, function(index, nurse) {
@@ -273,8 +280,9 @@
             });
         });
 
-        /*]]>*/
+
     </script>
+
 
 </body>
 </html>

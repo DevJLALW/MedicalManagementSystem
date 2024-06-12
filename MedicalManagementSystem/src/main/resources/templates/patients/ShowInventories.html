@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inventory List</title>
+</head>
+<body>
+<h1>Inventory List</h1>
+<form th:action="@{/inventories}" method="get">
+    <input type="text" name="keyword" placeholder="Search by medicine name" th:value="${keyword}" />
+    <button type="submit">Search</button>
+    <a href="/inventories">Clear</a>
+</form>
+<a href="/inventories/new">Add New Inventory</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Medicine Name</th>
+        <th>Medicine Description</th>
+        <th>Inventory Quantity</th>
+        <th>Expiry Date</th>
+        <th>Medicine Price</th>
+        <th>Employee ID</th>
+        <th>Created At</th>
+        <th>Last Updated</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="inventory : ${listInventories}">
+        <td th:text="${inventory.inventoryID}"></td>
+        <td th:text="${inventory.medicineName}"></td>
+        <td th:text="${inventory.medicineDescription}"></td>
+        <td th:text="${inventory.stockQuantity}"></td>
+        <td th:text="${inventory.expiryDate}"></td>
+        <td th:text="${inventory.medicinePrice}"></td>
+        <td th:text="${inventory.employeeID}"></td>
+        <td th:text="${inventory.createdAt}"></td>
+        <td th:text="${inventory.lastUpdated}"></td>
+        <td>
+            <a th:href="@{/inventories/update/{id}(id=${inventory.inventoryID})}">Edit</a>
+            <a th:href="@{/inventories/delete/{id}(id=${inventory.inventoryID})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

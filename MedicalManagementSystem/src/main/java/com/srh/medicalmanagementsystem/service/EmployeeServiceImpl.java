@@ -1,5 +1,6 @@
 package com.srh.medicalmanagementsystem.service;
 
+import com.srh.medicalmanagementsystem.dao.DoctorNurseAssignmentRepository;
 import com.srh.medicalmanagementsystem.dao.EmployeeRepository;
 import com.srh.medicalmanagementsystem.dao.PatientRepository;
 import com.srh.medicalmanagementsystem.entity.Employee;
@@ -19,13 +20,15 @@ public class EmployeeServiceImpl implements EmployeeService{
     private EmployeeRepository employeeRepository;
     private PatientRepository patientRepository;
     private final PasswordEncoder passwordEncoder;
+    private  DoctorNurseAssignmentRepository doctorNurseAssignmentRepository;
 
     @Autowired
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, PatientRepository patientRepository, PasswordEncoder passwordEncoder) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, PatientRepository patientRepository, PasswordEncoder passwordEncoder, DoctorNurseAssignmentRepository doctorNurseAssignmentRepository) {
 
         this.employeeRepository = employeeRepository;
         this.patientRepository = patientRepository;
         this.passwordEncoder = passwordEncoder;
+        this.doctorNurseAssignmentRepository=doctorNurseAssignmentRepository;
     }
 
     @Override
@@ -112,5 +115,9 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public List<Patient> getAllAssignedPatients(Integer employeeId) {
         return patientRepository.findPatientsByEmployeeId(employeeId);
+    }
+
+    public List<Employee> findNursesByDoctorId(int doctorId) {
+        return doctorNurseAssignmentRepository.findNursesByDoctorId(doctorId);
     }
 }

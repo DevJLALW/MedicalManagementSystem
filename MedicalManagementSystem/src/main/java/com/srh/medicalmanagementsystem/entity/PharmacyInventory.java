@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-//import jakarta.validation.constraints.NotEmpty;
+
 
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
@@ -22,35 +22,27 @@ public class PharmacyInventory {
     private int inventoryID;
 
     @Column(name = "MedicineName", nullable = false)
-//    @NotEmpty(message = "Medicine Name is mandatory")
     private String medicineName;
 
     @Column(name = "MedicineDescription", columnDefinition = "TEXT")
-//    @NotEmpty(message = "Medicine Description is mandatory")
     private String medicineDescription;
 
     @Column(name = "StockQuantity", nullable = false)
-//    @NotEmpty(message = "Stock Quantity is mandatory")
     private int stockQuantity;
 
     @Column(name = "ExpiryDate")
-//    @NotEmpty(message = "Expiry Date is mandatory")
     private LocalDate expiryDate;
 
     @Column(name = "MedicinePrice", nullable = false)
-//    @NotEmpty(message = "Medicine Price is mandatory")
     private BigDecimal medicinePrice;
 
     @Column(name = "EmployeeID", nullable = false)
-//    @NotEmpty(message = "Employee ID is mandatory")
     private int employeeID;
 
     @Column(name = "CreatedAt", updatable = false)
-//    @NotEmpty(message = "Medicine Stock Creation Date is mandatory")
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "LastUpdated")
-//    @NotEmpty(message = "If Updated, Date is mandatory")
     private LocalDateTime lastUpdated = LocalDateTime.now();
 
     // Getters and setters

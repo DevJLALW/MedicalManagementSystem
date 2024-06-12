@@ -21,14 +21,14 @@ public class PharmacyInventoryController {
         List<PharmacyInventory> listInventories = service.searchInventories(keyword);
         model.addAttribute("listInventories", listInventories);
         model.addAttribute("keyword", keyword);
-        return "patients/Inventories";
+        return "/patients/ShowInventories";
     }
 
     @GetMapping("/inventories/new")
     public String showNewInventoryForm(Model model) {
         PharmacyInventory inventory = new PharmacyInventory();
         model.addAttribute("inventory", inventory);
-        return "patients/NewInventory";
+        return "/patients/NewInventory";
     }
 
     @PostMapping("/inventories")
@@ -46,7 +46,7 @@ public class PharmacyInventoryController {
     public String showUpdateInventoryForm(@PathVariable("id") int id, Model model) {
         PharmacyInventory inventory = service.getInventoryById(id);
         model.addAttribute("inventory", inventory);
-        return "patients/UpdateInventory";
+        return "/patients/UpdateInventory";
     }
 
     @PostMapping("/inventories/{id}")
@@ -56,7 +56,7 @@ public class PharmacyInventoryController {
             return "redirect:/inventories";
         } catch (Exception e) {
             model.addAttribute("error", "Error updating inventory: " + e.getMessage());
-            return "patients/UpdateInventory";
+            return "UpdateInventory";
         }
     }
 

@@ -1,7 +1,10 @@
 package com.srh.medicalmanagementsystem.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.srh.medicalmanagementsystem.entity.Room;
 
-public interface RoomRepository extends JpaRepository<Room, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+public interface RoomRepository extends JpaRepository<Room, Integer> {
+    List<Room> findByPatientId(Integer patientID);
 }
