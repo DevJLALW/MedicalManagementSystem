@@ -36,29 +36,35 @@
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Patient ID</label>
                             <div class="col-sm-8">
-                                <input type="text" th:field="*{patientId}" class="form-control" />
+                                <select class="form-control" id="patientId" th:field="*{patientId}">
+                                    <option value="0">select option</option>
+                                    <option th:each="patient : ${patients}" th:value="${patient.patientId}" th:text="${patient.patientId + ' ' + patient.firstName + ' ' + patient.lastName}"></option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Doctor ID</label>
+                            <label class="col-sm-4 col-form-label">Doctor</label>
                             <div class="col-sm-8">
-                                <input type="text" th:field="*{doctorId}" class="form-control" />
+                                <select class="form-control" id="doctorId" th:field="*{doctorId}">
+                                    <option value="0">select option</option>
+                                    <option th:each="doctor : ${doctors}" th:value="${doctor.employeeId}" th:text="${doctor.employeeId + ' ' + doctor.firstName + ' ' + doctor.lastName}"></option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Date</label>
                             <div class="col-sm-8">
-                                <input type="date" name="date" class="form-control" />
+                                <input type="date" name="date" class="form-control" th:field="*{date} />
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Slot</label>
                             <div class="col-sm-8">
                                 <select name="slot" class="form-control">
-                                    <option th:each="slot : ${availableSlots}" th:value="${slot}" th:text="${slot}"></option>
+                                    <option th:each="slot : ${allSlots}" th:value="${slot}" th:text="${slot}"></option>
                                 </select>
                             </div>
-                        </div>
+                        </div><!--
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Appointment Status</label>
                             <div class="col-sm-8">
@@ -69,7 +75,7 @@
                                     <option value="COMPLETED">Completed</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
                         <button type="submit" class="btn btn-primary">Save</button>
                         <a class="btn btn-primary" href="/appointments/all">Back</a>
                     </div>

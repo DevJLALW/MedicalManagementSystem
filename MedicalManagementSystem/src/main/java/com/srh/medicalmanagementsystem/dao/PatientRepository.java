@@ -19,8 +19,8 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
        @Query("SELECT p FROM Patient p WHERE p.status = 0")
        List<Patient> findInactivePatients();
 
-       @Query("SELECT p FROM Patient p WHERE  p.doctor.employeeId = :employeeId")
-       List<Patient> findPatientsByDoctorId(@Param("employeeId") Integer employeeId);
+       @Query("SELECT p FROM Patient p WHERE  p.doctor.employeeId = :employeeId OR p.nurse.employeeId = :employeeId")
+       List<Patient> findPatientsByEmployeeId(@Param("employeeId") Integer employeeId);
 
        @Modifying
        @Transactional

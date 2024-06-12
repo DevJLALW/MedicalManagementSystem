@@ -110,7 +110,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public List<Patient> getAllAssignedPatients(Integer doctorId) {
-        return patientRepository.findPatientsByDoctorId(doctorId);
+    public List<Patient> getAllAssignedPatients(Integer employeeId) {
+        return patientRepository.findPatientsByEmployeeId(employeeId);
     }
 }

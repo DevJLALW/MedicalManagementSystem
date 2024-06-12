@@ -31,8 +31,8 @@ public class EmployeeControllerPages {
 
     @GetMapping("/{employeeId}/assignedPatients")
     public String getAllAssignedPatients(@PathVariable("employeeId") Integer employeeId, Model model) {
-        List<Patient> patientList= employeeService.getAllAssignedPatients(employeeId);
-        model.addAttribute("patients",patientList);
+        List<Patient> patients= employeeService.getAllAssignedPatients(employeeId);
+        model.addAttribute("patients",patients);
 
         return "patients/ShowPatientsOfDoctor";
     }
