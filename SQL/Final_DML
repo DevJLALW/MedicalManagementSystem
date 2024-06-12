@@ -29,6 +29,11 @@ VALUES (1006, 'Matthew', 'Wilson', '+1234567895', 'matthew.wilson@example.com', 
 INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
 VALUES (1007, 'Olivia', 'Martinez', '+1234567896', 'olivia.martinez@example.com', 'nurse', 1);
 
+-- Inserting a pharmacist
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1008, 'David', 'Miller', '+1234567897', 'david.miller@example.com', 'pharmacist', 1);
+
+
 --------------------------------------------------------------------------------------------
 
 -- Inserting a specialization for DoctorID 1001
