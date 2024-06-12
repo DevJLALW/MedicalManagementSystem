@@ -1,0 +1,67 @@
+use hospitaldb;
+
+--------------------------------------------------------------------------------------------
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1001, 'Michael', 'Johnson', '+1234567892', 'michael.johnson@example.com', 'doctor', 1);
+
+-- Inserting another doctor
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1002, 'Emily', 'Brown', '+1234567893', 'emily.brown@example.com', 'doctor', 1);
+
+
+-- Inserting an admin
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1003, 'John', 'Doe', '+1234567890', 'john.doe@example.com', 'admin', 1);
+
+-- Inserting a receptionist
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1004, 'Alice', 'Smith', '+1234567891', 'alice.smith@example.com', 'receptionist', 1);
+
+-- Inserting a nurse
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1005, 'Emma', 'Davis', '+1234567894', 'emma.davis@example.com', 'nurse', 1);
+
+-- Inserting another nurse
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1006, 'Matthew', 'Wilson', '+1234567895', 'matthew.wilson@example.com', 'nurse', 1);
+
+-- Inserting another nurse
+INSERT INTO Employee (EmployeeID, FirstName, LastName, ContactNumber, Email, Role, Status)
+VALUES (1007, 'Olivia', 'Martinez', '+1234567896', 'olivia.martinez@example.com', 'nurse', 1);
+
+--------------------------------------------------------------------------------------------
+
+-- Inserting a specialization for DoctorID 1001
+INSERT INTO Specialization (DoctorID, SpecializationName)
+VALUES (1001, 'Cardiology');
+
+-- Inserting a specialization for DoctorID 1002
+INSERT INTO Specialization (DoctorID, SpecializationName)
+VALUES (1002, 'Orthopedics');
+
+-- Inserting a specialization for DoctorID 1003
+INSERT INTO Specialization (DoctorID, SpecializationName)
+VALUES (1003, 'Neurology');
+
+--------------------------------------------------------------------------------------------
+
+-- Inserting doctor-nurse assignments
+INSERT INTO DoctorNurseAssignment (DoctorID, NurseID)
+VALUES (1001, 1005);  -- Michael Johnson and Emma Davis
+
+INSERT INTO DoctorNurseAssignment (DoctorID, NurseID)
+VALUES (1001, 1006);  -- Michael Johnson and Matthew Wilson
+
+INSERT INTO DoctorNurseAssignment (DoctorID, NurseID)
+VALUES (1002, 1007);  -- Emily Brown and Olivia Martinez
+
+INSERT INTO DoctorNurseAssignment (DoctorID, NurseID)
+VALUES (1002, 1006);  -- Emily Brown and Matthew Wilson
+
+INSERT INTO DoctorNurseAssignment (DoctorID, NurseID)
+VALUES (1002, 1005);  -- Emily Brown and Emma Davis
+
+--------------------------------------------------------------------------------------------
+
+
+
