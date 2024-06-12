@@ -1,1 +1,39 @@
+CREATE DATABASE hospitaldb;
+
+USE hospitaldb;
+
+-------------------------------
+CREATE TABLE Employee (
+    EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(255) NOT NULL,
+    LastName VARCHAR(255) NOT NULL,
+    ContactNumber VARCHAR(20) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    Password VARCHAR(255),
+    Role VARCHAR(255) NOT NULL,
+    Status INT NOT NULL
+);
+-------------------------------
+CREATE TABLE Specialization (
+    DoctorID INT PRIMARY KEY,
+    SpecializationName VARCHAR(255) NOT NULL
+);
+---------------------------------
+CREATE TABLE DoctorNurseAssignment (
+    AssignmentID INT AUTO_INCREMENT PRIMARY KEY,
+    DoctorID INT NOT NULL,
+    NurseID INT NOT NULL,
+    FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID),
+    FOREIGN KEY (NurseID) REFERENCES Employee(EmployeeID)
+);
+
+ALTER TABLE DoctorNurseAssignment
+ADD CONSTRAINT fk_DoctorID FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID),
+ADD CONSTRAINT fk_NurseID FOREIGN KEY (NurseID) REFERENCES Employee(EmployeeID);
+
+-----------------------------------
+
+
+
+
 
