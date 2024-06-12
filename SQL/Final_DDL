@@ -76,8 +76,58 @@ CREATE TABLE MedicalRecord (
 
 -----------------------------------
 
+CREATE TABLE PatientEventRecord (
+    EventId INT AUTO_INCREMENT PRIMARY KEY,
+    PatientId INT NOT NULL,
+    EventDate DATE,
+    EventType VARCHAR(255) NOT NULL,
+    Details TEXT NOT NULL,
+    AssignedDoctorId INT NOT NULL,
+    AssignedNurseId INT NOT NULL,
+    Status INT NOT NULL,
+    FOREIGN KEY (PatientId) REFERENCES Patients(PatientID)
+);
 
+-----------------------------------
 
+CREATE TABLE Payment (
+    PaymentID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    PatientID INT,  -- Changed from BIGINT to INT
+    PaymentDate DATE,
+    PaymentMethod VARCHAR(255),
+    PaymentDetails TEXT,
+    DoctorFees DECIMAL(10, 2),
+    RoomService DECIMAL(10, 2),
+    PharmacyCost DECIMAL(10, 2),
+    PaymentStatus VARCHAR(255),
+    TotalAmount DECIMAL(10, 2),
+    Status INT NOT NULL,
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
+);
 
+-----------------------------------
 
+CREATE TABLE Room (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    PatientID INT,
+    RoomNumber VARCHAR(255) NOT NULL,
+    RoomType VARCHAR(255) NOT NULL,
+    RoomAdmissionStartDate DATE,
+    RoomAdmissionEndDate DATE,
+    NumberOfDays BIGINT,
+    RoomBill DECIMAL(19, 2),
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
+);
 
+-----------------------------------
+CREATE TABLE Appointments (
+    AppointmentID INT AUTO_INCREMENT PRIMARY KEY,
+    PatientID INT NOT NULL,
+    DoctorID INT NOT NULL,
+    AppointmentDate DATE,
+    StartTime TIME,
+    EndTime TIME,
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+    FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID)
+);
+-----------------------------------

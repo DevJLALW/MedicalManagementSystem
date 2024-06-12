@@ -122,3 +122,88 @@ INSERT INTO MedicalRecord (Diagnosis, DiagnosisNotes, MedicalResult, Medications
 VALUES ('Heartburn', 'Acid reflux', 'Improving', 'Antacids', '2024-06-03', 1001, 100109, 1);
 
 --------------------------------------------------------------------------------------------
+
+-- Inserting patient event records
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100101, '2024-06-12', 'Appointment', 'Routine checkup', 1001, 1005, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100102, '2024-06-12', 'Prescription', 'Antibiotics prescribed', 1002, 1006, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100103, '2024-06-12', 'Test', 'Blood sugar test', 1001, 1005, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100104, '2024-06-12', 'Consultation', 'General consultation', 1002, 1007, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100105, '2024-06-12', 'Test', 'Lung function test', 1002, 1006, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100106, '2024-06-12', 'Appointment', 'Follow-up appointment', 1001, 1007, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100107, '2024-06-12', 'Prescription', 'Pain medication prescribed', 1002, 1005, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100108, '2024-06-12', 'Consultation', 'Arthritis assessment', 1001, 1006, 1);
+
+INSERT INTO PatientEventRecord (PatientId, EventDate, EventType, Details, AssignedDoctorId, AssignedNurseId, Status)
+VALUES (100109, '2024-06-12', 'Test', 'Cholesterol level test', 1001, 1005, 1);
+
+--------------------------------------------------------------------------------------------
+-- Inserting payment data
+INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
+VALUES (100101, '2024-06-12', 'CASH', 'Doctor consultation fees', 50.00, NULL, NULL, 'PAID', 1);
+
+INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
+VALUES (100102, '2024-06-12', 'DEBIT_CREDIT', 'Doctor consultation fees and room service', 50.00, 25.00, NULL, 'PAID', 1);
+
+INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
+VALUES (100103, '2024-06-12', 'BANK_TRANSFER', 'Doctor consultation fees, room service, and pharmacy cost', 50.00, 25.00, 20.00, 'PAID', 1);
+
+INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
+VALUES (100104, '2024-06-12', 'CASH', 'Doctor consultation fees', 50.00, NULL, NULL, 'UNPAID', 1);
+
+INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
+VALUES (100105, '2024-06-12', 'DEBIT_CREDIT', 'Doctor consultation fees and room service', 50.00, 25.00, NULL, 'UNPAID', 1);
+
+INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
+VALUES (100106, '2024-06-12', 'BANK_TRANSFER', 'Doctor consultation fees, room service, and pharmacy cost', 50.00, 25.00, 20.00, 'UNPAID', 1);
+
+INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
+VALUES (100107, '2024-06-12', 'CASH', 'Doctor consultation fees', 50.00, NULL, NULL, 'PAID', 1);
+
+INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
+VALUES (100108, '2024-06-12', 'DEBIT_CREDIT', 'Doctor consultation fees and room service', 50.00, 25.00, NULL, 'PAID', 1);
+
+INSERT INTO Payment (PatientID, PaymentDate, PaymentMethod, PaymentDetails, DoctorFees, RoomService, PharmacyCost, PaymentStatus, Status)
+VALUES (100109, '2024-06-12', 'BANK_TRANSFER', 'Doctor consultation fees, room service, and pharmacy cost', 50.00, 25.00, 20.00, 'PAID', 1);
+
+
+--------------------------------------------------------------------------------------------
+
+-- Inserting data into the Room table
+INSERT INTO Room (PatientID, RoomNumber, RoomType, RoomAdmissionStartDate, RoomAdmissionEndDate, NumberOfDays, RoomBill)
+VALUES 
+    (100101, '101', 'Standard', '2024-06-12', '2024-06-20', 8, 1200.00),
+    (100102, '102', 'Deluxe', '2024-06-14', '2024-06-22', 8, 1800.00),
+    (100103, '103', 'Standard', '2024-06-16', '2024-06-24', 8, 1500.00),
+    (100104, '104', 'Suite', '2024-06-18', '2024-06-26', 8, 2200.00),
+    (100105, '105', 'Standard', '2024-06-20', '2024-06-28', 8, 1300.00),
+    (100106, '106', 'Deluxe', '2024-06-22', '2024-06-30', 8, 1900.00),
+    (100107, '107', 'Standard', '2024-06-24', '2024-07-02', 8, 1400.00),
+    (100108, '108', 'Suite', '2024-06-26', '2024-07-04', 8, 2300.00),
+    (100109, '109', 'Deluxe', '2024-06-28', '2024-07-06', 8, 2000.00);
+
+--------------------------------------------------------------------------------------------
+
+-- Inserting data into Appointments table
+INSERT INTO Appointments (PatientID, DoctorID, AppointmentDate, StartTime, EndTime)
+VALUES (100101, 1001, '2024-06-12', '10:00:00', '11:00:00'),
+       (100102, 1001, '2024-06-13', '11:00:00', '12:00:00'),
+       (100103, 1002, '2024-06-14', '12:00:00', '13:00:00'),
+       (100104, 1002, '2024-06-15', '13:00:00', '14:00:00'),
+       (100105, 1001, '2024-06-16', '14:00:00', '15:00:00');
+
+--------------------------------------------------------------------------------------------
