@@ -24,6 +24,18 @@
     			border: 1px solid black;
 			}    
 		</style>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            document.addEventListener('DOMContentLoaded', function() {
+                var urlParams = new URLSearchParams(window.location.search);
+                var patientId = urlParams.get('patientId');
+                if (patientId) {
+                    document.getElementById('patientId').value = patientId;
+                }
+            });
+            /*]]>*/
+        </script>
     </head>
 
     <body> 
@@ -36,10 +48,15 @@
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Patient ID</label>
                             <div class="col-sm-8">
-                                <select class="form-control" id="patientId" th:field="*{patientId}">
+                                <div th:if="${#authorization.expression('hasRole(''ROLE_PATIENT'')')}">
+                                    <input type="text" class="form-control" id="patientId" readonly="readonly" th:field="*{patientId}" />
+                                </div>
+                                <div th:unless="${#authorization.expression('hasRole(''ROLE_PATIENT'')')}">
+                                <select class="form-control" id="patientIdSelect" th:field="*{patientId}">
                                     <option value="0">select option</option>
                                     <option th:each="patient : ${patients}" th:value="${patient.patientId}" th:text="${patient.patientId + ' ' + patient.firstName + ' ' + patient.lastName}"></option>
                                 </select>
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -64,20 +81,11 @@
                                     <option th:each="slot : ${allSlots}" th:value="${slot}" th:text="${slot}"></option>
                                 </select>
                             </div>
-                        </div><!--
-                        <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Appointment Status</label>
-                            <div class="col-sm-8">
-                                <select th:field="*{appointmentStatus}" class="form-control">
-                                    <option value="PENDING">Pending</option>
-                                    <option value="CONFIRMED">Confirmed</option>
-                                    <option value="CANCELED">Canceled</option>
-                                    <option value="COMPLETED">Completed</option>
-                                </select>
-                            </div>
-                        </div>-->
+                        </div>
                         <button type="submit" class="btn btn-primary">Save</button>
+
                         <a class="btn btn-primary" href="/appointments/all">Back</a>
+
                     </div>
                 </div>
             </div>            

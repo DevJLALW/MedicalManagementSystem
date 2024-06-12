@@ -208,8 +208,9 @@
 
             <h4 style="margin-left: 10px; margin-top: 25px">Appointments</h4>
             <div class="container">
-                <a class="btn btn-primary" href="/appointments/create" style="float: right; margin-right: 5px;">Book Appointment</a>
-            <table class="table">
+                <a class="btn btn-primary" th:href="@{/appointments/create(patientId=${patient.patientId})}" style="float: right; margin-right: 5px;">Book Appointment</a>
+
+                <table class="table">
                 <thead>
                 <tr>
                     <th>ID</th>

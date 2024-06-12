@@ -8,11 +8,15 @@ import com.srh.medicalmanagementsystem.service.EmployeeService;
 import com.srh.medicalmanagementsystem.service.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
@@ -26,6 +30,7 @@ public class AppointmentController {
     private AppointmentService appointmentService;
     private PatientService patientService;
     private EmployeeService employeeService;
+
 
     public AppointmentController(AppointmentService appointmentService, PatientService patientService, EmployeeService employeeService) {
         this.appointmentService = appointmentService;
@@ -75,6 +80,7 @@ public class AppointmentController {
         model.addAttribute("allSlots", appointmentService.getAllSlots());
         model.addAttribute("patients", patientService.getAllPatients());
         model.addAttribute("doctors", employeeService.getRoleSpecificEmployees("Doctor"));
+
         return "patients/CreateAppointment";
     }
 
@@ -85,6 +91,8 @@ public class AppointmentController {
             BindingResult bindingResult,
             Model model
     ) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
         if (bindingResult.hasErrors()) {
             model.addAttribute("allSlots", appointmentService.getAllSlots());
             return "patients/CreateAppointment";
@@ -107,7 +115,11 @@ public class AppointmentController {
 
                 System.out.println(appointment.getDate());
                 appointmentService.saveAppointment(appointment);
-                return "redirect:/appointments/all";
+                if (userDetails.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PATIENT"))) {
+                    return "redirect:/patients/details/" + userDetails.getUsername();
+                } else {
+                    return "redirect:/appointments/all";
+                }
             } else {
                 model.addAttribute("error", "Slot is already booked.");
             }
@@ -145,6 +157,8 @@ public class AppointmentController {
             return "patients/UpdateAppointment";
         }
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
 
         try {
             if (appointmentService.isSlotAvailableForDate(appointment.getDoctorId(), appointment.getDate(), slot)) {
@@ -162,7 +176,10 @@ public class AppointmentController {
 
                 appointmentService.updateAppointment(id, appointment);
                 model.addAttribute("appointments", appointmentService.getAllAppointments());
-                return "patients/ShowAppointments";
+                if (userDetails.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PATIENT"))) {
+                    return "redirect:/patients/details/" + userDetails.getUsername();
+                } else {
+                return "patients/ShowAppointments";}
             } else {
                 model.addAttribute("error", "Slot is already booked.");
             }
@@ -178,8 +195,14 @@ public class AppointmentController {
 
     @GetMapping("/delete/{id}")
     public String deleteAppointment(@PathVariable("id") int id) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
         appointmentService.deleteAppointment(id);
-        return "redirect:/appointments/all";
+        if (userDetails.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_PATIENT"))) {
+            return "redirect:/patients/details/" + userDetails.getUsername();
+        } else {
+        return "redirect:/appointments/all";}
     }
 
 
