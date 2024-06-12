@@ -11,57 +11,75 @@
     <h1 class="text-center mb-5">Add Payment</h1>
     <form th:action="@{/payments/add}" th:object="${payment}" method="post">
         <div class="card mx-auto p-4" style="max-width: 600px;">
-            <div class="mb-3">
-                <label class="form-label" for="patientID">Patient ID</label>
-                <input class="form-control" type="number" id="patientID" th:field="*{patientId}" oninput="fetchBills()" />
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label" for="patientID">Patient ID</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="number" id="patientID" th:field="*{patientId}" oninput="fetchBills()" />
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="paymentDate">Payment Date</label>
-                <input class="form-control" type="date" id="paymentDate" th:field="*{paymentDate}" />
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label" for="paymentDate">Payment Date</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="date" id="paymentDate" th:field="*{paymentDate}" />
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="doctorFees">Doctor Fees</label>
-                <input class="form-control" type="number" step="0.01" id="doctorFees" th:field="*{doctorFees}" oninput="updateTotalAmount()">
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label" for="doctorFees">Doctor Fees</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="number" step="0.01" id="doctorFees" th:field="*{doctorFees}" oninput="updateTotalAmount()">
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="pharmacyBill">Pharmacy Bill</label>
-                <input class="form-control" type="number" step="0.01" id="pharmacyBill" readonly />
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label" for="pharmacyBill">Pharmacy Bill</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="number" step="0.01" id="pharmacyBill" readonly />
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="roomBill">Room Bill</label>
-                <input class="form-control" type="number" step="0.01" id="roomBill" readonly />
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label" for="roomBill">Room Bill</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="number" step="0.01" id="roomBill" readonly />
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="paymentMethod">Payment Method</label>
-                <select class="form-control" id="paymentMethod" th:field="*{paymentMethod}">
-                    <option value="CASH">Cash</option>
-                    <option value="DEBIT_CREDIT">Debit/Credit</option>
-                    <option value="BANK_TRANSFER">Bank Transfer</option>
-                    <option value="INSURANCE">Insurance</option>
-                </select>
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label" for="paymentMethod">Payment Method</label>
+                <div class="col-sm-8">
+                    <select class="form-control" id="paymentMethod" th:field="*{paymentMethod}">
+                        <option value="CASH">Cash</option>
+                        <option value="DEBIT_CREDIT">Debit/Credit</option>
+                        <option value="BANK_TRANSFER">Bank Transfer</option>
+                        <option value="INSURANCE">Insurance</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="paymentDetails">Payment Details</label>
-                <input class="form-control" type="text" id="paymentDetails" th:field="*{paymentDetails}" />
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label" for="paymentDetails">Payment Details</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" id="paymentDetails" th:field="*{paymentDetails}" />
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="paymentStatus">Payment Status</label>
-                <select class="form-control" id="paymentStatus" th:field="*{paymentStatus}">
-                    <option value="PAID">Paid</option>
-                    <option value="UNPAID">Unpaid</option>
-                </select>
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label" for="paymentStatus">Payment Status</label>
+                <div class="col-sm-8">
+                    <select class="form-control" id="paymentStatus" th:field="*{paymentStatus}">
+                        <option value="PAID">Paid</option>
+                        <option value="UNPAID">Unpaid</option>
+                    </select>   
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="totalAmount">Total Amount</label>
-                <input class="form-control" type="number" step="0.01" id="totalAmount" th:field="*{totalAmount}" readonly />
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label" for="totalAmount">Total Amount</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="number" step="0.01" id="totalAmount" th:field="*{totalAmount}" readonly />
+                </div>
             </div>
 
             <div class="d-flex justify-content-between">
