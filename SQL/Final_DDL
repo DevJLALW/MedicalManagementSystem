@@ -34,7 +34,31 @@ ADD CONSTRAINT fk_NurseID FOREIGN KEY (NurseID) REFERENCES Employee(EmployeeID);
 
 -----------------------------------
 
+CREATE TABLE Patients (
+    PatientID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(255) NOT NULL,
+    LastName VARCHAR(255) NOT NULL,
+    DOB DATE NOT NULL,
+    Gender VARCHAR(255) NOT NULL,
+    ContactNumber VARCHAR(255) NOT NULL,
+    Email VARCHAR(255),
+    Address TEXT,
+    MedicalHistory TEXT,
+    InsuranceID VARCHAR(50),
+    DoctorID INT,
+    NurseID INT,
+    RoomID INT,
+    Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    UserID INT,
+    Password VARCHAR(255),
+    Status INT NOT NULL,
+    FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID),
+    FOREIGN KEY (NurseID) REFERENCES Employee(EmployeeID),
+    FOREIGN KEY (UserID) REFERENCES Employee(EmployeeID)
+);
 
+
+-----------------------------------
 
 
 
