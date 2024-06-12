@@ -56,11 +56,6 @@ public class PatientControllerPages {
             System.out.println("Null employeeID");
         }
         Integer employeeIDInt = Integer.parseInt(employeeID);
-        /*Employee loggedInUser=new Employee();
-        loggedInUser.setEmployeeId(employeeIDInt);
-        patientdto.setUser(loggedInUser);
-        System.out.println("Controller "+patientdto.getUser().getEmployeeId());
-        patientdto.getUser().getEmployeeId();*/
         patientService.savePatient(patientdto, employeeIDInt);
         return "redirect:/patients/all";
     }
@@ -99,17 +94,19 @@ public class PatientControllerPages {
         Patient patient = patientService.findPatientById(patientId);
 
         List<MedicalRecord> medicalRecords = patient.getMedicalRecords();
-        //List<MedicalRecord> medicalRecords = medicalRecordService.findMedicalRecordByPatientId(patientId);
         List<PatientEventRecord> patientEventRecordList = patient.getEventRecords();
         List<Payment> payments = patient.getPayments();
         List<PharmacyPrescription> pharmacyPrescription = patient.getPharmacyPrescription();
         List<Appointment> appointmentDto = patient.getAppointmentDto();
+        List<Room> rooms = patient.getRooms();
 
         model.addAttribute("patient", patient);
         model.addAttribute("medicalRecords", medicalRecords);
         model.addAttribute("patientEventRecords", patientEventRecordList);
         model.addAttribute("pharmacyPrescriptionRecords", pharmacyPrescription);
         model.addAttribute("appointmentRecords", appointmentDto);
+        model.addAttribute("rooms", rooms);
+
 
         if (patient.getDoctor() != null) {
             model.addAttribute("doctorName", patient.getDoctor().getFirstName() + " " + patient.getDoctor().getLastName());

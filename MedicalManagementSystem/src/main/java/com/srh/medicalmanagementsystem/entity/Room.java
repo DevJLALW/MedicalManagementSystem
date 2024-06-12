@@ -38,4 +38,9 @@ public class Room {
     public void setTotalRoomCost(BigDecimal totalRoomCost) {
         this.roomBill = totalRoomCost;
     }
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patientId", referencedColumnName = "PatientID", insertable = false, updatable = false)
+    private Patient patient;
 }

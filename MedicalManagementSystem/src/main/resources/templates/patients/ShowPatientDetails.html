@@ -89,17 +89,9 @@
                         <td th:text="${nurseName}"></td>
                     </tr>
                     <tr>
-                        <th>Room ID</th>
-                        <td th:text="${patient.roomID}"></td>
-                    </tr>
-                    <tr>
                         <th>Created Date</th>
                         <td th:text="${patient.timestamp}"></td>
                     </tr>
-                    <!--<tr>
-                        <th>Employee ID</th>
-                        <td th:text="${patient.userID}"></td>
-                    </tr>-->
                 </table>
             </div>    
             <h3 style="margin-left: 10px; margin-top: 25px">Medical Record Information</h3>
@@ -245,6 +237,43 @@
                 </tbody>
             </table>
             </div>
+
+        <h4 style="margin-left: 10px; margin-top: 25px">Rooms</h4>
+        <div class="container">
+            <div th:if="${!#authorization.expression('hasRole(''ROLE_PATIENT'')')}">
+            <a th:href="@{/rooms/new}" class="btn btn-primary" style="margin-bottom: 5px;">Create New Room</a>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Room Number</th>
+                    <th>Room Type</th>
+                    <th>Admission Start Date</th>
+                    <th>Admission End Date</th>
+                    <th>Number of Days</th>
+                    <th>Room Bill</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="room : ${rooms}">
+                    <td th:text="${room.patientId}">Patient ID</td>
+                    <td th:text="${room.roomNumber}">Room Number</td>
+                    <td th:text="${room.roomType}">Room Type</td>
+                    <td th:text="${room.roomAdmissionStartDate}">Admission Start Date</td>
+                    <td th:text="${room.roomAdmissionEndDate}">Admission End Date</td>
+                    <td th:text="${room.numberOfDays}">Number of Days</td>
+                    <td th:text="${room.roomBill}">Total Cost</td>
+                    <td>
+                        <div th:if="${!#authorization.expression('hasRole(''ROLE_PATIENT'')')}">
+                        <a th:href="@{/rooms/edit/{id}(id=${room.id})}">Edit</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
         </body>
 </html>

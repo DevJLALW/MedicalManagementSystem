@@ -77,6 +77,7 @@ public class PatientDTO {
     @JoinColumn(name = "NurseID", referencedColumnName = "EmployeeID")
     private Employee nurse;
 
+
     @Column(name = "RoomID", nullable = true)
     private Integer roomID;
 
@@ -112,6 +113,9 @@ public class PatientDTO {
 
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointmentDto;
+
+    @OneToMany(mappedBy = "patient")
+    private List<Room> rooms;
 
     @PrePersist
     protected void onCreate() {

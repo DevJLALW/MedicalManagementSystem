@@ -22,7 +22,7 @@ spring.datasource.username=MYSQL_USERNAME
 spring.datasource.password=MYSQL_PASSWORD
 
 
-7. Application Setup and Employee Registration
+6. Application Setup and Employee Registration
 Open your browser and navigate to:
 
 http://localhost:8080/index
