@@ -122,3 +122,18 @@ INSERT INTO MedicalRecord (Diagnosis, DiagnosisNotes, MedicalResult, Medications
 VALUES ('Heartburn', 'Acid reflux', 'Improving', 'Antacids', '2024-06-03', 1001, 100109, 1);
 
 --------------------------------------------------------------------------------------------
+
+CREATE TABLE PatientEventRecord (
+    EventId INT AUTO_INCREMENT PRIMARY KEY,
+    PatientId INT NOT NULL,
+    EventDate DATE,
+    EventType VARCHAR(255) NOT NULL,
+    Details TEXT NOT NULL,
+    AssignedDoctorId INT NOT NULL,
+    AssignedNurseId INT NOT NULL,
+    Status INT NOT NULL,
+    FOREIGN KEY (PatientId) REFERENCES Patients(PatientID)
+);
+
+--------------------------------------------------------------------------------------------
+
