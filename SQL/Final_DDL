@@ -131,3 +131,42 @@ CREATE TABLE Appointments (
     FOREIGN KEY (DoctorID) REFERENCES Employee(EmployeeID)
 );
 -----------------------------------
+
+CREATE TABLE PharmacyInventory (
+    InventoryID INT AUTO_INCREMENT PRIMARY KEY,
+    MedicineName VARCHAR(255) NOT NULL,
+    MedicineDescription TEXT,
+    StockQuantity INT NOT NULL,
+    ExpiryDate DATE,
+    MedicinePrice DECIMAL(19, 2) NOT NULL,
+    EmployeeID INT NOT NULL,
+    CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    LastUpdated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+-----------------------------------
+CREATE TABLE PharmacyStock (
+    itemId INT AUTO_INCREMENT PRIMARY KEY,
+    itemName VARCHAR(255) NOT NULL,
+    itemCost INT NOT NULL,
+    expiryDate INT NOT NULL,
+    totalCount INT NOT NULL,
+    leftCount INT NOT NULL,
+    employeeId INT NOT NULL
+);
+
+-----------------------------------
+CREATE TABLE PharmacyPrescriptions (
+    PrescriptionID INT AUTO_INCREMENT PRIMARY KEY,
+    PatientID INT NOT NULL,
+    DoctorID INT NOT NULL,
+    InventoryID INT NOT NULL,
+    MedicinePrice DECIMAL(19, 2) NOT NULL,
+    MedicineDosage INT NOT NULL,
+    NumberOfDays INT NOT NULL,
+    PharmacyBill DECIMAL(19, 2) NOT NULL,
+    CreatedAt DATETIME NOT NULL,
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+    FOREIGN KEY (DoctorID) REFERENCES employee(EmployeeID),
+    FOREIGN KEY (InventoryID) REFERENCES PharmacyInventory(InventoryID)
+);
+-----------------------------------
