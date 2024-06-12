@@ -6,8 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
-import java.util.Timer;
+import java.sql.Date;
+import java.sql.Time;
 
 
 @Entity
@@ -36,12 +36,12 @@ public class Appointment {
     @Column(name= "StartTime")
     @Temporal(TemporalType.TIME)
     @DateTimeFormat(pattern = "HH:mm")
-    private Date startTime;
+    private Time startTime;
 
     @Column(name= "EndTime")
     @Temporal(TemporalType.TIME)
     @DateTimeFormat(pattern = "HH:mm")
-    private Date endTime;
+    private Time endTime;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patientId", referencedColumnName = "PatientID", insertable = false, updatable = false)

@@ -92,13 +92,19 @@ public class AppointmentController {
         }
 
         try {
-            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
             if (appointmentService.isSlotAvailableForDate(appointment.getDoctorId(), date, slot)) {
-                String[] times = slot.split("-");
+                String[] times = slot.split("/");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
-                appointment.setStartTime(dateFormat.parse(dateString + " " + times[0]));
-                appointment.setEndTime(dateFormat.parse(dateString + " " + times[1]));
+                java.util.Date startTimeUtilFormat = dateFormat.parse(dateString + " " + times[0]);
+                java.util.Date endTimeUtilFormat = dateFormat.parse(dateString + " " + times[1]);
+
+                java.sql.Time startTime = new java.sql.Time(startTimeUtilFormat.getTime());
+                java.sql.Time endTime = new java.sql.Time(endTimeUtilFormat.getTime());
+
+                appointment.setStartTime(startTime);
+                appointment.setEndTime(endTime);
 
                 appointmentService.saveAppointment(appointment);
                 return "redirect:/appointments/all";
@@ -137,14 +143,19 @@ public class AppointmentController {
         }
 
         try {
-            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
             if (appointmentService.isSlotAvailableForDate(appointment.getDoctorId(), date, slot)) {
-                String[] times = slot.split("-");
+                String[] times = slot.split("/");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
-                appointment.setStartTime(dateFormat.parse(dateString + " " + times[0]));
-                appointment.setEndTime(dateFormat.parse(dateString + " " + times[1]));
+                java.util.Date startTimeUtilFormat = dateFormat.parse(dateString + " " + times[0]);
+                java.util.Date endTimeUtilFormat = dateFormat.parse(dateString + " " + times[1]);
 
+                java.sql.Time startTime = new java.sql.Time(startTimeUtilFormat.getTime());
+                java.sql.Time endTime = new java.sql.Time(endTimeUtilFormat.getTime());
+
+                appointment.setStartTime(startTime);
+                appointment.setEndTime(endTime);
                 appointmentService.updateAppointment(id,appointment);
                 return "redirect:/appointments/all";
             } else {

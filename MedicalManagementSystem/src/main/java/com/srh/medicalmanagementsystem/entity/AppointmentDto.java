@@ -5,7 +5,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
 
 public class AppointmentDto {
 
@@ -17,11 +18,11 @@ public class AppointmentDto {
     private String doctorFirstName;
     private String doctorLastName;
     private Date date;
-    private Date startTime;
-    private Date endTime;
+    private Time startTime;
+    private Time endTime;
     private Patient patient;
 
-    public AppointmentDto(Integer appointmentId, Integer patientId, String patientFirstName, String patientLastName, Integer doctorId, String doctorFirstName, String doctorLastName, Date date, Date startTime, Date endTime, Patient patient) {
+    public AppointmentDto(Integer appointmentId, Integer patientId, String patientFirstName, String patientLastName, Integer doctorId, String doctorFirstName, String doctorLastName, Date date, Time startTime, Time endTime) {
         this.appointmentId = appointmentId;
         this.patientId = patientId;
         this.patientFirstName = patientFirstName;
@@ -32,7 +33,6 @@ public class AppointmentDto {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.patient=patient;
     }
 
     public AppointmentDto() {}
@@ -101,19 +101,19 @@ public class AppointmentDto {
         this.date = date;
     }
 
-    public Date getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
 
