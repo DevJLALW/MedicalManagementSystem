@@ -82,6 +82,14 @@
             </div>
         </div>
         </div>
+        <div th:if="${#authorization.expression('hasRole(''ROLE_RECEPTIONIST'')')}">
+            <div class="row mb-3" style="display: none;">
+                <label class="col-sm-4 col-form-label">MedicalHistory</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{medicalHistory}" class="form-control" />
+                </div>
+            </div>
+        </div>
         <div class="row mb-3">
             <label class="col-sm-4 col-form-label">InsuranceID</label>
             <div class="col-sm-8">
