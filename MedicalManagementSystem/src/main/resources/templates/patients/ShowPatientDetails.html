@@ -108,7 +108,7 @@
                         <th>Medical Result</th>
                         <th>Medications Prescribed</th>
                         <th>Date</th>
-                        <th>Employee ID</th>
+                        <!--<th>Employee ID</th>-->
                         <th>Patient ID</th>
                     </tr>
                 </thead>
@@ -120,7 +120,7 @@
                         <td th:text="${medicalRecord.medicalResult}"></td>
                         <td th:text="${medicalRecord.medicationsPrescribed}"></td>
                         <td th:text="${medicalRecord.date}"></td>
-                        <td th:text="${medicalRecord.employeeId}"></td>
+                      <!--  <td th:text="${medicalRecord.employeeId}"></td>-->
                         <td th:text="${medicalRecord.patientId}"></td>
 
                     </tr>
@@ -136,8 +136,8 @@
                     <th>Event date</th>
                     <th>Event Type</th>
                     <th>Details</th>
-                    <th>Assigned doctor ID</th>
-                    <th>Assigned nurse ID</th>
+                   <!-- <th>Assigned doctor ID</th>
+                    <th>Assigned nurse ID</th>-->
                 </tr>
                 </thead>
                 <tbody>
@@ -147,8 +147,8 @@
                     <td th:text="${record.eventDate}"></td>
                     <td th:text="${record.eventType}"></td>
                     <td th:text="${record.details}"></td>
-                    <td th:text="${record.assignedDoctorId}"></td>
-                    <td th:text="${record.assignedNurseId}"></td>
+                   <!-- <td th:text="${record.assignedDoctorId}"></td>
+                    <td th:text="${record.assignedNurseId}"></td>-->
                 </tr>
                 </tbody>
             </table>
@@ -185,7 +185,7 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Prescription ID</th>
+                     <th>Prescription ID</th>
                     <th>Patient ID</th>
                     <th>Medicine</th>
                     <th>Medicine Price</th>
@@ -219,7 +219,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Patient ID</th>
-                    <th>Doctor ID</th>
+                   <!-- <th>Doctor ID</th>-->
                     <th>Appointment Date</th>
                     <th>Start Time</th>
                     <th>End Time</th>
@@ -230,7 +230,7 @@
                 <tr th:each="appointment : ${appointmentRecords}">
                     <td th:text="${appointment.appointmentId}"></td>
                     <td th:text="${appointment.patientId}"></td>
-                    <td th:text="${appointment.doctorId}"></td>
+                    <!--<td th:text="${appointment.doctorId}"></td>-->
                     <td th:text="${appointment.date}"></td>
                     <td th:text="${appointment.startTime}"></td>
                     <td th:text="${appointment.endTime}"></td>
