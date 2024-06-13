@@ -33,7 +33,7 @@
             <form th:action="@{/inventories}" method="get">
                 <input type="text" name="keyword" placeholder="Search by medicine name" th:value="${keyword}" />
                 <button type="submit" style="background-color: #0D6EFD; color:white; margin-bottom: 10px;">Search</button>
-                <a href="/inventories">Clear</a>
+                <button id="reset" value="Reset" style="background-color: #DC3545; color:white;">Reset</button>
             </form>
             <a class="btn btn-primary" style="margin-bottom: 5px;" href="/inventories/new">Add New Inventory</a>
             <a class="btn btn-primary" style="float: right; margin-bottom: 5px;" href="/medicalmanagement/dashboard">Back</a>
