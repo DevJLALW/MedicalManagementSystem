@@ -1,6 +1,7 @@
 package com.srh.medicalmanagementsystem.controller;
 
 import com.srh.medicalmanagementsystem.entity.*;
+import com.srh.medicalmanagementsystem.security.MaskingDetails;
 import com.srh.medicalmanagementsystem.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,7 +93,6 @@ public class PatientControllerPages {
     @GetMapping("/details/{patientId}")
     public String getPatientDetails(@PathVariable("patientId") int patientId, Model model) {
         Patient patient = patientService.findPatientById(patientId);
-
         List<MedicalRecord> medicalRecords = patient.getMedicalRecords();
         List<PatientEventRecord> patientEventRecordList = patient.getEventRecords();
         List<Payment> payments = patient.getPayments();
@@ -133,14 +133,33 @@ public class PatientControllerPages {
             return "error";
         }
         model.addAttribute("patient", patient);
+        String maskedEmail = MaskingDetails.maskEmail(patient.getEmail());
+        String maskedContactNumber = MaskingDetails.maskContactNumber(patient.getContactNumber());
+
+        model.addAttribute("maskedEmail", maskedEmail);
+        model.addAttribute("maskedContactNumber", maskedContactNumber);
+
         return "patients/ForgetPassword";
     }
 
     @PostMapping("/forgetPassword/{patientId}")
-    public String forgetPassword(@PathVariable("patientId") Integer patientId, @RequestParam("password") String newPassword) {
+    public String forgetPassword(@PathVariable("patientId") Integer patientId, @RequestParam("password") String newPassword, @RequestParam("otp") String otp,Model model) {
         Patient patient = patientService.findPatientById(patientId);
+
         if (patient == null) {
             return "error";
+        } else if (!"1234".equals(otp)) {
+
+            model.addAttribute("error", "Invalid OTP");
+
+            model.addAttribute("patient", patient);
+            String maskedEmail = MaskingDetails.maskEmail(patient.getEmail());
+            String maskedContactNumber = MaskingDetails.maskContactNumber(patient.getContactNumber());
+
+            model.addAttribute("maskedEmail", maskedEmail);
+            model.addAttribute("maskedContactNumber", maskedContactNumber);
+
+            return "patients/ForgetPassword";
         }
         patientService.updatePassword(patientId, newPassword);
         return "redirect:/login";
