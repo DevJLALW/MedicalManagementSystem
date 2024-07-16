@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.sql.Date;
@@ -133,4 +135,27 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.findByDoctorIdAndDate(doctorId, date);
     }
 
+    @Override
+    public List<String> getAvailableSlots(Integer doctorId, Date date) {
+        System.out.println(doctorId+" "+date);
+        List<AppointmentDto> appointments = appointmentRepository.findByDoctorIdAndDate(doctorId, date);
+
+        System.out.println("Test===================================================");
+        System.out.println(appointments);
+        List<String> bookedSlots =new ArrayList<>();
+        for(AppointmentDto appointment: appointments){
+
+            System.out.println(appointment.getStartTime());
+            System.out.println(appointment.getEndTime());
+            String getStartTime = appointment.getStartTime().toString().substring(0, 5);
+            String getEndTime = appointment.getEndTime().toString().substring(0, 5);
+            System.out.println(getStartTime+"-"+getEndTime);
+            bookedSlots.add(getStartTime+"-"+getEndTime);
+        }
+        // Filter out the booked slots from the ALL_SLOTS list
+        List<String> availableSlots = new ArrayList<>(ALL_SLOTS);
+        availableSlots.removeAll(bookedSlots);
+        System.out.println("----------------availableSlots-------------------"+availableSlots);
+        return availableSlots;
+    }
 }

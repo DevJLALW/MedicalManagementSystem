@@ -59,15 +59,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label">Doctor</label>
-                            <div class="col-sm-8">
-                                <select class="form-control" id="doctorId" th:field="*{doctorId}">
-                                    <option value="0">select option</option>
-                                    <option th:each="doctor : ${doctors}" th:value="${doctor.employeeId}" th:text="${doctor.employeeId + ' ' + doctor.firstName + ' ' + doctor.lastName}"></option>
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Date</label>
                             <div class="col-sm-8">
@@ -75,10 +67,20 @@
                             </div>
                         </div>
                         <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Doctor</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="doctorId" th:field="*{doctorId}" onchange="fetchAvailableSlots(this.value)">
+                                    <option value="0">select option</option>
+                                    <option th:each="doctor : ${doctors}" th:value="${doctor.employeeId}" th:text="${doctor.employeeId + ' ' + doctor.firstName + ' ' + doctor.lastName}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Slot</label>
                             <div class="col-sm-8">
                                 <select name="slot" class="form-control">
-                                    <option th:each="slot : ${allSlots}" th:value="${slot}" th:text="${slot}"></option>
+                                    <option value="">Select slot</option>
+                                    <option th:each="slot : ${allAvailableSlots}" th:value="${slot}" th:text="${slot}"></option>
                                 </select>
                             </div>
                         </div>
@@ -91,5 +93,34 @@
             </div>            
         </form>
         <p th:text="${error}"></p>
+        <script th:inline="javascript">
+            function fetchAvailableSlots(doctorId) {
+    console.log('Fetching available slots...', doctorId);
+    var dateInput = document.getElementById('date').value;
+    var slotSelect = document.querySelector('select[name="slot"]');
+    var url = '/appointments/availableSlots?doctorId=' + doctorId + '&date=' + dateInput;
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            slotSelect.innerHTML = ''; // Clear existing options
+            var defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.text = 'Select slot';
+            slotSelect.appendChild(defaultOption);
+            data.forEach(slot => {
+                var option = document.createElement('option');
+                option.value = slot;
+                option.text = slot;
+                slotSelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching available slots:', error));
+}
+        </script>
     </body>
 </html>

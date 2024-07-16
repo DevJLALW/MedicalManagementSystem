@@ -42,6 +42,7 @@ public class SpringSecurityConfig {
                 .requestMatchers("/patients/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST")
                 .requestMatchers("/employees/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST")
                 .requestMatchers("/appointments/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST","ROLE_PATIENT")
+                .requestMatchers("/appointments/availableSlots/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST","ROLE_PATIENT")
                 .requestMatchers("/appointments/update/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST","ROLE_PATIENT")
                 .requestMatchers(HttpMethod.GET,"/employees/searchDoctors").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST")
                 .requestMatchers(HttpMethod.GET,"/employees/searchNurse").hasAnyAuthority("ROLE_ADMIN", "ROLE_DOCTOR", "ROLE_NURSE", "ROLE_RECEPTIONIST")

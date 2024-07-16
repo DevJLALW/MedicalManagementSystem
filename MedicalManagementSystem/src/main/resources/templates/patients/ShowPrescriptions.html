@@ -49,7 +49,7 @@
                     <th>Number of Days</th>
                     <th>Pharmacy Bill</th>
                     <th>Created At</th>
-                    <th>Actions</th>
+                   <!-- <th>Actions</th>-->
                 </tr>
                 </thead>
                 <tbody>
@@ -62,9 +62,9 @@
                     <td th:text="${prescription.numberOfDays}"></td>
                     <td th:text="${prescription.totalBill}"></td>
                     <td th:text="${prescription.createdAt}"></td>
-                    <td>
+                   <!-- <td>
                         <a th:href="@{/prescriptions/delete/{id}(id=${prescription.prescriptionID})}">Delete</a>
-                    </td>
+                    </td>-->
                 </tr>
                 </tbody>
             </table>

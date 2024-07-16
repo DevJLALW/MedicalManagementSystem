@@ -35,6 +35,27 @@ public class AppointmentDto {
         this.endTime = endTime;
     }
 
+    public AppointmentDto(Integer appointmentId, Integer doctorId, Integer patientId, Date date, Time startTime, Time endTime, String doctorFirstName, String doctorLastName, String patientFirstName, String patientLastName) {
+        this.appointmentId = appointmentId;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.doctorFirstName = doctorFirstName;
+        this.doctorLastName = doctorLastName;
+        this.patientFirstName = patientFirstName;
+        this.patientLastName = patientLastName;
+    }
+
+    public AppointmentDto(Integer doctorId, Integer patientId, Date date, Time startTime, Time endTime) {
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     public AppointmentDto() {}
 
     public Integer getAppointmentId() {

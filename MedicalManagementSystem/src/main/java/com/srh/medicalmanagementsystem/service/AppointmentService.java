@@ -33,4 +33,5 @@ public interface AppointmentService {
     List<AppointmentDto> getAppointmentsByDoctorIdAndDate(Integer doctorId, Date date);
 
     List<String> getAllSlots();
+    List<String> getAvailableSlots(Integer doctorId, Date date);
 }
