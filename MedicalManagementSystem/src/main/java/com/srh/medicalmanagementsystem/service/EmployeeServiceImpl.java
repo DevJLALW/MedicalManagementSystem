@@ -7,6 +7,7 @@ import com.srh.medicalmanagementsystem.entity.Employee;
 import com.srh.medicalmanagementsystem.entity.Patient;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -120,14 +121,17 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
+    @Cacheable("doctors")
     public List<Employee> searchDoctorsByName(String name) {
-      
+
+       // System.out.println("Fetching doctors by name from database: " + name);
         return employeeRepository.searchDoctorsByName(name);
     }
 
     @Override
     public List<Employee> searchNurseByName(String name) {
 
+       // System.out.println("searchNurseByName from database: " + name);
         return employeeRepository.searchNurseByName(name);
     }
 
@@ -136,7 +140,9 @@ public class EmployeeServiceImpl implements EmployeeService{
         return patientRepository.findPatientsByEmployeeId(employeeId);
     }
 
+    @Cacheable(value = "nurses", key = "#doctorId")
     public List<Employee> findNursesByDoctorId(int doctorId) {
+       // System.out.println("Fetching Nurse by name from database: " + doctorId);
         return doctorNurseAssignmentRepository.findNursesByDoctorId(doctorId);
     }
 }

@@ -36,19 +36,19 @@ public class EmployeeController {
             docIds.add(doctor.getEmployeeId());
         }
         List<Specialization> specializations =specializationService.findByDoctorIds(docIds);
-        System.out.println("specializations "+specializations);
+        //System.out.println("specializations "+specializations);
 
         for(Employee doctor: doctors)
         {
             for(Specialization specialization : specializations){
-                System.out.println(doctor.getEmployeeId()+" : "+specialization.getDoctorId());
+                //System.out.println(doctor.getEmployeeId()+" : "+specialization.getDoctorId());
                 if(doctor.getEmployeeId().equals(specialization.getDoctorId())) {
-                    System.out.println("Check if working");
+                   // System.out.println("Check if working");
                     doctor.setSpecialization(specialization);
                 }
             }
         }
-        System.out.println(doctors);
+       // System.out.println(doctors);
         return ResponseEntity.ok(doctors);
     }
 

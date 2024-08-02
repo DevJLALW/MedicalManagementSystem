@@ -5,6 +5,7 @@ import com.srh.medicalmanagementsystem.entity.DoctorSpecializationDto;
 import com.srh.medicalmanagementsystem.entity.Specialization;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -70,7 +71,9 @@ public class SpecializationServiceImpl implements SpecializationService{
     }
 
     @Override
+    @Cacheable(value = "specializations", key = "#ids")
     public List<Specialization> findByDoctorIds(List<Integer> ids){
+      //  System.out.println("Fetching specializations from database for doctor IDs: " + ids);
         return specializationRepository.findByDoctorIdIn(ids);
     }
 }
